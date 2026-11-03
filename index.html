@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zembaczyn Maps</title>
+<style>
+  :root{
+    --blue:#1a73e8; --text:#202124; --sub:#5f6368; --line:#e8eaed;
+    --shadow:0 1px 2px rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;overflow:hidden;background:#ebe8e1;color:var(--text);
+    font-family:Roboto,"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;font-size:14px}
+  button{font:inherit;color:inherit}
+  #map{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab;outline:none}
+  #map.dragging{cursor:grabbing}
+  .card{background:#fff;border-radius:8px;box-shadow:var(--shadow)}
+  [hidden]{display:none!important}
+
+  /* lewa kolumna: wyszukiwarka + karta obiektu */
+  #left{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));left:12px;
+    width:min(392px,calc(100% - 24px));display:flex;flex-direction:column;gap:8px;z-index:5;
+    max-height:calc(100% - 100px)}
+  #searchcard{position:relative}
+  .brand{display:flex;align-items:center;gap:8px;padding:10px 14px 0;font-size:16px;font-weight:500;letter-spacing:.1px}
+  .brand svg{flex:none}
+  .brand small{color:var(--sub);font-weight:400;font-size:13px;margin-left:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:45%}
+  .searchrow{display:flex;align-items:center;gap:8px;padding:4px 8px 6px 14px;height:48px}
+  .searchrow input{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:15px;background:transparent;color:var(--text)}
+  .searchrow input::placeholder{color:#80868b}
+  .iconbtn{border:0;background:transparent;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--sub);flex:none}
+  .iconbtn:hover{background:#f1f3f4}
+  .iconbtn:focus-visible,.fab:focus-visible,.chip:focus-visible,#results li:focus-visible,.cta:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+  #results{position:absolute;left:0;right:0;top:100%;margin:6px 0 0;padding:6px 0;list-style:none;background:#fff;border-radius:8px;box-shadow:var(--shadow);max-height:55vh;overflow:auto}
+  #results li{display:flex;align-items:center;gap:12px;padding:8px 14px;cursor:pointer}
+  #results li:hover,#results li.active{background:#f1f3f4}
+  #results .dot{width:12px;height:12px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+  #results .t{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #results .s{font-size:12px;color:var(--sub)}
+  #results .none{padding:10px 14px;color:var(--sub);cursor:default}
+  #results .none:hover{background:transparent}
+
+  #info{padding:14px 16px 12px;overflow:auto}
+  #info header{display:flex;gap:12px;align-items:flex-start}
+  #info .dot{width:14px;height:14px;border-radius:50%;margin-top:5px;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)}
+  #info h2{margin:0;font-size:20px;font-weight:400;line-height:1.25;word-break:break-word}
+  #info .sub{color:var(--sub);font-size:13px;margin-top:2px}
+  #info dl{margin:12px 0 4px;display:grid;grid-template-columns:auto 1fr;gap:6px 16px;border-top:1px solid var(--line);padding-top:12px}
+  #info dt{color:var(--sub)} #info dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;word-break:break-word}
+  .cta{margin-top:10px;border:1px solid var(--line);background:#fff;color:var(--blue);padding:7px 16px;border-radius:18px;font-weight:500;cursor:pointer}
+  .cta:hover{background:#f6fafe}
+
+  #infoLines{border-top:1px solid var(--line);margin-top:10px;padding-top:10px}
+  #infoLines h3{margin:0 0 8px;font-size:12px;font-weight:500;color:var(--sub);text-transform:uppercase;letter-spacing:.5px}
+  #infoBadges{display:flex;flex-wrap:wrap;gap:6px}
+  .ln{min-width:38px;padding:4px 9px;border-radius:5px;background:var(--lc,#1a73e8);color:#fff;font-weight:500;font-size:14px;text-align:center;font-variant-numeric:tabular-nums;border:2px solid var(--lc,#1a73e8);line-height:1.2}
+  .ln.nz{background:#fff;color:var(--lc,#1a73e8);border-style:dashed}
+  .ln.nz small{font-size:10px;font-weight:500;margin-left:4px;opacity:.85}
+  button.ln{font:inherit;font-size:14px;font-weight:500;cursor:pointer;line-height:1.2}
+  button.ln:hover{filter:brightness(.95)}
+  .ln.on{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--lc,#1a73e8)}
+  .ln.alight{background:#5f6368;border-color:#5f6368;font-size:13px}
+  #infoDeps{border-top:1px solid var(--line);margin-top:10px;padding-top:10px}
+  #infoDeps h3{margin:0 0 6px;font-size:12px;font-weight:500;color:var(--sub);text-transform:uppercase;letter-spacing:.5px}
+  .depmsg{color:var(--sub);font-size:13px;padding:6px 0}
+  .dep{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;padding:6px 4px;border-radius:6px;cursor:pointer;text-align:left}
+  .dep:hover,.rs:hover{background:#f1f3f4}
+  .dep .t{font-weight:500;font-variant-numeric:tabular-nums;min-width:48px}
+  .dep .t small{display:block;font-size:10px;color:var(--sub);font-weight:400;line-height:1}
+  .dep .ln{min-width:38px;padding:2px 7px;font-size:13px}
+  .dep .to,.routehead .to{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#3c4043;font-size:13px}
+  .dep .rel{color:var(--sub);font-size:12px;white-space:nowrap}
+  .more,.back{border:0;background:transparent;color:var(--blue);font-weight:500;padding:6px 4px;cursor:pointer;border-radius:6px}
+  .more:hover,.back:hover{background:#f6fafe}
+  .routehead{display:flex;align-items:center;gap:10px;padding:4px 4px 8px}
+  .routehead .ln{padding:2px 7px;font-size:13px}
+  .route{display:flex;flex-direction:column;max-height:46vh;overflow:auto;border-left:2px solid var(--line);margin-left:6px}
+  .rs{display:flex;align-items:flex-start;gap:10px;width:100%;border:0;background:transparent;padding:5px 8px;text-align:left;font:inherit;font-size:13px;cursor:pointer;border-radius:4px;color:var(--text)}
+  div.rs{cursor:default}
+  .rs .t{font-variant-numeric:tabular-nums;color:var(--sub);min-width:40px}
+  .rs .nm{flex:1;min-width:0}
+  .rs .nm small{display:block;font-size:11px;color:var(--sub)}
+  .rs .nzt{font-size:10px;font-weight:500;color:var(--blue);border:1px dashed var(--blue);border-radius:3px;padding:0 3px}
+  .rs.sel{background:#e8f0fe;font-weight:500}
+  .rs.sel .t{color:var(--blue)}
+  .rs.past{color:#9aa0a6}
+  .rs.nomap{color:#9aa0a6}
+  #infoLegend{margin-top:8px;font-size:12px;color:var(--sub)}
+
+  /* prawy dół: zoom + status */
+  #zoom{position:absolute;right:12px;bottom:calc(52px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;z-index:4}
+  .fab{width:40px;height:40px;border:0;background:#fff;border-radius:50%;box-shadow:var(--shadow);display:grid;place-items:center;cursor:pointer;color:#5f6368}
+  .fab:hover{background:#f8f9fa;color:var(--text)}
+  #zoom .pair{background:#fff;border-radius:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+  #zoom .pair .fab{box-shadow:none;border-radius:0;height:40px}
+  #zoom .pair hr{margin:0 8px;border:0;border-top:1px solid var(--line)}
+  #status{position:absolute;right:0;bottom:0;z-index:3;display:flex;align-items:center;gap:12px;padding:3px 10px calc(3px + env(safe-area-inset-bottom,0px));
+    background:rgba(255,255,255,.8);font-size:11px;color:#3c4043;border-top-left-radius:4px;backdrop-filter:blur(2px)}
+  #coords{font-variant-numeric:tabular-nums;min-width:130px;text-align:right}
+  #scale{display:flex;align-items:center;gap:6px}
+  #scalebar{height:6px;border:2px solid #3c4043;border-top:0;min-width:10px}
+
+  /* warstwy */
+  #layers{position:absolute;left:12px;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:6}
+  #layersBtn{width:64px;height:64px;border:2px solid #fff;border-radius:8px;box-shadow:var(--shadow);cursor:pointer;padding:0;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,#d7e8d0 0 38%,#ebe8e1 38% 62%,#bcd7ef 62%)}
+  #layersBtn span{position:absolute;left:0;right:0;bottom:0;background:rgba(255,255,255,.88);font-size:11px;padding:2px 0;font-weight:500}
+  #layersPanel{position:absolute;left:0;bottom:76px;width:260px;padding:14px;display:flex;flex-direction:column;gap:12px}
+  #layersPanel h3{margin:0;font-size:13px;font-weight:500;color:var(--sub)}
+  .chips{display:flex;gap:8px}
+  .chip{flex:1;border:2px solid transparent;border-radius:8px;background:#f1f3f4;padding:0;cursor:pointer;overflow:hidden;font-size:12px}
+  .chip i{display:block;height:36px}
+  .chip b{display:block;font-weight:400;padding:4px 0}
+  .chip[aria-pressed=true]{border-color:var(--blue);color:var(--blue)}
+  #layersPanel label{display:flex;align-items:center;gap:10px;cursor:pointer}
+  #layersPanel input[type=checkbox]{width:16px;height:16px;accent-color:var(--blue)}
+  #layersPanel .meta{font-size:12px;color:var(--sub);line-height:1.4}
+
+  /* komunikat */
+  #msg{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:20px;background:rgba(235,232,225,.92)}
+  #msg .box{max-width:460px;padding:24px 26px}
+  #msg h1{margin:0 0 8px;font-size:20px;font-weight:500}
+  #msg p{margin:0 0 10px;line-height:1.5;color:#3c4043}
+  #msg code{background:#f1f3f4;padding:1px 5px;border-radius:4px;font-size:13px}
+  #msg .cta{margin-top:6px;background:var(--blue);color:#fff;border-color:var(--blue)}
+  #msg .cta:hover{background:#1765cc}
+  #drop{position:fixed;inset:0;z-index:30;display:grid;place-items:center;background:rgba(26,115,232,.18);border:4px dashed var(--blue);font-size:20px;font-weight:500;color:var(--blue);pointer-events:none}
+
+  @media (max-width:520px){
+    #left{max-height:calc(100% - 150px)}
+    #status #coords{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<canvas id="map" tabindex="0" aria-label="Mapa z GeoGebry"></canvas>
+
+<div id="left">
+  <div id="searchcard" class="card">
+    <div class="brand">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ea4335" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.8" fill="#fff"/></svg>
+      <span id="brandtxt" aria-label="Zembaczyn Maps"></span>
+      <small id="fileLabel"></small>
+    </div>
+    <div class="searchrow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#5f6368" aria-hidden="true"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 14 15.5l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+      <input id="q" type="text" placeholder="Szukaj w Zembaczyn Maps" autocomplete="off" spellcheck="false" aria-label="Szukaj obiektów na mapie">
+      <button id="clear" class="iconbtn" hidden aria-label="Wyczyść wyszukiwanie"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"/></svg></button>
+    </div>
+    <ul id="results" role="listbox" hidden></ul>
+  </div>
+
+  <div id="info" class="card" hidden>
+    <header>
+      <span class="dot" id="infoDot"></span>
+      <div style="flex:1;min-width:0"><h2 id="infoTitle"></h2><div class="sub" id="infoSub"></div></div>
+      <button id="infoClose" class="iconbtn" aria-label="Zamknij"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"/></svg></button>
+    </header>
+    <dl id="infoRows"></dl>
+    <div id="infoLines" hidden><h3>Linie</h3><div id="infoBadges"></div><div id="infoLegend"></div></div>
+    <div id="infoDeps" hidden></div>
+    <button id="infoZoom" class="cta">Przybliż</button>
+  </div>
+</div>
+
+<div id="zoom">
+  <button id="fit" class="fab" aria-label="Pokaż całą mapę" title="Pokaż całą mapę"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M5 15H3v4a2 2 0 0 0 2 2h4v-2H5v-4zM5 5h4V3H5a2 2 0 0 0-2 2v4h2V5zm14-2h-4v2h4v4h2V5a2 2 0 0 0-2-2zm0 16h-4v2h4a2 2 0 0 0 2-2v-4h-2v4z"/></svg></button>
+  <div class="pair">
+    <button id="zin" class="fab" aria-label="Przybliż" title="Przybliż"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg></button>
+    <hr>
+    <button id="zout" class="fab" aria-label="Oddal" title="Oddal"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13H5v-2h14z"/></svg></button>
+  </div>
+</div>
+
+<div id="status"><span id="coords"></span><span id="scale"><span id="scalebar"></span><span id="scaletxt"></span></span></div>
+
+<div id="layers">
+  <div id="layersPanel" class="card" hidden>
+    <h3>Typ mapy</h3>
+    <div class="chips" id="themeChips"></div>
+    <h3>Szczegóły mapy</h3>
+    <label><input type="checkbox" id="optLabels"> Etykiety</label>
+    <label><input type="checkbox" id="optGrid"> Siatka</label>
+    <label><input type="checkbox" id="optMetro"> Linie metra</label>
+    <button class="cta" id="openFile" style="margin:0;align-self:flex-start">Otwórz plik XML…</button>
+    <div class="meta" id="meta"></div>
+  </div>
+  <button id="layersBtn" aria-label="Warstwy" aria-expanded="false"><span>Warstwy</span></button>
+</div>
+
+<div id="msg" hidden><div class="card box">
+  <h1 id="msgTitle"></h1><div id="msgBody"></div>
+  <button class="cta" id="msgPick">Wybierz plik XML…</button>
+</div></div>
+<div id="drop" hidden>Upuść plik XML z GeoGebry</div>
+<input type="file" id="file" accept=".xml,text/xml,application/xml" hidden>
+
+<script>
+(() => {
+'use strict';
+
+/* ───────────── KONFIGURACJA ───────────── */
+const XML_FILE      = 'geogebra.xml';   // nazwa pliku XML leżącego obok index.html
+const FALLBACK_FILES = ['map.xml', 'mapa.xml', 'zembaczyn.xml', 'data.xml']; // próbowane, gdy powyższego brak
+const UNIT_NAME     = 'j.';             // jednostka długości w GeoGebrze, np. 'm' albo 'km'
+const MIN_FILL_ALPHA = 0.25;            // minimalna nieprzezroczystość wypełnień (GeoGebra domyślnie daje 0.1)
+
+/* ───────────── NARZĘDZIA ───────────── */
+const $ = s => document.querySelector(s);
+const kid = (el, tag) => { for (const c of el.children) if (c.tagName === tag) return c; return null; };
+const num = (v, d = 0) => { const n = parseFloat(v); return Number.isFinite(n) ? n : d; };
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const nf = new Intl.NumberFormat('pl-PL', { maximumFractionDigits: 3 });
+const f = n => nf.format(Math.abs(n) < 1e-9 ? 0 : n);
+const norm = s => String(s).toLowerCase().replace(/ł/g, 'l').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+const attrList = el => el ? Array.from(el.attributes).sort((a, b) => parseInt(a.name.slice(1)) - parseInt(b.name.slice(1))).map(a => a.value) : [];
+
+/* ───────────── PARSER XML GEOGEBRY ───────────── */
+function parseGGB(text) {
+  const doc = new DOMParser().parseFromString(text.replace(/^\uFEFF/, '').trim(), 'application/xml');
+  if (doc.getElementsByTagName('parsererror').length) throw new Error('Ten plik nie jest poprawnym XML-em.');
+  const cons = doc.getElementsByTagName('construction')[0];
+  if (!cons) throw new Error('Brak sekcji <construction> – to nie wygląda na XML z GeoGebry (plik geogebra.xml z wnętrza .ggb).');
+
+  const elements = new Map(), exprs = new Map(), cmds = [];
+  for (const c of cons.children) {
+    if (c.tagName === 'element') elements.set(c.getAttribute('label'), c);
+    else if (c.tagName === 'expression') exprs.set(c.getAttribute('label'), c.getAttribute('exp') || '');
+    else if (c.tagName === 'command') cmds.push({ name: c.getAttribute('name'), inputs: attrList(kid(c, 'input')), outputs: attrList(kid(c, 'output')) });
+  }
+  const defOf = new Map();
+  for (const c of cmds) c.outputs.forEach((l, i) => { if (!defOf.has(l)) defOf.set(l, c); });
+
+  const isVisible = e => { const s = kid(e, 'show'); return s ? s.getAttribute('object') !== 'false' : true; };
+
+  // punkty
+  const P = new Map();
+  for (const [l, e] of elements) {
+    if (e.getAttribute('type') !== 'point') continue;
+    const c = kid(e, 'coords'); if (!c) continue;
+    const z = num(c.getAttribute('z'), 1);
+    if (Math.abs(z) < 1e-12) continue;
+    P.set(l, [num(c.getAttribute('x')) / z, num(c.getAttribute('y')) / z]);
+  }
+  const NUMRE = '[-+]?\\d*\\.?\\d+(?:e[-+]?\\d+)?';
+  const litRe = new RegExp('^\\(?\\s*(' + NUMRE + ')\\s*[,;]\\s*(' + NUMRE + ')\\s*\\)?$', 'i');
+  const pt = s => {
+    if (s == null) return null;
+    s = String(s).trim();
+    if (P.has(s)) return P.get(s);
+    const m = litRe.exec(s);
+    if (m) return [parseFloat(m[1]), parseFloat(m[2])];
+    if (!/^\(/.test(s)) return null;
+    const inner = s.replace(/^\(\s*/, '').replace(/\s*\)$/, '');
+    let d = 0, cut = -1;
+    for (let i = 0; i < inner.length; i++) { const ch = inner[i]; if (ch === '(') d++; else if (ch === ')') d--; else if ((ch === ',' || ch === ';') && d === 0) { cut = i; break; } }
+    if (cut < 0) return null;
+    const ev = t => {
+      t = t.replace(/\b([xy])\(\s*([^()\s]+)\s*\)/g, (_, a, l) => { const p = P.get(l); return p ? '(' + p[a === 'x' ? 0 : 1] + ')' : 'NaN'; });
+      if (!/^[-+*/().\deE\s]+$/.test(t)) return NaN;
+      try { return Function('"use strict";return (' + t + ')')(); } catch (e) { return NaN; }
+    };
+    const a = ev(inner.slice(0, cut)), b = ev(inner.slice(cut + 1));
+    return Number.isFinite(a) && Number.isFinite(b) ? [a, b] : null;
+  };
+
+  const listPts = str => {
+    str = String(str).trim(); if (!str.startsWith('{') || !str.endsWith('}')) return null;
+    const items = []; let d = 0, cur = '';
+    for (const ch of str.slice(1, -1)) {
+      if (ch === '(' || ch === '{') d++; else if (ch === ')' || ch === '}') d--;
+      if (ch === ',' && d === 0) { items.push(cur); cur = ''; } else cur += ch;
+    }
+    items.push(cur);
+    const ps = items.map(pt); return ps.every(Boolean) ? ps : null;
+  };
+  // wielokąty i łamane (+ ich boki)
+  const polys = new Map(), edgeOf = new Map();
+  for (const c of cmds) {
+    if (!/^poly(gon|line)$/i.test(c.name)) continue;
+    const verts = []; let n = null;
+    for (const s of c.inputs) { const p = pt(s); if (p) verts.push(p); else { const L = listPts(exprs.has(s) ? exprs.get(s) : s); if (L) verts.push(...L); else if (/^\d+$/.test(s.trim())) n = parseInt(s, 10); } }
+    if (n && verts.length === 2 && n >= 3) { // wielokąt foremny
+      let [a, b] = verts, dx = b[0] - a[0], dy = b[1] - a[1];
+      const ang = 2 * Math.PI / n;
+      for (let i = 2; i < n; i++) {
+        const nx = dx * Math.cos(ang) - dy * Math.sin(ang), ny = dx * Math.sin(ang) + dy * Math.cos(ang);
+        dx = nx; dy = ny; const last = verts[verts.length - 1]; verts.push([last[0] + dx, last[1] + dy]);
+      }
+    }
+    if (verts.length < 2) continue;
+    const poly = { verts, closed: /^polygon$/i.test(c.name), hasEdges: false };
+    polys.set(c.outputs[0], poly);
+    let ei = 0;
+    for (let k = 1; k < c.outputs.length; k++) {
+      const e = elements.get(c.outputs[k]);
+      if (e && e.getAttribute('type') === 'segment') {
+        edgeOf.set(c.outputs[k], [verts[ei % verts.length], verts[(ei + 1) % verts.length]]);
+        if (isVisible(e)) poly.hasEdges = true;
+        ei++;
+      }
+    }
+  }
+
+  function styleOf(e) {
+    const show = kid(e, 'show'), col = kid(e, 'objColor'), ls = kid(e, 'lineStyle'),
+          cap = kid(e, 'caption'), lm = kid(e, 'labelMode'), ps = kid(e, 'pointSize'), ly = kid(e, 'layer');
+    return {
+      visible: show ? show.getAttribute('object') !== 'false' : true,
+      showLabel: !!show && show.getAttribute('label') === 'true',
+      rgb: col ? [num(col.getAttribute('r')), num(col.getAttribute('g')), num(col.getAttribute('b'))] : null,
+      alpha: col && col.hasAttribute('alpha') ? num(col.getAttribute('alpha')) : null,
+      thickness: ls ? num(ls.getAttribute('thickness'), 5) : 5,
+      lineOp: ls && ls.hasAttribute('opacity') ? clamp(num(ls.getAttribute('opacity')) / 255, 0, 1) : null,
+      alphaAttr: col && col.hasAttribute('alpha') ? num(col.getAttribute('alpha')) : null,
+      lineType: ls ? num(ls.getAttribute('type'), 0) : 0,
+      caption: cap ? cap.getAttribute('val') : '',
+      labelMode: lm ? num(lm.getAttribute('val'), 0) : 0,
+      pointSize: ps ? num(ps.getAttribute('val'), 5) : 5,
+      layer: ly ? num(ly.getAttribute('val'), 0) : 0,
+    };
+  }
+  const cleanText = exp => {
+    if (exp == null) return null;
+    let s = exp.trim();
+    if (/^"[^"]*"$/.test(s)) s = s.slice(1, -1); else s = s.replace(/"/g, '');
+    return s.replace(/\$/g, '');
+  };
+
+  let objs = []; const skipped = { n: 0 }, unresolved = [];
+  const UNSUPPORTED = new Set(['function', 'locus', 'image', 'implicitpoly', 'curvecartesian', 'curveparametric', 'conic', 'interval']);
+
+  for (const [label, e] of elements) {
+    const type = e.getAttribute('type'); let o = null;
+    const def = defOf.get(label);
+    switch (type) {
+      case 'point': { const p = P.get(label); if (p) o = { kind: 'point', x: p[0], y: p[1] }; break; }
+      case 'segment': case 'ray': {
+        let d = edgeOf.get(label);
+        if (!d && def && (def.name === 'Segment' || def.name === 'Ray')) d = [pt(def.inputs[0]), pt(def.inputs[1])];
+        if (d && d[0] && d[1]) o = { kind: type, p1: d[0], p2: d[1] };
+        break;
+      }
+      case 'line': {
+        const c = kid(e, 'coords');
+        if (c) o = { kind: 'line', a: num(c.getAttribute('x')), b: num(c.getAttribute('y')), c: num(c.getAttribute('z')) };
+        break;
+      }
+      case 'vector': {
+        let p1 = null, p2 = null;
+        if (def && def.name === 'Vector') {
+          if (def.inputs.length >= 2) { p1 = pt(def.inputs[0]); p2 = pt(def.inputs[1]); }
+          else if (def.inputs.length === 1) { p1 = [0, 0]; p2 = pt(def.inputs[0]); }
+        }
+        if (!p1 || !p2) {
+          const c = kid(e, 'coords'), sp = kid(e, 'startPoint');
+          if (c) {
+            p1 = [0, 0];
+            if (sp) p1 = sp.getAttribute('exp') ? (pt(sp.getAttribute('exp')) || [0, 0]) : [num(sp.getAttribute('x')), num(sp.getAttribute('y'))];
+            p2 = [p1[0] + num(c.getAttribute('x')), p1[1] + num(c.getAttribute('y'))];
+          }
+        }
+        if (p1 && p2) o = { kind: 'vector', p1, p2 };
+        break;
+      }
+      case 'polygon': case 'polyline': {
+        const p = polys.get(label);
+        if (p) o = { kind: 'polygon', pts: p.verts, closed: p.closed, hasEdges: p.hasEdges };
+        else { unresolved.push(label + (def ? ' (' + def.name + ': ' + def.inputs.join(' | ') + ')' : ' (brak komendy)')); console.warn('Nie odczytano łamanej/wielokąta', label, def); }
+        break;
+      }
+      case 'conic': {
+        const m = kid(e, 'matrix'); if (!m) break;
+        const [A0, A1, A2, A3, A4, A5] = [0, 1, 2, 3, 4, 5].map(i => num(m.getAttribute('A' + i)));
+        const det = A0 * A1 - A3 * A3;
+        if (!(det > 1e-12)) break; // tylko elipsy i okręgi
+        const cx = (-A4 * A1 + A3 * A5) / det, cy = (-A0 * A5 + A3 * A4) / det;
+        const k = A2 + A4 * cx + A5 * cy, h = (A0 + A1) / 2, r = Math.hypot((A0 - A1) / 2, A3), l1 = h + r, l2 = h - r;
+        if (l1 > 0 && l2 > 0) { if (k >= 0) break; } else if (l1 < 0 && l2 < 0) { if (k <= 0) break; } else break;
+        const a = Math.sqrt(Math.abs(k / l1)), b = Math.sqrt(Math.abs(k / l2));
+        if (!Number.isFinite(a) || !Number.isFinite(b)) break;
+        o = { kind: 'ellipse', cx, cy, a, b, th: 0.5 * Math.atan2(2 * A3, A0 - A1), circle: Math.abs(a - b) < 1e-9 * Math.max(a, b) };
+        break;
+      }
+      case 'conicpart': {
+        if (!def) break;
+        if (def.name === 'Semicircle') {
+          const A = pt(def.inputs[0]), B = pt(def.inputs[1]); if (!A || !B) break;
+          const m = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2], a0 = Math.atan2(B[1] - m[1], B[0] - m[0]);
+          o = { kind: 'arc', c: m, r: dist(A, B) / 2, a0, a1: a0 + Math.PI, sector: false };
+        } else if (/^Circ(le|ular)(Arc|Sector)$/.test(def.name)) {
+          const C = pt(def.inputs[0]), S = pt(def.inputs[1]), E = pt(def.inputs[2]); if (!C || !S || !E) break;
+          const a0 = Math.atan2(S[1] - C[1], S[0] - C[0]); let a1 = Math.atan2(E[1] - C[1], E[0] - C[0]);
+          while (a1 <= a0) a1 += 2 * Math.PI;
+          o = { kind: 'arc', c: C, r: dist(S, C), a0, a1, sector: /Sector/.test(def.name) };
+        }
+        break;
+      }
+      case 'text': {
+        const sp = kid(e, 'startPoint'); let pos = null;
+        if (sp) {
+          if (sp.getAttribute('exp')) pos = pt(sp.getAttribute('exp'));
+          else if (sp.hasAttribute('x')) { const z = num(sp.getAttribute('z'), 1) || 1; pos = [num(sp.getAttribute('x')) / z, num(sp.getAttribute('y')) / z]; }
+        }
+        const str = cleanText(exprs.get(label));
+        if (pos && str != null && str !== '') o = { kind: 'text', x: pos[0], y: pos[1], str };
+        break;
+      }
+    }
+    if (!o) { if (UNSUPPORTED.has(type)) skipped.n++; continue; }
+    Object.assign(o, styleOf(e), { label, type });
+    if (!o.rgb) o.rgb = o.kind === 'point' ? [21, 101, 192] : o.kind === 'polygon' ? [153, 51, 0] : o.kind === 'text' ? [32, 33, 36] : [97, 97, 97];
+    if (o.alpha == null) o.alpha = o.kind === 'polygon' ? 0.1 : 0;
+    o.fillA = o.alpha > 0 ? Math.max(o.alpha, MIN_FILL_ALPHA) : 0;
+    o.name = o.kind === 'text' ? o.str.split('\n')[0] : ((o.caption && o.caption.replace(/\$/g, '').trim()) ? o.caption.replace(/\$/g, '').replace(/%n/g, o.label).trim() : o.label);
+    o.bbox = bboxOf(o);
+    objs.push(o);
+  }
+  objs = classify(objs);
+  objs.forEach((o, i) => o.id = i);
+
+  // widok początkowy zapisany w pliku
+  let initView = null;
+  const ev = doc.getElementsByTagName('euclidianView')[0];
+  const cs = ev && ev.getElementsByTagName('coordSystem')[0], sz = ev && ev.getElementsByTagName('size')[0];
+  if (cs) {
+    const w = sz ? num(sz.getAttribute('width'), 800) : 800, h = sz ? num(sz.getAttribute('height'), 600) : 600;
+    const sc = num(cs.getAttribute('scale'), 50) || 50;
+    initView = { cx: (w / 2 - num(cs.getAttribute('xZero'))) / sc, cy: (num(cs.getAttribute('yZero')) - h / 2) / (num(cs.getAttribute('yscale'), sc) || sc), s: sc };
+  }
+  return { objs, skipped: skipped.n, unresolved, initView };
+}
+
+function ptsBBox(pts) {
+  let a = Infinity, b = Infinity, c = -Infinity, d = -Infinity;
+  for (const p of pts) { a = Math.min(a, p[0]); b = Math.min(b, p[1]); c = Math.max(c, p[0]); d = Math.max(d, p[1]); }
+  return [a, b, c, d];
+}
+function arcPts(o, n) {
+  const out = [];
+  if (o.sector) out.push(o.c);
+  for (let i = 0; i <= n; i++) { const a = o.a0 + (o.a1 - o.a0) * i / n; out.push([o.c[0] + o.r * Math.cos(a), o.c[1] + o.r * Math.sin(a)]); }
+  return out;
+}
+function bboxOf(o) {
+  switch (o.kind) {
+    case 'point': case 'text': return [o.x, o.y, o.x, o.y];
+    case 'segment': case 'ray': case 'vector': return ptsBBox([o.p1, o.p2]);
+    case 'polygon': return ptsBBox(o.pts);
+    case 'ellipse': {
+      const c = Math.cos(o.th), s = Math.sin(o.th), ex = Math.hypot(o.a * c, o.b * s), ey = Math.hypot(o.a * s, o.b * c);
+      return [o.cx - ex, o.cy - ey, o.cx + ex, o.cy + ey];
+    }
+    case 'arc': return ptsBBox(arcPts(o, 72));
+  }
+  return null;
+}
+
+/* ───────────── STAN, WIDOK, MOTYWY ───────────── */
+const canvas = $('#map'), ctx = canvas.getContext('2d');
+let W = 0, H = 0, dpr = 1;
+const V = { cx: 0, cy: 0, s: 50, min: 1e-6, max: 1e9, fit: 50 };
+const anim = { mode: null };
+let model = null, order = [], selected = null, fileName = '', allBBox = null;
+const settings = { theme: 'map', labels: true, grid: true, metro: true };
+try { Object.assign(settings, JSON.parse(localStorage.getItem('zm-settings') || '{}')); } catch (e) {}
+const saveSettings = () => { try { localStorage.setItem('zm-settings', JSON.stringify(settings)); } catch (e) {} };
+
+const ROADS_LIGHT = { mainFill: '#fde9a0', mainCase: '#dcb54b', minorFill: '#ffffff', minorCase: '#cdc7b9', streetText: '#5f6368',
+  rail: '#8d9399', railDash: '#ffffff', island: '#cfe8c3', shopText: '#b06000', placeText: '#5f6368' };
+const ROADS_DARK = { mainFill: '#5d5a4a', mainCase: '#2b2f35', minorFill: '#474c54', minorCase: '#2b2f35', streetText: '#cfd3d8',
+  rail: '#9aa0a6', railDash: '#1f2329', island: '#2f4a37', shopText: '#f2a65a', placeText: '#bdc1c6' };
+const THEMES = {
+  map:   { name: 'Mapa',      bg: '#ebe8e1', minor: 'rgba(255,255,255,.5)',  major: 'rgba(255,255,255,.95)', majorW: 2, dark: false, label: '#3c4043', halo: 'rgba(255,255,255,.92)', swatch: '#ebe8e1', ...ROADS_LIGHT },
+  dark:  { name: 'Ciemna',    bg: '#1f2329', minor: 'rgba(255,255,255,.04)', major: 'rgba(255,255,255,.09)', majorW: 1, dark: true,  label: '#e8eaed', halo: 'rgba(31,35,41,.92)',    swatch: '#1f2329', ...ROADS_DARK },
+  paper: { name: 'GeoGebra',  bg: '#ffffff', minor: '#eeeeee',               major: '#d6d6d6',               majorW: 1, dark: false, label: '#202124', halo: 'rgba(255,255,255,.92)', swatch: '#fff', axes: true, ...ROADS_LIGHT, minorCase: '#c4c4c4' },
+};
+const theme = () => THEMES[settings.theme] || THEMES.map;
+const KIND_ORDER = { polygon: 0, ellipse: 1, arc: 1, line: 2, street: 2.5, ray: 3, segment: 3, vector: 4, point: 6, text: 7 };
+
+const w2s = (x, y) => [(x - V.cx) * V.s + W / 2, H / 2 - (y - V.cy) * V.s];
+const s2w = (sx, sy) => [V.cx + (sx - W / 2) / V.s, V.cy + (H / 2 - sy) / V.s];
+
+function colorOf(o, a = 1) {
+  let [r, g, b] = o.rgb;
+  if (theme().dark && (0.299 * r + 0.587 * g + 0.114 * b) < 100) { r += (255 - r) * .78; g += (255 - g) * .78; b += (255 - b) * .78; }
+  return `rgba(${r | 0},${g | 0},${b | 0},${a})`;
+}
+const lineW = o => Math.max(1.3, o.thickness * 0.55);
+const pointR = o => 1.5 + o.pointSize * 0.7;
+
+/* ───────────── GEOMETRIA DO RYSOWANIA ───────────── */
+function worldPts(o) {
+  switch (o.kind) {
+    case 'segment': case 'vector': return [o.p1, o.p2];
+    case 'polygon': return o.pts;
+    case 'ray': {
+      const d = dist(o.p1, o.p2); if (d < 1e-12) return null;
+      const L = (W + H) / V.s + dist(o.p1, [V.cx, V.cy]);
+      return [o.p1, [o.p1[0] + (o.p2[0] - o.p1[0]) / d * L, o.p1[1] + (o.p2[1] - o.p1[1]) / d * L]];
+    }
+    case 'line': {
+      const n2 = o.a * o.a + o.b * o.b; if (n2 < 1e-18) return null;
+      const n = Math.sqrt(n2), dx = -o.b / n, dy = o.a / n, p0x = -o.a * o.c / n2, p0y = -o.b * o.c / n2;
+      const t = (V.cx - p0x) * dx + (V.cy - p0y) * dy, qx = p0x + dx * t, qy = p0y + dy * t, L = (W + H) / V.s;
+      return [[qx - dx * L, qy - dy * L], [qx + dx * L, qy + dy * L]];
+    }
+    case 'ellipse': {
+      const n = clamp(Math.ceil(Math.max(o.a, o.b) * V.s / 2), 64, 1440), c = Math.cos(o.th), s = Math.sin(o.th), out = [];
+      for (let i = 0; i < n; i++) { const t = 2 * Math.PI * i / n, u = o.a * Math.cos(t), v = o.b * Math.sin(t); out.push([o.cx + u * c - v * s, o.cy + u * s + v * c]); }
+      return out;
+    }
+    case 'arc': return arcPts(o, clamp(Math.ceil(o.r * V.s * Math.abs(o.a1 - o.a0) / 6), 24, 1440));
+  }
+  return null;
+}
+const isClosed = o => o.kind === 'ellipse' || (o.kind === 'polygon' && o.closed) || (o.kind === 'arc' && o.sector);
+const screenPts = o => { const w = worldPts(o); return w ? w.map(p => w2s(p[0], p[1])) : null; };
+
+/* ───────────── RYSOWANIE ───────────── */
+function niceStep(raw) { const p = Math.pow(10, Math.floor(Math.log10(raw))); for (const m of [1, 2, 5, 10]) if (p * m >= raw) return p * m; return p * 10; }
+
+function drawGrid(th) {
+  const x0 = V.cx - W / 2 / V.s, x1 = V.cx + W / 2 / V.s, y0 = V.cy - H / 2 / V.s, y1 = V.cy + H / 2 / V.s;
+  const step = niceStep(90 / V.s);
+  const mant = Math.round(step / Math.pow(10, Math.floor(Math.log10(step))));
+  const minor = step / (mant === 2 ? 4 : 5);
+  const lines = (st, style, width) => {
+    if ((x1 - x0) / st > 500 || (y1 - y0) / st > 500) return;
+    ctx.strokeStyle = style; ctx.lineWidth = width; ctx.beginPath();
+    for (let i = Math.ceil(x0 / st); i * st <= x1; i++) { const sx = Math.round((i * st - V.cx) * V.s + W / 2) + .5; ctx.moveTo(sx, 0); ctx.lineTo(sx, H); }
+    for (let i = Math.ceil(y0 / st); i * st <= y1; i++) { const sy = Math.round(H / 2 - (i * st - V.cy) * V.s) + .5; ctx.moveTo(0, sy); ctx.lineTo(W, sy); }
+    ctx.stroke();
+  };
+  if (settings.grid) {
+    if (minor * V.s >= 14) lines(minor, th.minor, 1);
+    lines(step, th.major, th.majorW);
+  }
+  if (th.axes) {
+    const [ax, ay] = w2s(0, 0);
+    ctx.strokeStyle = '#555'; ctx.lineWidth = 1.5; ctx.beginPath();
+    if (ax >= 0 && ax <= W) { ctx.moveTo(Math.round(ax) + .5, 0); ctx.lineTo(Math.round(ax) + .5, H); }
+    if (ay >= 0 && ay <= H) { ctx.moveTo(0, Math.round(ay) + .5); ctx.lineTo(W, Math.round(ay) + .5); }
+    ctx.stroke();
+    ctx.fillStyle = '#777'; ctx.font = '11px Roboto, "Segoe UI", sans-serif'; ctx.textBaseline = 'top'; ctx.textAlign = 'center';
+    const ty = clamp(ay + 4, 2, H - 16), tx = clamp(ax - 6, 24, W - 4);
+    for (let i = Math.ceil(x0 / step); i * step <= x1; i++) if (i) ctx.fillText(f(i * step), (i * step - V.cx) * V.s + W / 2, ty);
+    ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+    for (let i = Math.ceil(y0 / step); i * step <= y1; i++) if (i) ctx.fillText(f(i * step), tx, H / 2 - (i * step - V.cy) * V.s);
+  }
+}
+
+function setDash(o, lw) {
+  const t = o.lineType;
+  ctx.lineCap = 'round';
+  if (t === 10) ctx.setLineDash([lw * 3, lw * 2.5]);
+  else if (t === 15) ctx.setLineDash([lw * 6, lw * 3]);
+  else if (t === 20) ctx.setLineDash([0.01, lw * 2.4]);
+  else if (t === 30) ctx.setLineDash([lw * 5, lw * 2.5, 0.01, lw * 2.5]);
+  else ctx.setLineDash([]);
+}
+function tracePath(pts, closed) {
+  ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); if (closed) ctx.closePath();
+}
+
+let view0 = [0, 0, 0, 0];
+const inView = bb => !bb || !(bb[2] < view0[0] || bb[0] > view0[2] || bb[3] < view0[1] || bb[1] > view0[3]);
+
+/* ───────────── SEMANTYKA MAPY: ulice, przystanki, tory, ronda, metro, lokale ───────────── */
+const C_SHOP = [224, 116, 21], C_BUS = [160, 160, 160], C_TRAM = [255, 255, 102], C_WHITE = [255, 255, 255], C_ZESP = [64, 64, 64];
+const rgbIs = (o, c) => !!o.rgb && Math.abs(o.rgb[0] - c[0]) <= 2 && Math.abs(o.rgb[1] - c[1]) <= 2 && Math.abs(o.rgb[2] - c[2]) <= 2;
+const CATNAME = { street: 'Ulica', bus: 'Przystanek autobusowy', tram: 'Przystanek tramwajowy', metro: 'Stacja metra', shop: 'Lokal', rondo: 'Rondo', tram_track: 'Tory tramwajowe', metro_line: 'Linia metra' };
+const CATDOT = { metro_line: '#d93025', bus: '#1a73e8', tram: '#0b8043', metro: '#d93025', shop: '#e8710a', rondo: '#9aa0a6', tram_track: '#80868b' };
+const kindName = o => (o.cat === 'rondo' && /^\s*plac/i.test(o.name)) ? 'Plac' : (CATNAME[o.cat] || kindName0(o));
+const resultSub = o => (o.lines && o.lines.length) ? `${kindName(o)} · ${o.lines.map(l => l.n).join(', ')}` : (o.alight ? `${kindName(o)} · dla wysiadających` : kindName(o));
+const dispName = o => o.kind === 'street' ? (o.name || o.extra || 'Ulica bez nazwy') : (o.name || o.label);
+const ordOf = o => o.cat === 'tram_track' ? 2.2 : KIND_ORDER[o.kind];
+function stopRows(o) {
+  const R = [];
+  if (o.team) R.push(['Zespół', o.team]);
+  R.push(['Numer', o.num]);
+  R.push(['Współrzędne', xy([o.x, o.y])]);
+  return R;
+}
+
+// łączy odcinki w jak najdłuższe łamane (przechodząc przez skrzyżowania „prosto”)
+function buildChains(parts) {
+  const K = p => Math.round(p[0] * 1e5) + ',' + Math.round(p[1] * 1e5);
+  const pos = new Map(), adj = new Map(), edges = [];
+  const link = (k, id) => { let a = adj.get(k); if (!a) adj.set(k, a = []); a.push(id); };
+  for (const pts of parts) for (let i = 0; i + 1 < pts.length; i++) {
+    const a = K(pts[i]), b = K(pts[i + 1]); if (a === b) continue;
+    const id = edges.push({ a, b, used: false }) - 1;
+    pos.set(a, pts[i]); pos.set(b, pts[i + 1]); link(a, id); link(b, id);
+  }
+  const chains = [];
+  const walk = start => {
+    const ch = [pos.get(start)]; let cur = start, dir = null;
+    for (;;) {
+      let best = -1, bs = -Infinity;
+      for (const id of adj.get(cur) || []) {
+        const e = edges[id]; if (e.used) continue;
+        const p = pos.get(cur), q = pos.get(e.a === cur ? e.b : e.a);
+        let sc = 0;
+        if (dir) { const dx = q[0] - p[0], dy = q[1] - p[1], l = Math.hypot(dx, dy) || 1; sc = (dx * dir[0] + dy * dir[1]) / l; }
+        if (sc > bs) { bs = sc; best = id; }
+      }
+      if (best < 0) break;
+      const e = edges[best]; e.used = true;
+      const nxt = e.a === cur ? e.b : e.a, p = pos.get(cur), q = pos.get(nxt), l = Math.hypot(q[0] - p[0], q[1] - p[1]) || 1;
+      dir = [(q[0] - p[0]) / l, (q[1] - p[1]) / l]; ch.push(q); cur = nxt;
+    }
+    return ch;
+  };
+  const pending = ids => ids.some(id => !edges[id].used);
+  for (const [k, ids] of adj) if (ids.length !== 2) while (pending(ids)) { const c = walk(k); if (c.length > 1) chains.push(c); }
+  for (const [k, ids] of adj) while (pending(ids)) { const c = walk(k); if (c.length > 1) chains.push(c); }
+  return chains;
+}
+
+function classify(list) {
+  const out = [], groups = new Map(), zesp = [], stops = []; let uniq = 0;
+  for (const o of list) {
+    if (o.kind === 'point') {
+      if (rgbIs(o, C_SHOP)) o.cat = 'shop';
+      else if (rgbIs(o, C_BUS)) o.cat = 'bus';
+      else if (rgbIs(o, C_TRAM)) o.cat = 'tram';
+      else if (rgbIs(o, C_WHITE) && /^\s*(rondo|plac)(\s|$)/i.test(o.name)) o.cat = 'rondo';
+      else if (Math.round(o.pointSize) === 5 && o.showLabel) o.cat = 'metro';
+      else { o.cat = 'other'; o.visible = false; }
+      if (o.cat === 'bus' || o.cat === 'tram') stops.push(o);
+    } else if (o.kind === 'text') {
+      if (rgbIs(o, C_ZESP)) { o.cat = 'stopname'; o.visible = false; zesp.push(o); }
+    } else if (['segment', 'ray', 'line', 'vector', 'arc'].includes(o.kind) || (o.kind === 'polygon' && !o.closed && !o.hasEdges)) {
+      if (o.kind === 'polygon' && !o.closed && !o.hasEdges && (o.lineOp != null ? o.lineOp : 1) < 0.5) o.cat = 'metro_line';
+      else if (rgbIs(o, C_TRAM)) o.cat = 'tram_track';
+      else if (o.visible && (o.kind === 'segment' || o.kind === 'polygon') && (Math.round(o.thickness) === 13 || Math.round(o.thickness) === 10)) {
+        const cap = (o.caption || '').replace(/\$/g, '').trim(), found = [];
+        cap.replace(/\[([^\]]*)\]/g, (_, c) => { c.replace(/(DK|DW|S|A)\s*(\d+[a-z]?)/gi, (__, t, n) => { found.push({ t: t.toUpperCase(), n }); return ''; }); return ''; });
+        const nm = cap.replace(/\[[^\]]*\]/g, '').replace(/\s+/g, ' ').trim();
+        const key = nm ? 'n:' + nm.toLowerCase() : 'u:' + (uniq++); // ulica bez opisu: osobna, bez nazwy
+        let g = groups.get(key); if (!g) groups.set(key, g = { name: nm, parts: [], roads: [] });
+        for (const r of found) if (!g.roads.some(x => x.t === r.t && x.n === r.n)) g.roads.push(r);
+        g.parts.push({ pts: o.kind === 'segment' ? [o.p1, o.p2] : o.pts, cls: Math.round(o.thickness) === 13 ? 'main' : 'minor', rgb: o.rgb });
+        continue; // odcinek staje się częścią ulicy
+      }
+    }
+    o.dot = CATDOT[o.cat] || null;
+    out.push(o);
+  }
+
+  // nazwy stacji metra nie mogą się dublować (np. osobny napis o tej samej treści)
+  const nn = t => String(t).replace(/["\s]+/g, ' ').trim().toLowerCase();
+  const metroNames = new Set(out.filter(o => o.cat === 'metro').map(o => nn(o.name)));
+  for (const o of out) if (o.kind === 'text' && o.cat !== 'stopname' && metroNames.has(nn(o.str.replace(/\n/g, ' ')))) o.visible = false;
+
+  // ulice: wszystkie odcinki o tej samej etykiecie = jedna ulica
+  for (const g of groups.values()) {
+    const chains = [];
+    const keys = [...new Set(g.parts.map(p => p.cls + '|' + p.rgb.join(',')))];
+    for (const key of keys) {
+      const [cls, col] = key.split('|'), rgb = col.split(',').map(Number);
+      const parts = g.parts.filter(p => p.cls === cls && p.rgb.join(',') === col).map(p => p.pts);
+      const fill = `rgb(${rgb.join(',')})`, cs = `rgb(${rgb.map(v => Math.round(v * .82)).join(',')})`;
+      const lum = .299 * rgb[0] + .587 * rgb[1] + .114 * rgb[2];
+      for (const c of buildChains(parts)) chains.push({ pts: c, cls, rgb, fill, cs, txt: lum > 150 ? '#3c4043' : '#f1f3f4' });
+    }
+    if (!chains.length) continue;
+    const cls = g.parts.some(p => p.cls === 'main') ? 'main' : 'minor';
+    let length = 0; chains.forEach(c => length += polyLen(c.pts, false));
+    out.push({
+      kind: 'street', cat: 'street', type: 'street', cls, name: g.name, label: g.name, caption: g.name, roads: g.roads, extra: g.roads.map(r => r.t + r.n).join(' '), chains, nseg: g.parts.length, length,
+      visible: true, showLabel: true, layer: 0, thickness: cls === 'main' ? 13 : 10, rgb: chains[0].rgb,
+      alpha: 0, fillA: 0, labelMode: 3, pointSize: 0, lineType: 0, dot: chains[0].fill,
+      bbox: ptsBBox(chains.flatMap(c => c.pts)),
+    });
+  }
+
+  // przystanki: nazwa = ZESPÓŁ NUMER, linie z nawiasu kwadratowego
+  for (const st of stops) {
+    let best = null, bd = Infinity;
+    for (const t of zesp) { const d = Math.hypot(t.x - st.x, t.y - st.y); if (d < bd) { bd = d; best = t; } }
+    const team = best ? best.str.replace(/&#xa;/gi, ' ').replace(/&quot;/g, '').replace(/"/g, '').replace(/\s+/g, ' ').trim() : '';
+    const raw = st.name, m = /(\d+)\s*\[([^\]]*)\]/.exec(raw), m2 = m ? null : /(\d+)/.exec(raw);
+    st.num = m ? m[1] : m2 ? m2[1] : raw.trim();
+    const items = m ? m[2].split(',').map(x => x.trim()).filter(Boolean) : [], isWys = x => /^wys\.?$/i.test(x);
+    st.alight = items.some(isWys);
+    st.lines = items.filter(x => !isWys(x)).map(x => ({ n: x.replace(/N[ŻZ]/gi, '').trim(), demand: /N[ŻZ]/i.test(x) }));
+    st.team = team;
+    st.name = (team + ' ' + st.num).trim();
+  }
+  return out;
+}
+
+let stopIndex = new Map(), metroLines = [], rondoCol = null, streets = [], streetsByPrio = [], tracks = [], rondos = [], pointsList = [];
+function buildCaches() {
+  streets = order.filter(o => o.kind === 'street' && o.visible);
+  streetsByPrio = streets.slice().sort((a, b) => (a.cls === 'main' ? 0 : 1) - (b.cls === 'main' ? 0 : 1) || b.length - a.length);
+  tracks = order.filter(o => o.cat === 'tram_track' && o.visible);
+  metroLines = order.filter(o => o.cat === 'metro_line' && o.visible);
+  rondos = order.filter(o => o.cat === 'rondo' && o.visible);
+  const mc = streets.map(s => s.chains.find(c => c.cls === 'main')).find(Boolean);
+  rondoCol = mc ? { fill: mc.fill, cs: mc.cs } : null;
+  stopIndex = new Map();
+  for (const o of order) if (o.lines && o.team) { const k = skey(o.team, o.num); let a = stopIndex.get(k); if (!a) stopIndex.set(k, a = []); a.push(o); }
+  const pr = { shop: 0, tram: 1, bus: 2, metro: 3 };
+  pointsList = order.filter(o => o.kind === 'point' && o.cat !== 'rondo').sort((a, b) => (pr[a.cat] ?? 0) - (pr[b.cat] ?? 0));
+}
+
+/* ───────────── SKALA I WYGLĄD (jak na prawdziwej mapie, nie liniowo) ───────────── */
+const zr = () => V.s / Math.max(V.fit, 1e-9);
+// szerokość jezdni w pikselach: rośnie wolniej niż przybliżenie, ma dolny i górny limit
+const roadW = cls => { const m = clamp(3.4 * Math.pow(zr(), 0.7), 2, 24); return cls === 'main' ? m : Math.max(1.6, m * 0.72); };
+const caseW = w => clamp(w * 0.14, 1, 2.4);
+const rondoR = () => roadW('main') * 1.05 + 2;
+function pointVisible(o) {
+  if (o === selected || routeSet.has(o)) return true;
+  const z = zr();
+  if (o.cat === 'bus' || o.cat === 'tram') return z >= 1.6;
+  if (o.cat === 'shop') return z >= 2.5;
+  return true;
+}
+function pointRad(o) {
+  const z = zr();
+  switch (o.cat) {
+    case 'bus': case 'tram': return z < 3 ? 3.4 : z < 6 ? 7 : 8.5;
+    case 'shop': return z < 4 ? 3.2 : 7;
+    case 'metro': return z < 1.5 ? 5 : 9;
+    case 'rondo': return rondoR();
+  }
+  return pointR(o);
+}
+function rr(x, y, w, h, r) {
+  ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
+
+/* ───────────── RYSOWANIE ───────────── */
+function drawObj(o) {
+  if (o.kind === 'text') return;
+  const pts = screenPts(o); if (!pts || pts.length < 2) return;
+  const closed = isClosed(o), lw = lineW(o);
+  tracePath(pts, closed);
+  if (closed && o.fillA > 0) { ctx.fillStyle = colorOf(o, o.fillA); ctx.fill(); }
+  if (o.kind === 'polygon' && o.hasEdges) return;
+  ctx.lineJoin = 'round'; ctx.lineWidth = lw; ctx.strokeStyle = colorOf(o); setDash(o, lw);
+  ctx.stroke(); ctx.setLineDash([]);
+  if (o.kind === 'vector') {
+    const [a, b] = pts, ang = Math.atan2(b[1] - a[1], b[0] - a[0]), hl = 8 + lw * 1.5;
+    ctx.beginPath(); ctx.moveTo(b[0], b[1]);
+    ctx.lineTo(b[0] - hl * Math.cos(ang - .4), b[1] - hl * Math.sin(ang - .4));
+    ctx.lineTo(b[0] - hl * Math.cos(ang + .4), b[1] - hl * Math.sin(ang + .4));
+    ctx.closePath(); ctx.fillStyle = colorOf(o); ctx.fill();
+  }
+}
+
+function strokeChains(cls, width, which) {
+  const by = new Map();
+  for (const s of streets) {
+    if (!s._sc) continue;
+    for (const c of s._sc) if (c.cls === cls) { let a = by.get(c[which]); if (!a) by.set(c[which], a = []); a.push(c.sp); }
+  }
+  ctx.lineWidth = width;
+  for (const [col, list] of by) {
+    ctx.beginPath();
+    for (const sp of list) sp.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]));
+    ctx.strokeStyle = col; ctx.stroke();
+  }
+}
+function drawStreets(th) {
+  for (const s of streets) s._sc = inView(s.bbox) ? s.chains.map(c => ({ cls: c.cls, fill: c.fill, cs: c.cs, txt: c.txt, sp: c.pts.map(p => w2s(p[0], p[1])), cum: null })) : null;
+  const w1 = roadW('main'), w2 = roadW('minor'), c1 = caseW(w1), c2 = caseW(w2), R = rondoR();
+  const rs = rondos.filter(o => inView(o.bbox)).map(o => ({ o, p: w2s(o.x, o.y) }));
+  ctx.setLineDash([]); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  const rf = rondoCol ? rondoCol.fill : th.mainFill, rc = rondoCol ? rondoCol.cs : th.mainCase;
+  strokeChains('minor', w2 + 2 * c2, 'cs');
+  strokeChains('main', w1 + 2 * c1, 'cs');
+  ctx.fillStyle = rc;
+  for (const r of rs) { ctx.beginPath(); ctx.arc(r.p[0], r.p[1], R + c1, 0, 7); ctx.fill(); }
+  strokeChains('minor', w2, 'fill');
+  strokeChains('main', w1, 'fill');
+  for (const r of rs) {
+    ctx.fillStyle = rf; ctx.beginPath(); ctx.arc(r.p[0], r.p[1], R, 0, 7); ctx.fill();
+    const ri = R - w1 * 0.62 - 1;
+    if (ri >= 2) {
+      ctx.fillStyle = th.island; ctx.beginPath(); ctx.arc(r.p[0], r.p[1], ri, 0, 7); ctx.fill();
+      ctx.lineWidth = 1; ctx.strokeStyle = rc; ctx.stroke();
+    }
+  }
+}
+function drawTracks(th) {
+  if (!tracks.length) return;
+  const rw = clamp(2.2 * Math.pow(zr(), 0.3), 2, 4.5);
+  ctx.lineCap = 'butt'; ctx.lineJoin = 'round'; ctx.setLineDash([]);
+  ctx.beginPath(); let any = false;
+  for (const o of tracks) {
+    if (!inView(o.bbox)) continue;
+    const pts = screenPts(o); if (!pts || pts.length < 2) continue;
+    pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); any = true;
+  }
+  if (!any) return;
+  ctx.lineWidth = rw; ctx.strokeStyle = th.rail; ctx.stroke();
+  ctx.lineWidth = Math.max(.8, rw - 1.6); ctx.strokeStyle = th.railDash; ctx.setLineDash([rw * 1.3, rw * 1.3]); ctx.stroke();
+  ctx.setLineDash([]);
+}
+function drawMetroLines(th) {
+  if (!settings.metro || !metroLines.length) return;
+  const w = clamp(2.6 * Math.pow(zr(), 0.5), 3, 9);
+  const list = metroLines.filter(o => inView(o.bbox)).map(o => ({ o, p: screenPts(o) })).filter(x => x.p && x.p.length > 1);
+  ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.setLineDash([]);
+  const pass = (width, colFn) => { for (const { o, p } of list) { tracePath(p, false); ctx.lineWidth = width; ctx.strokeStyle = colFn(o); ctx.stroke(); } };
+  pass(w + 3, () => th.dark ? 'rgba(31,35,41,.9)' : 'rgba(255,255,255,.92)');
+  pass(w, o => colorOf(o, .95));
+}
+function drawPoint(o) {
+  if (o.cat === 'rondo' || !pointVisible(o)) return;
+  const [sx, sy] = w2s(o.x, o.y), r = pointRad(o);
+  if (sx < -30 || sy < -30 || sx > W + 30 || sy > H + 30) return;
+  const col = CATDOT[o.cat] || colorOf(o), sq = o.cat === 'metro';
+  const shape = k => { if (sq) rr(sx - r - k, sy - r - k, 2 * (r + k), 2 * (r + k), Math.max(2, r * .3 + k * .5)); else { ctx.beginPath(); ctx.arc(sx, sy, r + k, 0, 7); } };
+  ctx.save();
+  ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur = 3; ctx.shadowOffsetY = 1;
+  ctx.fillStyle = '#fff'; shape(1.6); ctx.fill();
+  ctx.restore();
+  ctx.fillStyle = col; shape(0); ctx.fill();
+  if (r < 6.5) return;
+  ctx.fillStyle = '#fff'; ctx.strokeStyle = '#fff';
+  const dot = (x, y, rad, c) => { ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, y, rad, 0, 7); ctx.fill(); };
+  if (o.cat === 'bus') {
+    rr(sx - r * .5, sy - r * .55, r, r * 1.1, r * .18); ctx.fill();
+    ctx.fillStyle = col; ctx.fillRect(sx - r * .36, sy - r * .4, r * .72, r * .34);
+    dot(sx - r * .22, sy + r * .3, r * .1, col); dot(sx + r * .22, sy + r * .3, r * .1, col);
+  } else if (o.cat === 'tram') {
+    rr(sx - r * .42, sy - r * .25, r * .84, r * .85, r * .15); ctx.fill();
+    ctx.fillStyle = col; ctx.fillRect(sx - r * .3, sy - r * .12, r * .6, r * .28);
+    dot(sx - r * .2, sy + r * .38, r * .09, col); dot(sx + r * .2, sy + r * .38, r * .09, col);
+    ctx.lineWidth = Math.max(1, r * .14); ctx.beginPath();
+    ctx.moveTo(sx, sy - r * .25); ctx.lineTo(sx, sy - r * .52); ctx.moveTo(sx - r * .26, sy - r * .52); ctx.lineTo(sx + r * .26, sy - r * .52); ctx.stroke();
+  } else if (o.cat === 'metro') {
+    ctx.font = `700 ${r * 1.3}px Roboto, Arial, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('M', sx, sy + r * .06);
+  } else if (o.cat === 'shop') {
+    dot(sx, sy, r * .38, '#fff');
+  }
+}
+
+const placed = [];
+const overlaps = r => placed.some(p => !(r.x2 < p.x1 || r.x1 > p.x2 || r.y2 < p.y1 || r.y1 > p.y2));
+function tryPlace(r) { if (overlaps(r)) return false; placed.push(r); return true; }
+function labelText(str, x, y, align, color, th, size = 13) {
+  ctx.font = `500 ${size}px Roboto, "Segoe UI", system-ui, sans-serif`;
+  ctx.textAlign = align; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
+  ctx.lineWidth = 3.5; ctx.strokeStyle = th.halo; ctx.strokeText(str, x, y);
+  ctx.fillStyle = color; ctx.fillText(str, x, y);
+}
+
+// punkt na łamanej ekranowej w odległości d od początku
+function pathAt(sp, cum, d) {
+  const n = sp.length; d = clamp(d, 0, cum[n - 1]);
+  let lo = 0, hi = n - 1;
+  while (hi - lo > 1) { const m = (lo + hi) >> 1; if (cum[m] <= d) lo = m; else hi = m; }
+  const seg = cum[hi] - cum[lo] || 1, t = (d - cum[lo]) / seg;
+  return [sp[lo][0] + (sp[hi][0] - sp[lo][0]) * t, sp[lo][1] + (sp[hi][1] - sp[lo][1]) * t];
+}
+function tryStreetLabel(c, ctr, tw, adv, ls, fs, name, th) {
+  const p0 = pathAt(c.sp, c.cum, ctr - tw / 2), p1 = pathAt(c.sp, c.cum, ctr + tw / 2);
+  const mid = pathAt(c.sp, c.cum, ctr);
+  if (mid[0] < 0 || mid[1] < 0 || mid[0] > W || mid[1] > H) return false;
+  const dx = p1[0] - p0[0], dy = p1[1] - p0[1];
+  const flip = dx < -1e-6 || (Math.abs(dx) <= 1e-6 && dy > 0);
+  const gl = []; let t = 0, prev = null, total = 0;
+  for (let i = 0; i < adv.length; i++) {
+    const a = adv[i], cen = t + (a - ls) / 2; t += a;
+    const d = flip ? ctr + tw / 2 - cen : ctr - tw / 2 + cen, h = a / 2, s = flip ? -1 : 1;
+    const A = pathAt(c.sp, c.cum, d - s * h), B = pathAt(c.sp, c.cum, d + s * h), P = pathAt(c.sp, c.cum, d);
+    const ang = Math.atan2(B[1] - A[1], B[0] - A[0]);
+    if (prev !== null) {
+      let da = ang - prev; while (da > Math.PI) da -= 2 * Math.PI; while (da < -Math.PI) da += 2 * Math.PI;
+      if (Math.abs(da) > 0.4) return false;
+      total += da; if (Math.abs(total) > 1.3) return false;
+    }
+    prev = ang; gl.push({ ch: name[i], x: P[0], y: P[1], ang });
+  }
+  const rects = [], e = fs * .7 + 1;
+  for (let i = 0; i < gl.length; i += 3) {
+    const g = gl.slice(i, i + 4); // lekko zachodzące grupy
+    rects.push({ x1: Math.min(...g.map(q => q.x)) - e, y1: Math.min(...g.map(q => q.y)) - e, x2: Math.max(...g.map(q => q.x)) + e, y2: Math.max(...g.map(q => q.y)) + e });
+  }
+  if (rects.some(overlaps)) return false;
+  rects.forEach(r => placed.push(r));
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round'; ctx.lineWidth = 2.5;
+  const halo = c.fill;
+  for (const g of gl) {
+    ctx.save(); ctx.translate(g.x, g.y); ctx.rotate(g.ang);
+    ctx.strokeStyle = halo; ctx.strokeText(g.ch, 0, .5);
+    ctx.fillStyle = c.txt; ctx.fillText(g.ch, 0, .5);
+    ctx.restore();
+  }
+  return true;
+}
+// nazwa ulicy wzdłuż jej „powierzchni”, jak w Google Maps
+function drawStreetLabels(th) {
+  for (const s of streetsByPrio) {
+    if (!s._sc || !s.name) continue;
+    const chars = [...s.name];
+    for (const c of s._sc) {
+      const w = roadW(c.cls); if (w < 7) continue;
+      const fs = clamp(w * 0.9, 8.5, 13);
+      ctx.font = `500 ${fs}px Roboto, "Segoe UI", system-ui, sans-serif`;
+      const ls = fs * 0.07, adv = chars.map(ch => ctx.measureText(ch).width + ls);
+      const tw = adv.reduce((a, b) => a + b, 0) - ls;
+      if (!c.cum) { c.cum = [0]; for (let i = 1; i < c.sp.length; i++) c.cum.push(c.cum[i - 1] + Math.hypot(c.sp[i][0] - c.sp[i - 1][0], c.sp[i][1] - c.sp[i - 1][1])); }
+      const L = c.cum[c.cum.length - 1]; if (L < tw + 16) continue;
+      const n = Math.max(1, Math.round(L / Math.max(tw * 3, 360)));
+      for (let k = 0; k < n; k++) {
+        const base = (k + .5) * L / n;
+        for (const off of [0, 40, -40, 90, -90, 160, -160]) {
+          const ctr = base + off;
+          if (ctr - tw / 2 < 6 || ctr + tw / 2 > L - 6) continue;
+          if (tryStreetLabel(c, ctr, tw, adv, ls, fs, chars, th)) break;
+        }
+      }
+    }
+  }
+}
+
+function ensureCum(c) {
+  if (!c.cum) { c.cum = [0]; for (let i = 1; i < c.sp.length; i++) c.cum.push(c.cum[i - 1] + Math.hypot(c.sp[i][0] - c.sp[i - 1][0], c.sp[i][1] - c.sp[i - 1][1])); }
+  return c.cum[c.cum.length - 1];
+}
+const roadText = r => r.t === 'DK' ? r.n : r.t + r.n;
+function drawBadge(x, y, w, h, r) {
+  const bg = r.t === 'DK' ? '#d32f2f' : r.t === 'S' ? '#b71c1c' : r.t === 'A' ? '#1a4fa0' : '#5f6368';
+  ctx.save(); ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur = 2; ctx.shadowOffsetY = 1;
+  rr(x, y, w, h, 3); ctx.fillStyle = bg; ctx.fill(); ctx.restore();
+  ctx.lineWidth = 1.1; ctx.strokeStyle = '#fff'; rr(x + 1.4, y + 1.4, w - 2.8, h - 2.8, 2); ctx.stroke();
+  ctx.fillStyle = r.t === 'A' ? '#ffd54f' : '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(roadText(r), x + w / 2, y + h / 2 + .5);
+}
+// piktogramy dróg krajowych (DK) i ekspresowych (S) na ulicy
+function drawRoadBadges() {
+  if (zr() < 1.2) return;
+  ctx.font = '700 10.5px Roboto, "Segoe UI", system-ui, sans-serif';
+  const h = 16, gap = 3;
+  for (const s of streetsByPrio) {
+    if (!s._sc || !s.roads.length) continue;
+    const items = s.roads.map(r => ({ r, w: Math.max(18, ctx.measureText(roadText(r)).width + 10) }));
+    const tw = items.reduce((a, b) => a + b.w, 0) + gap * (items.length - 1);
+    for (const c of s._sc) {
+      const L = ensureCum(c); if (L < tw + 24) continue;
+      const n = Math.max(1, Math.round(L / 520));
+      for (let k = 0; k < n; k++) {
+        const base = (k + .5) * L / n;
+        for (const off of [0, 60, -60, 140, -140]) {
+          const ctr = base + off; if (ctr < 12 || ctr > L - 12) continue;
+          const P = pathAt(c.sp, c.cum, ctr); if (P[0] < 0 || P[1] < 0 || P[0] > W || P[1] > H) continue;
+          const rect = { x1: P[0] - tw / 2 - 2, y1: P[1] - h / 2 - 2, x2: P[0] + tw / 2 + 2, y2: P[1] + h / 2 + 2 };
+          if (!tryPlace(rect)) continue;
+          let x = P[0] - tw / 2;
+          ctx.font = '700 10.5px Roboto, "Segoe UI", system-ui, sans-serif';
+          for (const it of items) { drawBadge(x, P[1] - h / 2, it.w, h, it.r); x += it.w + gap; }
+          break;
+        }
+      }
+    }
+  }
+}
+
+function drawLabels(th) {
+  placed.length = 0;
+  for (const o of order) {
+    if (!o.visible || o.kind !== 'point' || !pointVisible(o)) continue;
+    const [sx, sy] = w2s(o.x, o.y), r = pointRad(o) + 2;
+    if (sx > -60 && sy > -60 && sx < W + 60 && sy < H + 60) placed.push({ x1: sx - r, y1: sy - r, x2: sx + r, y2: sy + r });
+  }
+  const zz = zr();
+  const texts = order.filter(o => o.visible && o.kind === 'text' && o.cat !== 'stopname');
+  for (const o of texts) { // teksty z GeoGebry – zawsze widoczne
+    const [sx, sy] = w2s(o.x, o.y), lines = o.str.split('\n'); o._rect = null;
+    if (sx < -300 || sy < -100 || sx > W + 300 || sy > H + 100) continue;
+    ctx.font = '500 14px Roboto, "Segoe UI", system-ui, sans-serif';
+    let w = 0; lines.forEach(l => w = Math.max(w, ctx.measureText(l).width));
+    lines.forEach((l, i) => labelText(l, sx, sy + i * 18, 'left', colorOf(o), th, 14));
+    o._rect = { x1: sx, y1: sy - 10, x2: sx + w, y2: sy - 10 + lines.length * 18 };
+    placed.push(o._rect);
+  }
+  for (const o of order) if (o.cat === 'stopname') o._rect = null;
+  drawRoadBadges();
+  if (!settings.labels) return;
+
+  drawStreetLabels(th);
+
+  const prio = { metro: 0, rondo: 1, shop: 2 };
+  const pts = order.filter(o => o.visible && o.kind === 'point' && prio[o.cat] !== undefined && o.name && (o.caption || o.showLabel) && pointVisible(o)
+    && (o.cat !== 'shop' || zz >= 4) && (o.cat !== 'rondo' || zz >= 1.3)).sort((a, b) => prio[a.cat] - prio[b.cat]);
+  const shownMetro = new Set();
+  for (const o of pts) {
+    if (o.cat === 'metro') { if (shownMetro.has(o.name)) continue; shownMetro.add(o.name); }
+    const [sx, sy] = w2s(o.x, o.y); if (sx < -30 || sy < -30 || sx > W + 30 || sy > H + 30) continue;
+    const size = 12, color = o.cat === 'shop' ? th.shopText : o.cat === 'rondo' ? th.placeText : th.label;
+    ctx.font = `500 ${size}px Roboto, "Segoe UI", system-ui, sans-serif`;
+    const w = ctx.measureText(o.name).width, r = pointRad(o) + 5;
+    const opts = [['left', sx + r, sy, sx + r, sx + r + w], ['right', sx - r, sy, sx - r - w, sx - r],
+                  ['center', sx, sy - r - 5, sx - w / 2, sx + w / 2], ['center', sx, sy + r + 5, sx - w / 2, sx + w / 2]];
+    for (const [al, x, y, xa, xb] of opts) if (tryPlace({ x1: xa, y1: y - 9, x2: xb, y2: y + 9 })) { labelText(o.name, x, y, al, color, th, size); break; }
+  }
+
+  const cand = order.filter(o => o.visible && o.showLabel && !['text', 'line', 'point', 'street'].includes(o.kind) && o.cat !== 'tram_track' && o.cat !== 'metro_line' && o.name);
+  for (const o of cand) {
+    if (!inView(o.bbox)) continue;
+    ctx.font = '500 13px Roboto, "Segoe UI", system-ui, sans-serif';
+    const w = ctx.measureText(o.name).width, lc = th.label;
+    let c;
+    if (o.kind === 'ellipse') c = [o.cx, o.cy];
+    else if (o.kind === 'polygon') { const n = o.pts.length; c = [o.pts.reduce((s, p) => s + p[0], 0) / n, o.pts.reduce((s, p) => s + p[1], 0) / n]; }
+    else if (o.kind === 'arc') { const a = (o.a0 + o.a1) / 2; c = [o.c[0] + o.r * Math.cos(a) * (o.sector ? .6 : 1), o.c[1] + o.r * Math.sin(a) * (o.sector ? .6 : 1)]; }
+    else c = [(o.p1[0] + o.p2[0]) / 2, (o.p1[1] + o.p2[1]) / 2];
+    const [sx, sy] = w2s(c[0], c[1]), y = (o.kind === 'segment' || o.kind === 'ray' || o.kind === 'vector') ? sy - 10 : sy;
+    if (sx < -50 || sy < -50 || sx > W + 50 || sy > H + 50) continue;
+    if (tryPlace({ x1: sx - w / 2, y1: y - 9, x2: sx + w / 2, y2: y + 9 })) labelText(o.name, sx, y, 'center', lc, th);
+  }
+}
+
+function drawSelection(o) {
+  const hl = 'rgba(26,115,232,';
+  if (o.kind === 'point') {
+    const [sx, sy] = w2s(o.x, o.y), r = pointRad(o);
+    ctx.beginPath(); ctx.arc(sx, sy, r + 8, 0, 7); ctx.fillStyle = hl + '.22)'; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = hl + '.9)'; ctx.beginPath(); ctx.arc(sx, sy, r + 4, 0, 7); ctx.stroke();
+  } else if (o.kind === 'text') {
+    if (o._rect) { ctx.lineWidth = 2; ctx.strokeStyle = hl + '.9)'; ctx.strokeRect(o._rect.x1 - 4, o._rect.y1 - 2, o._rect.x2 - o._rect.x1 + 8, o._rect.y2 - o._rect.y1 + 4); }
+  } else if (o.kind === 'street') { // zaznacz wszystkie odcinki ulicy
+    const w = roadW(o.cls);
+    ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.setLineDash([]);
+    for (const [lw, a] of [[w + 10, '.3)'], [w + 1, '.5)']]) {
+      ctx.beginPath();
+      for (const c of o.chains) c.pts.forEach((p, i) => { const q = w2s(p[0], p[1]); i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]); });
+      ctx.lineWidth = lw; ctx.strokeStyle = hl + a; ctx.stroke();
+    }
+  } else {
+    const pts = screenPts(o); if (!pts) return;
+    tracePath(pts, isClosed(o));
+    if (isClosed(o)) { ctx.fillStyle = hl + '.16)'; ctx.fill(); }
+    ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.setLineDash([]);
+    ctx.lineWidth = lineW(o) + 7; ctx.strokeStyle = hl + '.35)'; ctx.stroke();
+    ctx.lineWidth = Math.max(2, lineW(o)); ctx.strokeStyle = hl + '.95)'; ctx.stroke();
+  }
+}
+
+function drawScale() {
+  const target = 110, raw = target / V.s, st = niceStep(raw * 0.7);
+  let len = st; if (len * V.s > 150) len /= 2;
+  $('#scalebar').style.width = Math.max(10, len * V.s) + 'px';
+  $('#scaletxt').textContent = `${f(len)} ${UNIT_NAME}`;
+}
+
+function draw() {
+  const th = theme();
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.fillStyle = th.bg; ctx.fillRect(0, 0, W, H);
+  document.body.style.background = th.bg;
+  drawGrid(th);
+  const pad = 30 / V.s;
+  view0 = [V.cx - W / 2 / V.s - pad, V.cy - H / 2 / V.s - pad, V.cx + W / 2 / V.s + pad, V.cy + H / 2 / V.s + pad];
+  for (const o of order) { if (o.visible && o.kind !== 'point' && o.kind !== 'street' && o.cat !== 'tram_track' && o.cat !== 'metro_line' && inView(o.bbox)) drawObj(o); }
+  drawStreets(th);
+  drawTracks(th);
+  drawMetroLines(th);
+  for (const o of pointsList) { if (o.visible && inView(o.bbox)) drawPoint(o); }
+  for (const o of routeStops) { const [sx, sy] = w2s(o.x, o.y); ctx.beginPath(); ctx.arc(sx, sy, pointRad(o) + 4.5, 0, 7); ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(26,115,232,.9)'; ctx.setLineDash([3, 3]); ctx.stroke(); ctx.setLineDash([]); }
+  if (selected && selected.visible) drawSelection(selected);
+  drawLabels(th);
+  drawScale();
+}
+
+/* ───────────── ANIMACJE I WIDOK ───────────── */
+let raf = 0, last = 0;
+function requestDraw() { if (!raf) raf = requestAnimationFrame(frame); }
+function frame(t) {
+  raf = 0;
+  const dt = last ? Math.min(50, t - last) : 16; last = t;
+  let again = false;
+  if (anim.mode === 'inertia') {
+    V.cx -= anim.vx * dt / V.s; V.cy += anim.vy * dt / V.s;
+    const k = Math.pow(0.94, dt / 16); anim.vx *= k; anim.vy *= k;
+    if (Math.hypot(anim.vx, anim.vy) < 0.02) anim.mode = null; else again = true;
+  } else if (anim.mode === 'anchor' || anim.mode === 'fly') {
+    const fr = 1 - Math.pow(1 - 0.2, dt / 16.7);
+    const ls = Math.log(V.s), lt = Math.log(anim.s); let nl = ls + (lt - ls) * fr;
+    if (Math.abs(lt - nl) < 0.0008) nl = lt;
+    V.s = Math.exp(nl);
+    if (anim.mode === 'anchor') {
+      V.cx = anim.wx - (anim.sx - W / 2) / V.s; V.cy = anim.wy + (anim.sy - H / 2) / V.s;
+      if (nl === lt) anim.mode = null;
+    } else {
+      V.cx += (anim.cx - V.cx) * fr; V.cy += (anim.cy - V.cy) * fr;
+      if (nl === lt && Math.hypot(anim.cx - V.cx, anim.cy - V.cy) * V.s < 0.3) { V.cx = anim.cx; V.cy = anim.cy; anim.mode = null; }
+    }
+    again = anim.mode !== null;
+  }
+  draw();
+  if (again) requestDraw(); else last = 0;
+}
+function zoomAt(factor, sx, sy, fromTarget = true) {
+  const base = (fromTarget && (anim.mode === 'anchor' || anim.mode === 'fly')) ? anim.s : V.s;
+  const w = s2w(sx, sy);
+  Object.assign(anim, { mode: 'anchor', s: clamp(base * factor, V.min, V.max), wx: w[0], wy: w[1], sx, sy });
+  requestDraw();
+}
+function flyTo(cx, cy, s) {
+  Object.assign(anim, { mode: 'fly', cx, cy, s: clamp(s, V.min, V.max) });
+  requestDraw();
+}
+function fitScaleFor(bb, padPx = 90) {
+  const w = bb[2] - bb[0], h = bb[3] - bb[1];
+  if (w < 1e-9 && h < 1e-9) return null;
+  return Math.min((W - 2 * padPx) / Math.max(w, 1e-9), (H - 2 * padPx) / Math.max(h, 1e-9));
+}
+function flyToBBox(bb) {
+  const cx = (bb[0] + bb[2]) / 2, cy = (bb[1] + bb[3]) / 2;
+  let s = fitScaleFor(bb, Math.min(90, W / 6));
+  if (s == null) s = Math.max(V.s, V.fit * 8);
+  flyTo(cx, cy, Math.min(s, V.fit * 4000));
+}
+function flyToObj(o) { if (o && o.bbox) flyToBBox(o.bbox); }
+function resetView(animate) {
+  const bb = allBBox;
+  let cx = 0, cy = 0, s = 50;
+  if (bb) { cx = (bb[0] + bb[2]) / 2; cy = (bb[1] + bb[3]) / 2; const fs = fitScaleFor(bb, Math.min(90, W / 6)); s = fs == null ? 50 : fs; }
+  else if (model && model.initView) ({ cx, cy, s } = model.initView);
+  if (animate) { flyTo(cx, cy, s); return; }
+  Object.assign(V, { cx, cy, s }); V.fit = s; V.min = s / 40; V.max = s * 6000; anim.mode = null; requestDraw();
+}
+
+/* ───────────── OBSŁUGA MYSZY, DOTYKU, KLAWIATURY ───────────── */
+const ptrs = new Map(); let moved = false, downAt = null, lastMove = 0, vel = { x: 0, y: 0 };
+canvas.addEventListener('pointerdown', e => {
+  canvas.setPointerCapture(e.pointerId); canvas.focus({ preventScroll: true });
+  ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  anim.mode = null; vel = { x: 0, y: 0 };
+  if (ptrs.size === 1) { moved = false; downAt = { x: e.clientX, y: e.clientY }; } else moved = true;
+  closePanels();
+});
+canvas.addEventListener('pointermove', e => {
+  const p = ptrs.get(e.pointerId);
+  const w = s2w(e.clientX, e.clientY);
+  $('#coords').textContent = `x: ${f(w[0])}   y: ${f(w[1])}`;
+  if (!p) { hoverCheck(e.clientX, e.clientY); return; }
+  if (ptrs.size === 1) {
+    const dx = e.clientX - p.x, dy = e.clientY - p.y;
+    if (!moved && Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y) > 4) { moved = true; canvas.classList.add('dragging'); }
+    if (moved) {
+      V.cx -= dx / V.s; V.cy += dy / V.s;
+      const now = performance.now(), dt = Math.max(1, now - lastMove);
+      vel = { x: .6 * vel.x + .4 * dx / dt, y: .6 * vel.y + .4 * dy / dt }; lastMove = now;
+      requestDraw();
+    }
+    p.x = e.clientX; p.y = e.clientY;
+  } else if (ptrs.size === 2) {
+    const [a, b] = [...ptrs.values()];
+    const od = Math.hypot(a.x - b.x, a.y - b.y), om = [(a.x + b.x) / 2, (a.y + b.y) / 2];
+    p.x = e.clientX; p.y = e.clientY;
+    const [a2, b2] = [...ptrs.values()];
+    const nd = Math.hypot(a2.x - b2.x, a2.y - b2.y), nm = [(a2.x + b2.x) / 2, (a2.y + b2.y) / 2];
+    if (od > 0 && nd > 0) {
+      const w0 = s2w(om[0], om[1]);
+      V.s = clamp(V.s * nd / od, V.min, V.max);
+      V.cx = w0[0] - (nm[0] - W / 2) / V.s; V.cy = w0[1] + (nm[1] - H / 2) / V.s;
+      requestDraw();
+    }
+  }
+});
+function endPointer(e) {
+  if (!ptrs.has(e.pointerId)) return;
+  const wasSingle = ptrs.size === 1;
+  ptrs.delete(e.pointerId); canvas.classList.remove('dragging');
+  if (!wasSingle) return;
+  if (!moved && e.type === 'pointerup') { select(hit(e.clientX, e.clientY), false); return; }
+  if (moved && performance.now() - lastMove < 80 && Math.hypot(vel.x, vel.y) > 0.15) { Object.assign(anim, { mode: 'inertia', vx: vel.x, vy: vel.y }); requestDraw(); }
+}
+canvas.addEventListener('pointerup', endPointer);
+canvas.addEventListener('pointercancel', endPointer);
+canvas.addEventListener('dblclick', e => zoomAt(2, e.clientX, e.clientY));
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  const dy = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaMode === 2 ? e.deltaY * 100 : e.deltaY;
+  zoomAt(Math.exp(-dy * (e.ctrlKey ? 0.011 : 0.002)), e.clientX, e.clientY);
+}, { passive: false });
+canvas.addEventListener('keydown', e => {
+  const step = 120 / V.s;
+  if (e.key === 'ArrowLeft') V.cx -= step; else if (e.key === 'ArrowRight') V.cx += step;
+  else if (e.key === 'ArrowUp') V.cy += step; else if (e.key === 'ArrowDown') V.cy -= step;
+  else if (e.key === '+' || e.key === '=') return zoomAt(1.6, W / 2, H / 2);
+  else if (e.key === '-' || e.key === '_') return zoomAt(1 / 1.6, W / 2, H / 2);
+  else if (e.key === 'Escape') return select(null);
+  else return;
+  e.preventDefault(); anim.mode = null; requestDraw();
+});
+$('#zin').onclick = () => zoomAt(2, W / 2, H / 2);
+$('#zout').onclick = () => zoomAt(0.5, W / 2, H / 2);
+$('#fit').onclick = () => resetView(true);
+
+/* ───────────── TRAFIANIE W OBIEKTY ───────────── */
+function distSeg(p, a, b) {
+  const dx = b[0] - a[0], dy = b[1] - a[1], l2 = dx * dx + dy * dy;
+  const t = l2 ? clamp(((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / l2, 0, 1) : 0;
+  return Math.hypot(p[0] - a[0] - t * dx, p[1] - a[1] - t * dy);
+}
+function inPoly(p, pts) {
+  let c = false;
+  for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+    const a = pts[i], b = pts[j];
+    if ((a[1] > p[1]) !== (b[1] > p[1]) && p[0] < (b[0] - a[0]) * (p[1] - a[1]) / (b[1] - a[1]) + a[0]) c = !c;
+  }
+  return c;
+}
+function hit(sx, sy) {
+  const p = [sx, sy];
+  for (let i = order.length - 1; i >= 0; i--) {
+    const o = order[i]; if (!o.visible || (o.cat === 'metro_line' && !settings.metro)) continue;
+    if (o.kind === 'point') {
+      if (!pointVisible(o)) continue;
+      const q = w2s(o.x, o.y), r = o.cat === 'rondo' ? pointRad(o) + 3 : pointRad(o) + 6;
+      if (Math.hypot(q[0] - sx, q[1] - sy) <= r) return o; continue;
+    }
+    if (o.kind === 'text') { const r = o._rect; if (r && sx >= r.x1 - 4 && sx <= r.x2 + 4 && sy >= r.y1 - 4 && sy <= r.y2 + 4) return o; continue; }
+    if (!inView(o.bbox)) continue;
+    if (o.kind === 'street') {
+      const tol = roadW(o.cls) / 2 + 5;
+      for (const c of o.chains) {
+        const sp = c.pts.map(q => w2s(q[0], q[1]));
+        for (let k = 0; k + 1 < sp.length; k++) if (distSeg(p, sp[k], sp[k + 1]) <= tol) return o;
+      }
+      continue;
+    }
+    const pts = screenPts(o); if (!pts) continue;
+    const tol = Math.max(7, lineW(o) / 2 + 5), closed = isClosed(o);
+    let dmin = Infinity;
+    const n = pts.length, lim = closed ? n : n - 1;
+    for (let k = 0; k < lim; k++) dmin = Math.min(dmin, distSeg(p, pts[k], pts[(k + 1) % n]));
+    if (dmin <= tol) return o;
+    if (closed && o.fillA > 0 && inPoly(p, pts)) return o;
+    if (o.kind === 'polygon' && o.closed && inPoly(p, pts)) return o;
+  }
+  return null;
+}
+let hoverBusy = false;
+function hoverCheck(x, y) {
+  if (hoverBusy) return; hoverBusy = true;
+  requestAnimationFrame(() => { hoverBusy = false; canvas.style.cursor = hit(x, y) ? 'pointer' : ''; });
+}
+
+/* ───────────── KARTA OBIEKTU ───────────── */
+const kindName0 = o => ({
+  point: 'Punkt', segment: 'Odcinek', ray: 'Półprosta', line: 'Prosta', vector: 'Wektor', text: 'Tekst',
+  polygon: o.closed ? 'Wielokąt' : 'Łamana', ellipse: o.circle ? 'Okrąg' : 'Elipsa', arc: o.sector ? 'Wycinek koła' : 'Łuk',
+}[o.kind]);
+const polyLen = (pts, closed) => { let s = 0; for (let i = 0; i < pts.length - (closed ? 0 : 1); i++) s += dist(pts[i], pts[(i + 1) % pts.length]); return s; };
+const polyArea = pts => { let s = 0; for (let i = 0; i < pts.length; i++) { const a = pts[i], b = pts[(i + 1) % pts.length]; s += a[0] * b[1] - b[0] * a[1]; } return Math.abs(s) / 2; };
+const xy = p => `(${f(p[0])}; ${f(p[1])})`;
+
+function infoRows(o) {
+  const U = UNIT_NAME, R = [];
+  if (o.kind === 'street') { R.push(['Długość', `${f(o.length)} ${U}`], ['Odcinków', String(o.nseg)]); if (o.roads.length) R.push(['Droga', o.roads.map(r => r.t + r.n).join(', ')]); return R; }
+  if (o.lines) return stopRows(o);
+  switch (o.kind) {
+    case 'point': R.push(['Współrzędne', xy([o.x, o.y])]); break;
+    case 'segment': R.push(['Długość', `${f(dist(o.p1, o.p2))} ${U}`], ['Początek', xy(o.p1)], ['Koniec', xy(o.p2)]); break;
+    case 'ray': R.push(['Początek', xy(o.p1)], ['Przez punkt', xy(o.p2)]); break;
+    case 'vector': R.push(['Długość', `${f(dist(o.p1, o.p2))} ${U}`], ['Składowe', `(${f(o.p2[0] - o.p1[0])}; ${f(o.p2[1] - o.p1[1])})`]); break;
+    case 'line': R.push(['Równanie', `${f(o.a)}x + ${f(o.b)}y + ${f(o.c)} = 0`]); break;
+    case 'polygon':
+      R.push(['Wierzchołki', String(o.pts.length)]);
+      if (o.closed) R.push(['Pole', `${f(polyArea(o.pts))} ${U}²`], ['Obwód', `${f(polyLen(o.pts, true))} ${U}`]);
+      else R.push(['Długość', `${f(polyLen(o.pts, false))} ${U}`]);
+      break;
+    case 'ellipse':
+      R.push(['Środek', xy([o.cx, o.cy])]);
+      if (o.circle) R.push(['Promień', `${f(o.a)} ${U}`], ['Pole', `${f(Math.PI * o.a * o.a)} ${U}²`], ['Obwód', `${f(2 * Math.PI * o.a)} ${U}`]);
+      else R.push(['Półosie', `${f(Math.max(o.a, o.b))} i ${f(Math.min(o.a, o.b))} ${U}`], ['Pole', `${f(Math.PI * o.a * o.b)} ${U}²`],
+        ['Obwód (przybl.)', `${f(Math.PI * (3 * (o.a + o.b) - Math.sqrt((3 * o.a + o.b) * (o.a + 3 * o.b))))} ${U}`]);
+      break;
+    case 'arc': {
+      const ang = o.a1 - o.a0;
+      R.push(['Środek', xy(o.c)], ['Promień', `${f(o.r)} ${U}`], ['Kąt', `${f(ang * 180 / Math.PI)}°`], ['Długość łuku', `${f(o.r * ang)} ${U}`]);
+      if (o.sector) R.push(['Pole', `${f(o.r * o.r * ang / 2)} ${U}²`]);
+      break;
+    }
+    case 'text': R.push(['Położenie', xy([o.x, o.y])]); if (o.str.includes('\n')) R.push(['Treść', o.str]); break;
+  }
+  return R;
+}
+/* ───────────── ODJAZDY I TRASY LINII (lines/<numer>.json) ───────────── */
+const LINES_DIR = 'lines/';
+const lineCache = new Map();
+function loadLine(n) {
+  if (!lineCache.has(n)) lineCache.set(n, fetch(LINES_DIR + encodeURIComponent(n) + '.json', { cache: 'no-cache' }).then(r => { if (!r.ok) throw 0; return r.json(); }).catch(() => null));
+  return lineCache.get(n);
+}
+const skey = (name, num) => norm(name).replace(/[^a-z0-9]+/g, ' ').trim() + '|' + (/^\d+$/.test(String(num).trim()) ? String(parseInt(num, 10)) : norm(String(num)));
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const hhmm = d => String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+function findStop(name, number, type) {
+  const arr = stopIndex.get(skey(name, number)); if (!arr) return null;
+  return arr.find(o => o.cat === (type === 'tram' ? 'tram' : 'bus')) || arr[0];
+}
+function easter(y) {
+  const a = y % 19, b = Math.floor(y / 100), c = y % 100, d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25), g = Math.floor((b - f + 1) / 3),
+    h = (19 * a + b - d - g + 15) % 30, i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7, m = Math.floor((a + 11 * h + 22 * l) / 451),
+    mo = Math.floor((h + l - 7 * m + 114) / 31), da = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(y, mo - 1, da);
+}
+function isHoliday(d) {
+  const y = d.getFullYear(), md = (d.getMonth() + 1) * 100 + d.getDate();
+  if ([101, 106, 501, 503, 815, 1101, 1111, 1225, 1226].includes(md) || (md === 1224 && y >= 2025)) return true;
+  const e = easter(y), em = new Date(e), cc = new Date(e); em.setDate(e.getDate() + 1); cc.setDate(e.getDate() + 60);
+  const same = (a, b) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  return same(d, em) || same(d, cc);
+}
+function dayKey(d, tt) {
+  if (d.getDay() === 0 || isHoliday(d)) return ['sunday', 'holiday', 'sundayHoliday', 'sunday_holiday'].find(k => tt[k]) || null;
+  if (d.getDay() === 6) return tt.saturday ? 'saturday' : null;
+  return tt.weekday ? 'weekday' : null;
+}
+// odjazd z przystanku = odjazd z pętli początkowej + travelTime tego przystanku
+async function computeDepartures(stop) {
+  const out = [], missing = [], now = new Date(); now.setSeconds(0, 0);
+  const names = [...new Set(stop.lines.map(l => l.n))];
+  const datas = await Promise.all(names.map(loadLine));
+  names.forEach((n, i) => {
+    const data = datas[i]; if (!data) { missing.push(n); return; }
+    const brDemand = stop.lines.some(l => l.n === n && l.demand);
+    for (const route of data.routes || []) {
+      let lastK = -1; route.stops.forEach((s, k) => { if (s.name) lastK = k; });
+      route.stops.forEach((st, k) => {
+        if (!st.name || k === lastK || st.travelTime == null) return;
+        if (skey(st.name, st.number) !== skey(stop.team, stop.num)) return;
+        for (let d = -1; d <= 3; d++) {
+          const day = new Date(now.getFullYear(), now.getMonth(), now.getDate() + d), key = dayKey(day, route.timetable || {});
+          if (!key) continue;
+          const tt = route.timetable[key];
+          for (const h of Object.keys(tt)) for (const m of tt[h]) {
+            const base = new Date(day.getFullYear(), day.getMonth(), day.getDate(), +h, +m);
+            const when = new Date(base.getTime() + st.travelTime * 60000);
+            if (when >= now && when - now <= 864e5) out.push({ when, base, line: n, data, route, k, demand: !!st.request || brDemand });
+          }
+        }
+      });
+    }
+  });
+  out.sort((a, b) => a.when - b.when);
+  return { deps: out, missing, now };
+}
+let depFilter = null, depToken = 0, depTimer = 0, depState = null, routeStops = [], routeSet = new Set();
+const lineBadge = (n, type, demand) => {
+  const b = el('span', 'ln' + (demand ? ' nz' : ''), n); b.style.setProperty('--lc', type === 'tram' ? '#0b8043' : '#1a73e8');
+  if (demand) { const sm = el('small', null, 'NŻ'); b.append(sm); b.title = 'Zatrzymuje się na żądanie'; }
+  return b;
+};
+const dayLabel = (when, now) => {
+  const a = new Date(when.getFullYear(), when.getMonth(), when.getDate()), b = new Date(now.getFullYear(), now.getMonth(), now.getDate()), diff = Math.round((a - b) / 864e5);
+  return diff === 0 ? '' : diff === 1 ? 'jutro' : diff === -1 ? 'wczoraj' : when.toLocaleDateString('pl-PL', { weekday: 'short' });
+};
+async function showDepartures(stop, count = 1e9) {
+  const box = $('#infoDeps'), my = ++depToken;
+  clearInterval(depTimer);
+  if (!stop.lines.length) { box.hidden = true; return; }
+  box.hidden = false;
+  if (!box.firstChild || (depState && depState.stop !== stop)) { box.replaceChildren(el('h3', null, 'Odjazdy w ciągu 24 godzin'), el('div', 'depmsg', 'Wczytuję rozkład…')); }
+  const res = await computeDepartures(stop);
+  if (my !== depToken) return;
+  depState = { stop, count, mode: 'deps' };
+  const deps = depFilter ? res.deps.filter(d => d.line === depFilter) : res.deps;
+  box.replaceChildren(el('h3', null, 'Odjazdy w ciągu 24 godzin' + (depFilter ? ' · linia ' + depFilter : '')));
+  if (!deps.length) box.append(el('div', 'depmsg', 'Brak odjazdów w ciągu najbliższych 24 godzin.'));
+  for (const dep of deps.slice(0, count)) {
+    const row = el('button', 'dep'); row.type = 'button';
+    const t = el('span', 't', hhmm(dep.when)), dl = dayLabel(dep.when, res.now); if (dl) t.append(el('small', null, dl));
+    const mins = Math.round((dep.when - res.now) / 60000);
+    row.append(t, lineBadge(dep.line, dep.data.type, dep.demand), el('span', 'to', '→ ' + (dep.route.to || '')), el('span', 'rel', mins <= 0 ? 'teraz' : mins < 60 ? `za ${mins} min` : ''));
+    row.onclick = () => showRoute(stop, dep);
+    box.append(row);
+  }
+  if (deps.length > count) { const more = el('button', 'more', 'Pokaż więcej'); more.type = 'button'; more.onclick = () => showDepartures(stop, count + 10); box.append(more); }
+  if (res.missing.length) box.append(el('div', 'depmsg', `Brak rozkładu dla linii: ${res.missing.join(', ')} (plik ${LINES_DIR}${res.missing[0]}.json).`));
+  depTimer = setInterval(() => { if (depState && depState.mode === 'deps' && selected === depState.stop) showDepartures(depState.stop, depState.count); }, 30000);
+}
+function showRoute(stop, dep) {
+  depToken++; clearInterval(depTimer);
+  depState = { stop, count: 1e9, mode: 'route' };
+  const box = $('#infoDeps'); box.replaceChildren();
+  const back = el('button', 'back', '← Odjazdy'); back.type = 'button'; back.onclick = () => { routeStops = []; routeSet = new Set(); requestDraw(); showDepartures(stop, depState.count); };
+  const head = el('div', 'routehead'); head.append(lineBadge(dep.line, dep.data.type, false), el('span', 'to', '→ ' + (dep.route.to || '')));
+  box.append(back, head);
+  const list = el('div', 'route'), matched = []; let selEl = null;
+  dep.route.stops.forEach((st, k) => {
+    if (!st.name) return;
+    const ms = findStop(st.name, st.number, dep.data.type);
+    const li = el(ms ? 'button' : 'div', 'rs' + (k === dep.k ? ' sel' : '') + (k < dep.k ? ' past' : '') + (ms ? '' : ' nomap'));
+    if (ms) { li.type = 'button'; li.onclick = () => select(ms, true); matched.push(ms); } else li.title = 'Tego przystanku nie ma na mapie';
+    const tm = new Date(dep.base.getTime() + (st.travelTime || 0) * 60000);
+    const nm = el('span', 'nm', ms ? ms.name : `${st.name} ${/^\d+$/.test(String(st.number || '')) ? parseInt(st.number, 10) : (st.number || '')}`.trim());
+    if (st.street) nm.append(el('small', null, st.street));
+    li.append(el('span', 't', hhmm(tm)), nm);
+    if (st.request) { const z = el('span', 'nzt', 'NŻ'); z.title = 'Na żądanie'; li.append(z); }
+    list.append(li); if (k === dep.k) selEl = li;
+  });
+  box.append(list);
+  if (selEl) selEl.scrollIntoView({ block: 'nearest' });
+  routeStops = matched; routeSet = new Set(matched);
+  if (matched.length > 1) flyToBBox(ptsBBox(matched.map(o => [o.x, o.y])));
+  requestDraw();
+}
+
+function select(o, fly) {
+  if (o !== selected) depFilter = null;
+  depToken++; clearInterval(depTimer); routeStops = []; routeSet = new Set(); selected = o;
+  const box = $('#info'); box.hidden = !o;
+  if (o) {
+    $('#infoDot').style.background = o.dot || `rgb(${o.rgb.join(',')})`;
+    $('#infoTitle').textContent = dispName(o);
+    $('#infoSub').textContent = kindName(o) + (o.kind !== 'text' && !o.lines && o.name !== o.label ? ` · ${o.label}` : '');
+    const dl = $('#infoRows'); dl.replaceChildren();
+    for (const [k, v] of infoRows(o)) { const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = k; dd.textContent = v; dl.append(dt, dd); }
+    const hasL = !!(o.lines && (o.lines.length || o.alight)); $('#infoLines').hidden = !hasL;
+    if (hasL) {
+      const bx = $('#infoBadges'); bx.replaceChildren();
+      $('#infoLines').style.setProperty('--lc', o.cat === 'tram' ? '#0b8043' : '#1a73e8');
+      $('#infoLines h3').textContent = o.lines.length ? 'Linie' : 'Oznaczenie';
+      for (const l of o.lines) {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'ln' + (l.demand ? ' nz' : '') + (depFilter === l.n ? ' on' : ''); b.textContent = l.n; b.dataset.line = l.n;
+        b.onclick = () => { depFilter = depFilter === l.n ? null : l.n; bx.querySelectorAll('.ln[data-line]').forEach(x => x.classList.toggle('on', x.dataset.line === depFilter)); showDepartures(o); };
+        if (l.demand) { const sm = document.createElement('small'); sm.textContent = 'NŻ'; b.append(sm); b.title = 'Zatrzymuje się na żądanie'; }
+        bx.append(b);
+      }
+      if (o.alight) { const b = document.createElement('span'); b.className = 'ln alight'; b.textContent = 'Przystanek dla wysiadających'; bx.append(b); }
+      $('#infoLegend').textContent = o.lines.some(l => l.demand) ? 'NŻ – linia zatrzymuje się na żądanie' : '';
+    }
+    $('#infoZoom').hidden = !o.bbox;
+    if (o.lines) showDepartures(o); else $('#infoDeps').hidden = true;
+    if (fly) flyToObj(o);
+  }
+  requestDraw();
+}
+$('#infoClose').onclick = () => select(null);
+$('#infoZoom').onclick = () => flyToObj(selected);
+
+/* ───────────── WYSZUKIWARKA ───────────── */
+const q = $('#q'), results = $('#results'); let resItems = [], resActive = -1;
+function listed() { return (model ? model.objs : []).filter(o => o.visible && (o.kind === 'text' || o.caption || o.showLabel) && o.name); }
+function renderResults() {
+  const text = norm(q.value.trim());
+  $('#clear').hidden = !q.value;
+  let items;
+  if (!text) items = listed();
+  else items = (model ? model.objs : []).filter(o => o.visible && !(o.kind === 'street' && !o.name && !o.extra) && o.cat !== 'tram_track' && !(o.cat === 'metro_line' && !settings.metro) && (norm(o.name).includes(text) || norm(o.label).includes(text) || norm(o.caption || '').includes(text) || (o.extra && norm(o.extra).includes(text))));
+  items = items.slice(0, 8); resItems = items; resActive = items.length && text ? 0 : -1;
+  results.replaceChildren();
+  if (!items.length) {
+    if (text) { const li = document.createElement('li'); li.className = 'none'; li.textContent = 'Brak wyników'; results.append(li); }
+    results.hidden = !text; return;
+  }
+  items.forEach((o, i) => {
+    const li = document.createElement('li'); li.setAttribute('role', 'option'); li.tabIndex = -1;
+    if (i === resActive) li.classList.add('active');
+    const dot = document.createElement('span'); dot.className = 'dot'; dot.style.background = o.dot || `rgb(${o.rgb.join(',')})`;
+    const box = document.createElement('div'), t = document.createElement('div'), s = document.createElement('div');
+    t.className = 't'; t.textContent = dispName(o); s.className = 's'; s.textContent = resultSub(o);
+    box.append(t, s); li.append(dot, box);
+    li.onmousedown = ev => { ev.preventDefault(); pick(o); };
+    results.append(li);
+  });
+  results.hidden = false;
+}
+function pick(o) { results.hidden = true; q.blur(); q.value = dispName(o); $('#clear').hidden = false; select(o, true); }
+q.addEventListener('input', renderResults);
+q.addEventListener('focus', renderResults);
+q.addEventListener('blur', () => setTimeout(() => results.hidden = true, 120));
+q.addEventListener('keydown', e => {
+  const lis = [...results.querySelectorAll('li:not(.none)')];
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    if (!lis.length) return; e.preventDefault();
+    resActive = (resActive + (e.key === 'ArrowDown' ? 1 : -1) + lis.length) % lis.length;
+    lis.forEach((l, i) => l.classList.toggle('active', i === resActive));
+  } else if (e.key === 'Enter') { const o = resItems[Math.max(0, resActive)]; if (o) pick(o); }
+  else if (e.key === 'Escape') { results.hidden = true; q.blur(); }
+});
+$('#clear').onclick = () => { q.value = ''; q.focus(); renderResults(); };
+
+/* ───────────── WARSTWY ───────────── */
+const panel = $('#layersPanel'), lbtn = $('#layersBtn');
+function closePanels() { panel.hidden = true; lbtn.setAttribute('aria-expanded', 'false'); }
+lbtn.onclick = () => { panel.hidden = !panel.hidden; lbtn.setAttribute('aria-expanded', String(!panel.hidden)); };
+const chips = $('#themeChips');
+for (const [id, t] of Object.entries(THEMES)) {
+  const b = document.createElement('button'); b.className = 'chip'; b.dataset.id = id;
+  b.innerHTML = '<i></i><b></b>'; b.firstChild.style.background = t.swatch; b.lastChild.textContent = t.name;
+  if (id === 'paper') b.firstChild.style.backgroundImage = 'linear-gradient(#ddd 1px,transparent 1px),linear-gradient(90deg,#ddd 1px,transparent 1px)', b.firstChild.style.backgroundSize = '9px 9px';
+  b.onclick = () => { settings.theme = id; saveSettings(); syncUI(); requestDraw(); };
+  chips.append(b);
+}
+function syncUI() {
+  chips.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.id === settings.theme)));
+  $('#optLabels').checked = settings.labels; $('#optGrid').checked = settings.grid; $('#optMetro').checked = settings.metro;
+  const dark = theme().dark; $('#status').style.background = dark ? 'rgba(32,33,36,.8)' : 'rgba(255,255,255,.8)';
+  $('#status').style.color = dark ? '#e8eaed' : '#3c4043'; $('#scalebar').style.borderColor = dark ? '#e8eaed' : '#3c4043';
+}
+$('#optLabels').onchange = e => { settings.labels = e.target.checked; saveSettings(); requestDraw(); };
+$('#optMetro').onchange = e => { settings.metro = e.target.checked; saveSettings(); if (!settings.metro && selected && selected.cat === 'metro_line') select(null); requestDraw(); };
+$('#optGrid').onchange = e => { settings.grid = e.target.checked; saveSettings(); requestDraw(); };
+
+/* ───────────── WCZYTYWANIE PLIKU ───────────── */
+function showMsg(title, html, withPick) {
+  $('#msgTitle').textContent = title; $('#msgBody').innerHTML = html;
+  $('#msgPick').hidden = !withPick; $('#msg').hidden = false;
+}
+function loadText(text, name) {
+  const m = parseGGB(text);
+  model = m; fileName = name;
+  order = m.objs.slice().sort((a, b) => (a.layer - b.layer) || (ordOf(a) - ordOf(b)) || (a.id - b.id));
+  const bbs = m.objs.filter(o => o.visible && o.bbox).map(o => o.bbox);
+  allBBox = bbs.length ? [Math.min(...bbs.map(b => b[0])), Math.min(...bbs.map(b => b[1])), Math.max(...bbs.map(b => b[2])), Math.max(...bbs.map(b => b[3]))] : null;
+  buildCaches(); selected = null; $('#info').hidden = true; q.value = ''; $('#clear').hidden = true;
+  $('#fileLabel').textContent = name; $('#fileLabel').title = name;
+  const shown = m.objs.filter(o => o.visible).length;
+  $('#meta').textContent = `Plik: ${name}. Obiektów na mapie: ${shown}.` + (m.skipped ? ` Pominięto ${m.skipped} nieobsługiwanych (np. funkcje, hiperbole).` : '') + (m.unresolved.length ? ` Nie odczytano łamanych/wielokątów: ${m.unresolved.slice(0, 5).join('; ')}.` : '');
+  $('#msg').hidden = true;
+  resetView(false);
+}
+async function boot() {
+  const param = new URLSearchParams(location.search).get('file');
+  const names = [...new Set([param, XML_FILE, ...FALLBACK_FILES].filter(Boolean))];
+  for (const n of names) {
+    let text;
+    try { const r = await fetch(n, { cache: 'no-cache' }); if (!r.ok) continue; text = await r.text(); } catch (e) { continue; }
+    if (!/<construction/i.test(text)) continue;
+    try { loadText(text, n); } catch (e) { showMsg('Nie udało się wczytać mapy', `<p>Plik <code>${n.replace(/[<>&]/g, '')}</code> jest, ale: ${String(e.message).replace(/[<>&]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]))}</p>`, true); }
+    return;
+  }
+  const local = location.protocol === 'file:';
+  showMsg('Nie znaleziono pliku z mapą',
+    `<p>Szukałem pliku <code>${XML_FILE}</code> obok <code>index.html</code>. Wrzuć tam XML z GeoGebry (albo zmień <code>XML_FILE</code> na początku skryptu).</p>` +
+    (local ? '<p>Strona jest otwarta bezpośrednio z dysku, a przeglądarki blokują wtedy odczyt sąsiednich plików. Na GitHub Pages zadziała to normalnie – tu możesz wskazać plik ręcznie albo upuścić go na okno.</p>' : '<p>Możesz też wskazać plik ręcznie albo upuścić go na okno.</p>'),
+    true);
+}
+const fileInput = $('#file');
+const pickFile = () => fileInput.click();
+$('#openFile').onclick = pickFile; $('#msgPick').onclick = pickFile;
+async function readFile(file) {
+  if (!file) return;
+  if (/\.ggb$/i.test(file.name)) { showMsg('To archiwum .ggb', '<p>Plik <code>.ggb</code> to spakowany ZIP. Rozpakuj go i użyj pliku <code>geogebra.xml</code> ze środka.</p>', true); return; }
+  try { loadText(await file.text(), file.name); } catch (e) { showMsg('Nie udało się wczytać mapy', '<p></p>', true); $('#msgBody').firstChild.textContent = e.message; }
+}
+fileInput.onchange = () => { readFile(fileInput.files[0]); fileInput.value = ''; };
+let dragDepth = 0;
+addEventListener('dragenter', e => { e.preventDefault(); dragDepth++; $('#drop').hidden = false; });
+addEventListener('dragleave', () => { if (--dragDepth <= 0) { dragDepth = 0; $('#drop').hidden = true; } });
+addEventListener('dragover', e => e.preventDefault());
+addEventListener('drop', e => { e.preventDefault(); dragDepth = 0; $('#drop').hidden = true; readFile(e.dataTransfer.files[0]); });
+
+/* ───────────── START ───────────── */
+function resize() {
+  const first = W === 0;
+  dpr = Math.min(window.devicePixelRatio || 1, 3);
+  W = window.innerWidth; H = window.innerHeight;
+  canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+  if (!first && model && anim.mode === null && V.fit === 50 && !allBBox) resetView(false);
+  requestDraw();
+}
+addEventListener('resize', resize);
+
+(function brand() {
+  const cols = ['#4285f4', '#ea4335', '#fbbc04', '#4285f4', '#34a853', '#ea4335'], el = $('#brandtxt');
+  [...'Zembaczyn'].forEach((ch, i) => { const s = document.createElement('span'); s.textContent = ch; s.style.color = cols[i % cols.length]; el.append(s); });
+  const m = document.createElement('span'); m.textContent = ' Maps'; m.style.color = '#5f6368'; el.append(m);
+})();
+syncUI(); resize(); resetView(false);
+boot();
+})();
+</script>
+</body>
+</html>

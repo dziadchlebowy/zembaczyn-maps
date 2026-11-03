@@ -1,0 +1,753 @@
+{
+    "line": "103",
+    "type": "bus",
+    "description": "linia zwykła",
+    "validFrom": "2026-09-08",
+    "routes": [
+        {
+            "id": "TP-ZAK",
+            "name": "TP-ZAK",
+            "from": "ZAGAJE-PLAŻA",
+            "to": "ZAKŁADOWA-FSO",
+            "stops": [
+                {
+                    "street": "Twarogowa",
+                    "name": "ZAGAJE-PLAŻA",
+                    "travelTime": 0,
+                    "number": "01",
+                    "terminus": true,
+                    "groupId": "0028"
+                },
+                {
+                    "street": "Złotej Patelni",
+                    "name": "ZŁOTEJ PATELNI",
+                    "travelTime": 1,
+                    "number": "02",
+                    "groupId": "0027"
+                },
+                {
+                    "street": "Złotej Patelni",
+                    "name": "METRO NALEŚNIKARNIA",
+                    "travelTime": 2,
+                    "number": "06",
+                    "groupId": "0026"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "METRO NALEŚNIKARNIA",
+                    "travelTime": 3,
+                    "number": "04",
+                    "groupId": "0026"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "METRO MNICHÓW",
+                    "travelTime": 5,
+                    "number": "02",
+                    "groupId": "0035"
+                },
+                {
+                    "street": "Most Marymoncki"
+                },
+                {
+                    "street": "Odrowąża",
+                    "name": "METRO KALWARIA",
+                    "travelTime": 6,
+                    "number": "04",
+                    "groupId": "0036"
+                },
+                {
+                    "street": "Odrowąża",
+                    "name": "STUDNIA POD BASZTĄ",
+                    "travelTime": 8,
+                    "number": "01",
+                    "groupId": "0037"
+                },
+                {
+                    "street": "Al. Jana Pawła II",
+                    "name": "METRO WIŚNIEWO",
+                    "travelTime": 10,
+                    "number": "02",
+                    "groupId": "0024"
+                },
+                {
+                    "street": "Al. Jana Pawła II",
+                    "name": "EKSPRESOWA",
+                    "travelTime": 11,
+                    "number": "03",
+                    "groupId": "0023"
+                },
+                {
+                    "street": "Al. Jana Pawła II",
+                    "name": "TARGOWA",
+                    "travelTime": 12,
+                    "number": "02",
+                    "request": true,
+                    "groupId": "0038"
+                },
+                {
+                    "street": "Al. Jana Pawła II",
+                    "name": "PRZEMYSŁOWA",
+                    "travelTime": 13,
+                    "number": "02",
+                    "groupId": "0003"
+                },
+                {
+                    "street": "Most Tylżycki",
+                    "name": "DWA MOSTY",
+                    "travelTime": 14,
+                    "number": "01",
+                    "request": true,
+                    "groupId": "0017"
+                },
+                {
+                    "street": "Tczewska"
+                },
+                {
+                    "street": "Kwidzyńska",
+                    "name": "PL.GDAŃSKI",
+                    "travelTime": 16,
+                    "number": "01",
+                    "groupId": "0031"
+                },
+                {
+                    "street": "Zakładowa",
+                    "name": "ZAKŁADOWA",
+                    "travelTime": 17,
+                    "number": "03",
+                    "request": true,
+                    "groupId": "0039"
+                },
+                {
+                    "street": "Zakładowa",
+                    "name": "ZAKŁADOWA-FSO",
+                    "travelTime": 18,
+                    "number": "01",
+                    "terminus": true,
+                    "groupId": "0040"
+                }
+            ],
+            "timetable": {
+                "weekday": {
+                    "5": [
+                        3,
+                        12,
+                        21,
+                        31,
+                        42,
+                        52
+                    ],
+                    "6": [
+                        2,
+                        12,
+                        22,
+                        31,
+                        41,
+                        51
+                    ],
+                    "7": [
+                        0,
+                        10,
+                        20,
+                        30,
+                        40,
+                        50
+                    ],
+                    "8": [
+                        0,
+                        9,
+                        19,
+                        29,
+                        38,
+                        49,
+                        59
+                    ],
+                    "9": [
+                        11,
+                        27,
+                        41,
+                        56
+                    ],
+                    "10": [
+                        11,
+                        27,
+                        43,
+                        58
+                    ],
+                    "11": [
+                        13,
+                        27,
+                        42,
+                        57
+                    ],
+                    "12": [
+                        12,
+                        28,
+                        43,
+                        59
+                    ],
+                    "13": [
+                        14,
+                        29,
+                        43,
+                        57
+                    ],
+                    "14": [
+                        11,
+                        26,
+                        42,
+                        56
+                    ],
+                    "15": [
+                        7,
+                        16,
+                        27,
+                        36,
+                        47,
+                        56
+                    ],
+                    "16": [
+                        5,
+                        14,
+                        24,
+                        35,
+                        45,
+                        56
+                    ],
+                    "17": [
+                        6,
+                        16,
+                        26,
+                        37,
+                        48,
+                        58
+                    ],
+                    "18": [
+                        8,
+                        17,
+                        26,
+                        36,
+                        46,
+                        56
+                    ],
+                    "19": [
+                        10,
+                        25,
+                        40,
+                        56
+                    ],
+                    "20": [
+                        11,
+                        27,
+                        43,
+                        57
+                    ],
+                    "21": [
+                        11,
+                        27,
+                        42,
+                        57
+                    ],
+                    "22": [
+                        11,
+                        26,
+                        40,
+                        55
+                    ],
+                    "23": [
+                        11,
+                        26,
+                        42,
+                        56
+                    ]
+                },
+                "saturday": {
+                    "5": [
+                        12,
+                        27,
+                        41,
+                        57
+                    ],
+                    "6": [
+                        12,
+                        28,
+                        43,
+                        58
+                    ],
+                    "7": [
+                        13,
+                        28,
+                        42,
+                        56
+                    ],
+                    "8": [
+                        11,
+                        26,
+                        41,
+                        56
+                    ],
+                    "9": [
+                        10,
+                        25,
+                        40,
+                        54
+                    ],
+                    "10": [
+                        8,
+                        23,
+                        38,
+                        53
+                    ],
+                    "11": [
+                        8,
+                        23,
+                        37,
+                        51
+                    ],
+                    "12": [
+                        7,
+                        21,
+                        37,
+                        52
+                    ],
+                    "13": [
+                        8,
+                        22,
+                        36,
+                        51
+                    ],
+                    "14": [
+                        5,
+                        21,
+                        36,
+                        51
+                    ],
+                    "15": [
+                        6,
+                        21,
+                        36,
+                        52
+                    ],
+                    "16": [
+                        7,
+                        23,
+                        39,
+                        54
+                    ],
+                    "17": [
+                        9,
+                        25,
+                        39,
+                        54
+                    ],
+                    "18": [
+                        10,
+                        25,
+                        40,
+                        55
+                    ],
+                    "19": [
+                        10,
+                        24,
+                        40,
+                        55
+                    ],
+                    "20": [
+                        10,
+                        26,
+                        41,
+                        56
+                    ],
+                    "21": [
+                        11,
+                        26,
+                        42,
+                        56
+                    ],
+                    "22": [
+                        11,
+                        26,
+                        41,
+                        56
+                    ],
+                    "23": [
+                        11,
+                        25,
+                        39,
+                        53
+                    ]
+                }
+            }
+        },
+        {
+            "id": "TP-ZAG",
+            "name": "TP-ZAG",
+            "from": "ZAKŁADOWA-FSO",
+            "to": "ZAGAJE-PLAŻA",
+            "stops": [
+                {
+                    "street": "Zakładowa",
+                    "name": "ZAKŁADOWA-FSO",
+                    "travelTime": 0,
+                    "number": "01",
+                    "terminus": true,
+                    "groupId": "0040"
+                },
+                {
+                    "street": "Kwidzyńska",
+                    "name": "ZAKŁADOWA",
+                    "travelTime": 2,
+                    "number": "02",
+                    "request": true,
+                    "groupId": "0039"
+                },
+                {
+                    "street": "Tczewska",
+                    "name": "PL.GDAŃSKI",
+                    "travelTime": 3,
+                    "number": "02",
+                    "groupId": "0031"
+                },
+                {
+                    "street": "Most Tylżycki"
+                },
+                {
+                    "street": "Al. Jana Pawła II",
+                    "name": "DWA MOSTY",
+                    "travelTime": 4,
+                    "number": "04",
+                    "request": true,
+                    "groupId": "0017"
+                },
+                {
+                    "street": "Al. Jana Pawła II",
+                    "name": "PRZEMYSŁOWA",
+                    "travelTime": 5,
+                    "number": "01",
+                    "groupId": "0003"
+                },
+                {
+                    "street": "Al. Jana Pawła II",
+                    "name": "TARGOWA",
+                    "travelTime": 6,
+                    "number": "01",
+                    "request": true,
+                    "groupId": "0038"
+                },
+                {
+                    "street": "Al. Jana Pawła II",
+                    "name": "EKSPRESOWA",
+                    "travelTime": 7,
+                    "number": "04",
+                    "groupId": "0023"
+                },
+                {
+                    "street": "Odrowąża",
+                    "name": "METRO WIŚNIEWO",
+                    "travelTime": 8,
+                    "number": "04",
+                    "groupId": "0024"
+                },
+                {
+                    "street": "Odrowąża",
+                    "name": "STUDNIA POD BASZTĄ",
+                    "travelTime": 9,
+                    "number": "02",
+                    "groupId": "0037"
+                },
+                {
+                    "street": "Most Marymoncki",
+                    "name": "METRO KALWARIA",
+                    "travelTime": 10,
+                    "number": "02",
+                    "groupId": "0036"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "METRO MNICHÓW",
+                    "travelTime": 11,
+                    "number": "01",
+                    "groupId": "0035"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "METRO NALEŚNIKARNIA",
+                    "travelTime": 12,
+                    "number": "03",
+                    "groupId": "0026"
+                },
+                {
+                    "street": "Złotej Patelni",
+                    "name": "METRO NALEŚNIKARNIA",
+                    "travelTime": 13,
+                    "number": "05",
+                    "groupId": "0026"
+                },
+                {
+                    "street": "Złotej Patelni",
+                    "name": "ZŁOTEJ PATELNI",
+                    "travelTime": 14,
+                    "number": "01",
+                    "groupId": "0027"
+                },
+                {
+                    "street": "Twarogowa",
+                    "name": "ZAGAJE-PLAŻA",
+                    "travelTime": 15,
+                    "number": "01",
+                    "terminus": true,
+                    "groupId": "0028"
+                }
+            ],
+            "timetable": {
+                "weekday": {
+                    "5": [
+                        5,
+                        16,
+                        26,
+                        36,
+                        46,
+                        56
+                    ],
+                    "6": [
+                        6,
+                        16,
+                        26,
+                        36,
+                        46,
+                        55
+                    ],
+                    "7": [
+                        5,
+                        14,
+                        25,
+                        35,
+                        46,
+                        57
+                    ],
+                    "8": [
+                        7,
+                        17,
+                        28,
+                        39,
+                        48,
+                        58
+                    ],
+                    "9": [
+                        14,
+                        29,
+                        45
+                    ],
+                    "10": [
+                        0,
+                        16,
+                        31,
+                        46
+                    ],
+                    "11": [
+                        2,
+                        17,
+                        32,
+                        46
+                    ],
+                    "12": [
+                        1,
+                        16,
+                        31,
+                        46
+                    ],
+                    "13": [
+                        0,
+                        15,
+                        29,
+                        44,
+                        59
+                    ],
+                    "14": [
+                        14,
+                        29,
+                        45
+                    ],
+                    "15": [
+                        6,
+                        16,
+                        25,
+                        35,
+                        45,
+                        55
+                    ],
+                    "16": [
+                        4,
+                        13,
+                        23,
+                        33,
+                        43,
+                        52
+                    ],
+                    "17": [
+                        1,
+                        11,
+                        21,
+                        30,
+                        40,
+                        49,
+                        58
+                    ],
+                    "18": [
+                        9,
+                        19,
+                        29,
+                        40,
+                        50
+                    ],
+                    "19": [
+                        8,
+                        23,
+                        38,
+                        53
+                    ],
+                    "20": [
+                        8,
+                        23,
+                        38,
+                        53
+                    ],
+                    "21": [
+                        9,
+                        23,
+                        38,
+                        53
+                    ],
+                    "22": [
+                        8,
+                        23,
+                        38,
+                        52
+                    ],
+                    "23": [
+                        7,
+                        22,
+                        36,
+                        50
+                    ]
+                },
+                "saturday": {
+                    "5": [
+                        10,
+                        25,
+                        40,
+                        55
+                    ],
+                    "6": [
+                        9,
+                        23,
+                        38,
+                        53
+                    ],
+                    "7": [
+                        7,
+                        22,
+                        37,
+                        51
+                    ],
+                    "8": [
+                        5,
+                        19,
+                        35,
+                        50
+                    ],
+                    "9": [
+                        4,
+                        19,
+                        33,
+                        49
+                    ],
+                    "10": [
+                        5,
+                        21,
+                        37,
+                        52
+                    ],
+                    "11": [
+                        7,
+                        21,
+                        37,
+                        51
+                    ],
+                    "12": [
+                        7,
+                        22,
+                        38,
+                        53
+                    ],
+                    "13": [
+                        8,
+                        23,
+                        39,
+                        54
+                    ],
+                    "14": [
+                        10,
+                        25,
+                        40,
+                        55
+                    ],
+                    "15": [
+                        11,
+                        26,
+                        40,
+                        54
+                    ],
+                    "16": [
+                        8,
+                        23,
+                        38,
+                        54
+                    ],
+                    "17": [
+                        9,
+                        23,
+                        37,
+                        51
+                    ],
+                    "18": [
+                        6,
+                        20,
+                        36,
+                        51
+                    ],
+                    "19": [
+                        6,
+                        21,
+                        35,
+                        50
+                    ],
+                    "20": [
+                        6,
+                        22,
+                        38,
+                        54
+                    ],
+                    "21": [
+                        8,
+                        23,
+                        38,
+                        52
+                    ],
+                    "22": [
+                        7,
+                        21,
+                        37,
+                        52
+                    ],
+                    "23": [
+                        8,
+                        23,
+                        37,
+                        51
+                    ]
+                }
+            }
+        }
+    ]
+}

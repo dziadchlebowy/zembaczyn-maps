@@ -1,0 +1,1000 @@
+{
+    "line": "112",
+    "type": "bus",
+    "description": "linia zwykła",
+    "validFrom": "2026-09-08",
+    "routes": [
+        {
+            "id": "TP-ŻYR",
+            "name": "TP-ŻYR",
+            "from": "METRO KOROLIN",
+            "to": "ŻYRMUNY PARK",
+            "stops": [
+                {
+                    "street": "Rolnicza",
+                    "name": "METRO KOROLIN",
+                    "travelTime": 0,
+                    "number": "06",
+                    "terminus": true,
+                    "groupId": "0067"
+                },
+                {
+                    "street": "Al. Obrońców Korolina"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "MARYMONCKA",
+                    "travelTime": 1,
+                    "number": "02",
+                    "groupId": "0068"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "SZUWAROWA",
+                    "travelTime": 2,
+                    "number": "02",
+                    "groupId": "0069"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "OSTRÓW KOROLIŃSKI",
+                    "travelTime": 3,
+                    "number": "02",
+                    "groupId": "0051"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "WYGLĄDKA",
+                    "travelTime": 4,
+                    "number": "02",
+                    "request": true,
+                    "groupId": "0070"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "KAPLICZKA ŚW.FRANCISZKA",
+                    "travelTime": 5,
+                    "number": "02",
+                    "groupId": "0071"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "GALERIA",
+                    "travelTime": 6,
+                    "number": "02",
+                    "request": true,
+                    "groupId": "0072"
+                },
+                {
+                    "street": "Trasa Zagajska",
+                    "name": "METRO NALEŚNIKARNIA",
+                    "travelTime": 8,
+                    "number": "02",
+                    "groupId": "0026"
+                },
+                {
+                    "street": "Trasa Zagajska",
+                    "name": "MOST DMOWSKIEGO",
+                    "travelTime": 9,
+                    "number": "02",
+                    "request": true,
+                    "groupId": "0025"
+                },
+                {
+                    "street": "Most Dmowskiego"
+                },
+                {
+                    "street": "Al. Jana Pawła II",
+                    "name": "METRO WIŚNIEWO",
+                    "travelTime": 10,
+                    "number": "02",
+                    "groupId": "0024"
+                },
+                {
+                    "street": "Ekspresowa",
+                    "name": "EKSPRESOWA",
+                    "travelTime": 11,
+                    "number": "02",
+                    "groupId": "0023"
+                },
+                {
+                    "street": "Piaskowa",
+                    "name": "RONDO ELBLĄSKIE",
+                    "travelTime": 12,
+                    "number": "03",
+                    "request": true,
+                    "groupId": "0022"
+                },
+                {
+                    "street": "Piaskowa",
+                    "name": "RATUSZ",
+                    "travelTime": 13,
+                    "number": "03",
+                    "groupId": "0005"
+                },
+                {
+                    "street": "Wodna",
+                    "name": "DW.CENTRALNY",
+                    "travelTime": 14,
+                    "number": "03",
+                    "groupId": "0004"
+                },
+                {
+                    "street": "Piaskowa",
+                    "name": "DW.CENTRALNY (PIASKOWA)",
+                    "travelTime": 15,
+                    "number": "01",
+                    "groupId": "0073"
+                },
+                {
+                    "street": "Bryzowa"
+                },
+                {
+                    "street": "Most Królewiecki",
+                    "name": "DWA MOSTY",
+                    "travelTime": 16,
+                    "number": "03",
+                    "request": true,
+                    "groupId": "0017"
+                },
+                {
+                    "street": "Królewiecka"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "POLSODA",
+                    "travelTime": 17,
+                    "number": "02",
+                    "groupId": "0016"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "FABRYKA POMP",
+                    "travelTime": 18,
+                    "number": "02",
+                    "request": true,
+                    "groupId": "0034"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "MALBORSKA",
+                    "travelTime": 19,
+                    "number": "02",
+                    "request": true,
+                    "groupId": "0033"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "BYDGOSKA",
+                    "travelTime": 20,
+                    "number": "01",
+                    "groupId": "0074"
+                },
+                {
+                    "street": "jezdnia CH Żyrmuny Park",
+                    "name": "ŻYRMUNY PARK",
+                    "travelTime": 21,
+                    "number": "06",
+                    "terminus": true,
+                    "groupId": "0075"
+                }
+            ],
+            "timetable": {
+                "weekday": {
+                    "5": [
+                        4,
+                        10,
+                        15,
+                        20,
+                        25,
+                        29,
+                        35,
+                        40,
+                        45,
+                        50,
+                        55
+                    ],
+                    "6": [
+                        0,
+                        5,
+                        10,
+                        14,
+                        18,
+                        23,
+                        28,
+                        34,
+                        39,
+                        43,
+                        48,
+                        52,
+                        57
+                    ],
+                    "7": [
+                        1,
+                        6,
+                        11,
+                        16,
+                        22,
+                        27,
+                        33,
+                        37,
+                        41,
+                        47,
+                        52,
+                        57
+                    ],
+                    "8": [
+                        2,
+                        6,
+                        11,
+                        16,
+                        21,
+                        27,
+                        31,
+                        36,
+                        41,
+                        46,
+                        52,
+                        57
+                    ],
+                    "9": [
+                        5,
+                        15,
+                        26,
+                        36,
+                        47,
+                        57
+                    ],
+                    "10": [
+                        7,
+                        18,
+                        28,
+                        38,
+                        47,
+                        58
+                    ],
+                    "11": [
+                        9,
+                        19,
+                        29,
+                        38,
+                        48,
+                        57
+                    ],
+                    "12": [
+                        8,
+                        19,
+                        29,
+                        39,
+                        50
+                    ],
+                    "13": [
+                        0,
+                        11,
+                        22,
+                        32,
+                        41,
+                        51
+                    ],
+                    "14": [
+                        0,
+                        11,
+                        20,
+                        30,
+                        40,
+                        49,
+                        59
+                    ],
+                    "15": [
+                        4,
+                        8,
+                        13,
+                        17,
+                        22,
+                        27,
+                        32,
+                        37,
+                        43,
+                        48,
+                        53,
+                        58
+                    ],
+                    "16": [
+                        2,
+                        7,
+                        12,
+                        16,
+                        21,
+                        25,
+                        30,
+                        35,
+                        41,
+                        45,
+                        50,
+                        55
+                    ],
+                    "17": [
+                        1,
+                        6,
+                        11,
+                        15,
+                        20,
+                        26,
+                        31,
+                        36,
+                        41,
+                        46,
+                        51,
+                        56
+                    ],
+                    "18": [
+                        1,
+                        5,
+                        10,
+                        15,
+                        20,
+                        26,
+                        31,
+                        35,
+                        40,
+                        44,
+                        49,
+                        54,
+                        59
+                    ],
+                    "19": [
+                        8,
+                        19,
+                        29,
+                        39,
+                        50,
+                        59
+                    ],
+                    "20": [
+                        9,
+                        19,
+                        28,
+                        38,
+                        49,
+                        59
+                    ],
+                    "21": [
+                        9,
+                        19,
+                        29,
+                        39,
+                        49
+                    ],
+                    "22": [
+                        0,
+                        10,
+                        20,
+                        31,
+                        42,
+                        51
+                    ],
+                    "23": [
+                        2,
+                        13,
+                        24,
+                        34,
+                        45,
+                        55
+                    ]
+                },
+                "saturday": {
+                    "5": [
+                        0,
+                        14,
+                        28,
+                        42,
+                        58
+                    ],
+                    "6": [
+                        12,
+                        27,
+                        42,
+                        56
+                    ],
+                    "7": [
+                        11,
+                        27,
+                        42,
+                        56
+                    ],
+                    "8": [
+                        10,
+                        25,
+                        39,
+                        54
+                    ],
+                    "9": [
+                        9,
+                        23,
+                        38,
+                        53
+                    ],
+                    "10": [
+                        8,
+                        23,
+                        38,
+                        53
+                    ],
+                    "11": [
+                        7,
+                        22,
+                        37,
+                        52
+                    ],
+                    "12": [
+                        7,
+                        22,
+                        38,
+                        54
+                    ],
+                    "13": [
+                        10,
+                        25,
+                        39,
+                        54
+                    ],
+                    "14": [
+                        10,
+                        25,
+                        40,
+                        55
+                    ],
+                    "15": [
+                        10,
+                        25,
+                        41,
+                        55
+                    ],
+                    "16": [
+                        10,
+                        26,
+                        41,
+                        57
+                    ],
+                    "17": [
+                        11,
+                        26,
+                        41,
+                        56
+                    ],
+                    "18": [
+                        11,
+                        26,
+                        41,
+                        55
+                    ],
+                    "19": [
+                        10,
+                        24,
+                        39,
+                        53
+                    ],
+                    "20": [
+                        8,
+                        22,
+                        36,
+                        51
+                    ],
+                    "21": [
+                        6,
+                        21,
+                        37,
+                        52
+                    ],
+                    "22": [
+                        7,
+                        21,
+                        37,
+                        52
+                    ],
+                    "23": [
+                        7,
+                        21,
+                        35,
+                        51
+                    ]
+                }
+            }
+        },
+        {
+            "id": "TP-MET",
+            "name": "TP-MET",
+            "from": "ŻYRMUNY PARK",
+            "to": "METRO KOROLIN",
+            "stops": [
+                {
+                    "street": "jezdnia CH Żyrmuny Park",
+                    "name": "ŻYRMUNY PARK",
+                    "travelTime": 0,
+                    "number": "06",
+                    "terminus": true,
+                    "groupId": "0075"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "BYDGOSKA",
+                    "travelTime": 1,
+                    "number": "02",
+                    "groupId": "0074"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "MALBORSKA",
+                    "travelTime": 2,
+                    "number": "01",
+                    "request": true,
+                    "groupId": "0033"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "FABRYKA POMP",
+                    "travelTime": 3,
+                    "number": "01",
+                    "request": true,
+                    "groupId": "0034"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "POLSODA",
+                    "travelTime": 4,
+                    "number": "01",
+                    "groupId": "0016"
+                },
+                {
+                    "street": "Królewiecka"
+                },
+                {
+                    "street": "Most Królewiecki"
+                },
+                {
+                    "street": "Bryzowa",
+                    "name": "DWA MOSTY",
+                    "travelTime": 5,
+                    "number": "02",
+                    "request": true,
+                    "groupId": "0017"
+                },
+                {
+                    "street": "Piaskowa",
+                    "name": "DW.CENTRALNY (PIASKOWA)",
+                    "travelTime": 6,
+                    "number": "02",
+                    "groupId": "0073"
+                },
+                {
+                    "street": "Wodna",
+                    "name": "DW.CENTRALNY",
+                    "travelTime": 8,
+                    "number": "03",
+                    "groupId": "0004"
+                },
+                {
+                    "street": "Piaskowa",
+                    "name": "RATUSZ",
+                    "travelTime": 9,
+                    "number": "04",
+                    "groupId": "0005"
+                },
+                {
+                    "street": "Ekspresowa",
+                    "name": "RONDO ELBLĄSKIE",
+                    "travelTime": 10,
+                    "number": "01",
+                    "request": true,
+                    "groupId": "0022"
+                },
+                {
+                    "street": "Al. Jana Pawła II",
+                    "name": "EKSPRESOWA",
+                    "travelTime": 11,
+                    "number": "04",
+                    "groupId": "0023"
+                },
+                {
+                    "street": "Most Dmowskiego",
+                    "name": "METRO WIŚNIEWO",
+                    "travelTime": 12,
+                    "number": "01",
+                    "groupId": "0024"
+                },
+                {
+                    "street": "Most Dmowskiego",
+                    "name": "MOST DMOWSKIEGO",
+                    "travelTime": 13,
+                    "number": "01",
+                    "request": true,
+                    "groupId": "0025"
+                },
+                {
+                    "street": "Trasa Zagajska"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "METRO NALEŚNIKARNIA",
+                    "travelTime": 15,
+                    "number": "03",
+                    "groupId": "0026"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "GALERIA",
+                    "travelTime": 16,
+                    "number": "01",
+                    "request": true,
+                    "groupId": "0072"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "KAPLICZKA ŚW.FRANCISZKA",
+                    "travelTime": 18,
+                    "number": "01",
+                    "groupId": "0071"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "WYGLĄDKA",
+                    "travelTime": 20,
+                    "number": "01",
+                    "request": true,
+                    "groupId": "0070"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "OSTRÓW KOROLIŃSKI",
+                    "travelTime": 22,
+                    "number": "01",
+                    "groupId": "0051"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "SZUWAROWA",
+                    "travelTime": 23,
+                    "number": "01",
+                    "groupId": "0069"
+                },
+                {
+                    "street": "Al. Obrońców Korolina",
+                    "name": "MARYMONCKA",
+                    "travelTime": 24,
+                    "number": "01",
+                    "groupId": "0068"
+                },
+                {
+                    "street": "Rzeźnicka",
+                    "name": "METRO KOROLIN",
+                    "travelTime": 25,
+                    "number": "05",
+                    "alightingOnly": true,
+                    "groupId": "0067"
+                }
+            ],
+            "timetable": {
+                "weekday": {
+                    "5": [
+                        3,
+                        8,
+                        12,
+                        18,
+                        24,
+                        30,
+                        34,
+                        38,
+                        43,
+                        49,
+                        54
+                    ],
+                    "6": [
+                        0,
+                        5,
+                        9,
+                        14,
+                        20,
+                        25,
+                        30,
+                        34,
+                        38,
+                        43,
+                        49,
+                        53,
+                        57
+                    ],
+                    "7": [
+                        1,
+                        6,
+                        11,
+                        17,
+                        22,
+                        27,
+                        31,
+                        36,
+                        41,
+                        46,
+                        51,
+                        56
+                    ],
+                    "8": [
+                        0,
+                        5,
+                        9,
+                        15,
+                        19,
+                        24,
+                        29,
+                        34,
+                        38,
+                        43,
+                        48,
+                        52,
+                        58
+                    ],
+                    "9": [
+                        6,
+                        16,
+                        25,
+                        36,
+                        47,
+                        56
+                    ],
+                    "10": [
+                        5,
+                        14,
+                        24,
+                        34,
+                        44,
+                        53
+                    ],
+                    "11": [
+                        3,
+                        14,
+                        24,
+                        35,
+                        45,
+                        55
+                    ],
+                    "12": [
+                        5,
+                        15,
+                        25,
+                        35,
+                        45,
+                        56
+                    ],
+                    "13": [
+                        7,
+                        17,
+                        27,
+                        37,
+                        46,
+                        57
+                    ],
+                    "14": [
+                        7,
+                        17,
+                        27,
+                        37,
+                        47,
+                        57
+                    ],
+                    "15": [
+                        0,
+                        4,
+                        10,
+                        15,
+                        20,
+                        25,
+                        30,
+                        35,
+                        39,
+                        44,
+                        50,
+                        55
+                    ],
+                    "16": [
+                        0,
+                        5,
+                        11,
+                        16,
+                        22,
+                        27,
+                        31,
+                        36,
+                        41,
+                        46,
+                        50,
+                        55
+                    ],
+                    "17": [
+                        1,
+                        7,
+                        13,
+                        18,
+                        23,
+                        27,
+                        32,
+                        37,
+                        42,
+                        47,
+                        51,
+                        56
+                    ],
+                    "18": [
+                        1,
+                        5,
+                        9,
+                        13,
+                        17,
+                        22,
+                        27,
+                        31,
+                        36,
+                        41,
+                        45,
+                        50,
+                        55
+                    ],
+                    "19": [
+                        3,
+                        12,
+                        22,
+                        33,
+                        44,
+                        54
+                    ],
+                    "20": [
+                        4,
+                        14,
+                        23,
+                        34,
+                        44,
+                        54
+                    ],
+                    "21": [
+                        4,
+                        14,
+                        25,
+                        34,
+                        44,
+                        53
+                    ],
+                    "22": [
+                        2,
+                        13,
+                        23,
+                        34,
+                        44,
+                        53
+                    ],
+                    "23": [
+                        3,
+                        13,
+                        24,
+                        34,
+                        44,
+                        54
+                    ]
+                },
+                "saturday": {
+                    "5": [
+                        6,
+                        21,
+                        35,
+                        50
+                    ],
+                    "6": [
+                        5,
+                        20,
+                        35,
+                        50
+                    ],
+                    "7": [
+                        4,
+                        19,
+                        35,
+                        49
+                    ],
+                    "8": [
+                        4,
+                        19,
+                        33,
+                        49
+                    ],
+                    "9": [
+                        4,
+                        19,
+                        35,
+                        49
+                    ],
+                    "10": [
+                        4,
+                        19,
+                        35,
+                        51
+                    ],
+                    "11": [
+                        6,
+                        21,
+                        37,
+                        52
+                    ],
+                    "12": [
+                        7,
+                        22,
+                        37,
+                        53
+                    ],
+                    "13": [
+                        8,
+                        22,
+                        37,
+                        51
+                    ],
+                    "14": [
+                        5,
+                        20,
+                        35,
+                        49
+                    ],
+                    "15": [
+                        4,
+                        18,
+                        34,
+                        49
+                    ],
+                    "16": [
+                        4,
+                        19,
+                        34,
+                        50
+                    ],
+                    "17": [
+                        6,
+                        21,
+                        36,
+                        51
+                    ],
+                    "18": [
+                        6,
+                        20,
+                        36,
+                        50
+                    ],
+                    "19": [
+                        4,
+                        20,
+                        35,
+                        51
+                    ],
+                    "20": [
+                        6,
+                        21,
+                        36,
+                        51
+                    ],
+                    "21": [
+                        6,
+                        21,
+                        35,
+                        50
+                    ],
+                    "22": [
+                        6,
+                        21,
+                        37,
+                        51
+                    ],
+                    "23": [
+                        6,
+                        20,
+                        35,
+                        51
+                    ]
+                }
+            }
+        }
+    ]
+}

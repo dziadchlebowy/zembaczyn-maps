@@ -1,0 +1,776 @@
+{
+    "line": "102",
+    "type": "bus",
+    "description": "linia zwykła",
+    "validFrom": "2026-09-08",
+    "routes": [
+        {
+            "id": "TP-TŁO",
+            "name": "TP-TŁO",
+            "from": "DW.CENTRALNY",
+            "to": "TŁOCZYN",
+            "stops": [
+                {
+                    "street": "Wodna",
+                    "name": "DW.CENTRALNY",
+                    "travelTime": 0,
+                    "number": "01",
+                    "terminus": true,
+                    "groupId": "0004"
+                },
+                {
+                    "street": "Księcia Ruperta",
+                    "name": "CENTRUM",
+                    "travelTime": 1,
+                    "number": "01",
+                    "groupId": "0007"
+                },
+                {
+                    "street": "Pałacowa"
+                },
+                {
+                    "street": "Ekspresowa",
+                    "name": "KATEDRA",
+                    "travelTime": 2,
+                    "number": "02",
+                    "groupId": "0008"
+                },
+                {
+                    "street": "Ekspresowa",
+                    "name": "RONDO ELBLĄSKIE",
+                    "travelTime": 3,
+                    "number": "01",
+                    "request": true,
+                    "groupId": "0022"
+                },
+                {
+                    "street": "Ekspresowa",
+                    "name": "EKSPRESOWA",
+                    "travelTime": 4,
+                    "number": "01",
+                    "groupId": "0023"
+                },
+                {
+                    "street": "Ekspresowa",
+                    "name": "CH ELYTRA",
+                    "travelTime": 5,
+                    "number": "01",
+                    "groupId": "0029"
+                },
+                {
+                    "street": "Bulwary Olszewskiego",
+                    "name": "BULWARY OLSZEWSKIEGO",
+                    "travelTime": 6,
+                    "number": "01",
+                    "request": true,
+                    "groupId": "0030"
+                },
+                {
+                    "street": "Most Tylżycki"
+                },
+                {
+                    "street": "Tczewska"
+                },
+                {
+                    "street": "Malborska",
+                    "name": "PL.GDAŃSKI",
+                    "travelTime": 8,
+                    "number": "03",
+                    "groupId": "0031"
+                },
+                {
+                    "street": "Malborska",
+                    "name": "SUWALSKA",
+                    "travelTime": 9,
+                    "number": "01",
+                    "groupId": "0032"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "MALBORSKA",
+                    "travelTime": 11,
+                    "number": "03",
+                    "request": true,
+                    "groupId": "0033"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "FABRYKA POMP",
+                    "travelTime": 12,
+                    "number": "01",
+                    "request": true,
+                    "groupId": "0034"
+                },
+                {
+                    "street": "Olecka",
+                    "name": "POLSODA",
+                    "travelTime": 13,
+                    "number": "04",
+                    "groupId": "0016"
+                },
+                {
+                    "street": "Ełcka",
+                    "name": "OLECKA",
+                    "travelTime": 14,
+                    "number": "01",
+                    "groupId": "0015"
+                },
+                {
+                    "street": "Wydmińska",
+                    "name": "TŁOCZYN",
+                    "travelTime": 15,
+                    "number": "05",
+                    "terminus": true,
+                    "groupId": "0014"
+                }
+            ],
+            "timetable": {
+                "weekday": {
+                    "5": [
+                        2,
+                        12,
+                        23,
+                        33,
+                        43,
+                        53
+                    ],
+                    "6": [
+                        4,
+                        14,
+                        24,
+                        34,
+                        45,
+                        55
+                    ],
+                    "7": [
+                        5,
+                        15,
+                        25,
+                        35,
+                        44,
+                        55
+                    ],
+                    "8": [
+                        4,
+                        13,
+                        22,
+                        31,
+                        41,
+                        52
+                    ],
+                    "9": [
+                        5,
+                        16,
+                        28,
+                        41,
+                        54
+                    ],
+                    "10": [
+                        6,
+                        18,
+                        29,
+                        41,
+                        53
+                    ],
+                    "11": [
+                        5,
+                        17,
+                        28,
+                        41,
+                        53
+                    ],
+                    "12": [
+                        5,
+                        17,
+                        29,
+                        41,
+                        53
+                    ],
+                    "13": [
+                        4,
+                        16,
+                        29,
+                        41,
+                        53
+                    ],
+                    "14": [
+                        4,
+                        16,
+                        27,
+                        39,
+                        51
+                    ],
+                    "15": [
+                        3,
+                        13,
+                        23,
+                        33,
+                        43,
+                        53
+                    ],
+                    "16": [
+                        3,
+                        13,
+                        24,
+                        34,
+                        45,
+                        54
+                    ],
+                    "17": [
+                        5,
+                        15,
+                        26,
+                        35,
+                        44,
+                        54
+                    ],
+                    "18": [
+                        4,
+                        15,
+                        25,
+                        34,
+                        43,
+                        54
+                    ],
+                    "19": [
+                        0,
+                        11,
+                        22,
+                        34,
+                        46,
+                        58
+                    ],
+                    "20": [
+                        10,
+                        22,
+                        33,
+                        46,
+                        58
+                    ],
+                    "21": [
+                        9,
+                        22,
+                        34,
+                        46,
+                        58
+                    ],
+                    "22": [
+                        10,
+                        22,
+                        35,
+                        47,
+                        59
+                    ],
+                    "23": [
+                        10,
+                        21,
+                        32,
+                        44,
+                        56
+                    ]
+                },
+                "saturday": {
+                    "5": [
+                        14,
+                        29,
+                        45
+                    ],
+                    "6": [
+                        0,
+                        14,
+                        29,
+                        45
+                    ],
+                    "7": [
+                        1,
+                        15,
+                        30,
+                        46
+                    ],
+                    "8": [
+                        1,
+                        15,
+                        29,
+                        44,
+                        58
+                    ],
+                    "9": [
+                        13,
+                        29,
+                        45
+                    ],
+                    "10": [
+                        1,
+                        17,
+                        33,
+                        49
+                    ],
+                    "11": [
+                        5,
+                        19,
+                        35,
+                        50
+                    ],
+                    "12": [
+                        5,
+                        19,
+                        33,
+                        48
+                    ],
+                    "13": [
+                        3,
+                        17,
+                        32,
+                        47
+                    ],
+                    "14": [
+                        3,
+                        18,
+                        33,
+                        48
+                    ],
+                    "15": [
+                        3,
+                        17,
+                        33,
+                        48
+                    ],
+                    "16": [
+                        3,
+                        18,
+                        33,
+                        48
+                    ],
+                    "17": [
+                        3,
+                        17,
+                        31,
+                        45,
+                        59
+                    ],
+                    "18": [
+                        14,
+                        29,
+                        44,
+                        59
+                    ],
+                    "19": [
+                        14,
+                        29,
+                        44,
+                        59
+                    ],
+                    "20": [
+                        13,
+                        28,
+                        43,
+                        59
+                    ],
+                    "21": [
+                        15,
+                        30,
+                        45
+                    ],
+                    "22": [
+                        0,
+                        15,
+                        31,
+                        46
+                    ],
+                    "23": [
+                        0,
+                        14,
+                        29,
+                        44,
+                        59
+                    ]
+                }
+            }
+        },
+        {
+            "id": "TP-DWC",
+            "name": "TP-DWC",
+            "from": "TŁOCZYN",
+            "to": "DW.CENTRALNY",
+            "stops": [
+                {
+                    "street": "Wydmińska",
+                    "name": "TŁOCZYN",
+                    "travelTime": 0,
+                    "number": "05",
+                    "terminus": true,
+                    "groupId": "0014"
+                },
+                {
+                    "street": "Giżycka",
+                    "name": "TŁOCZYN",
+                    "travelTime": 1,
+                    "number": "02",
+                    "request": true,
+                    "groupId": "0014"
+                },
+                {
+                    "street": "Olecka",
+                    "name": "OLECKA",
+                    "travelTime": 3,
+                    "number": "02",
+                    "groupId": "0015"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "POLSODA",
+                    "travelTime": 4,
+                    "number": "02",
+                    "groupId": "0016"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "FABRYKA POMP",
+                    "travelTime": 6,
+                    "number": "02",
+                    "request": true,
+                    "groupId": "0034"
+                },
+                {
+                    "street": "Malborska",
+                    "name": "MALBORSKA",
+                    "travelTime": 7,
+                    "number": "04",
+                    "request": true,
+                    "groupId": "0033"
+                },
+                {
+                    "street": "Malborska",
+                    "name": "SUWALSKA",
+                    "travelTime": 8,
+                    "number": "02",
+                    "groupId": "0032"
+                },
+                {
+                    "street": "Tczewska",
+                    "name": "PL.GDAŃSKI",
+                    "travelTime": 9,
+                    "number": "02",
+                    "groupId": "0031"
+                },
+                {
+                    "street": "Most Tylżycki"
+                },
+                {
+                    "street": "Bulwary Olszewskiego",
+                    "name": "BULWARY OLSZEWSKIEGO",
+                    "travelTime": 10,
+                    "number": "02",
+                    "request": true,
+                    "groupId": "0030"
+                },
+                {
+                    "street": "Ekspresowa",
+                    "name": "CH ELYTRA",
+                    "travelTime": 11,
+                    "number": "02",
+                    "groupId": "0029"
+                },
+                {
+                    "street": "Ekspresowa",
+                    "name": "EKSPRESOWA",
+                    "travelTime": 12,
+                    "number": "02",
+                    "groupId": "0023"
+                },
+                {
+                    "street": "Ekspresowa",
+                    "name": "RONDO ELBLĄSKIE",
+                    "travelTime": 13,
+                    "number": "02",
+                    "request": true,
+                    "groupId": "0022"
+                },
+                {
+                    "street": "Pałacowa",
+                    "name": "KATEDRA",
+                    "travelTime": 14,
+                    "number": "04",
+                    "groupId": "0008"
+                },
+                {
+                    "street": "Księcia Ruperta",
+                    "name": "CENTRUM",
+                    "travelTime": 15,
+                    "number": "02",
+                    "groupId": "0007"
+                },
+                {
+                    "street": "Wodna",
+                    "name": "DW.CENTRALNY",
+                    "travelTime": 16,
+                    "number": "04",
+                    "alightingOnly": true,
+                    "groupId": "0004"
+                }
+            ],
+            "timetable": {
+                "weekday": {
+                    "5": [
+                        2,
+                        12,
+                        22,
+                        31,
+                        41,
+                        51
+                    ],
+                    "6": [
+                        1,
+                        10,
+                        20,
+                        30,
+                        40,
+                        50,
+                        59
+                    ],
+                    "7": [
+                        9,
+                        19,
+                        29,
+                        39,
+                        49,
+                        59
+                    ],
+                    "8": [
+                        10,
+                        19,
+                        29,
+                        38,
+                        48,
+                        58
+                    ],
+                    "9": [
+                        11,
+                        23,
+                        35,
+                        47,
+                        59
+                    ],
+                    "10": [
+                        11,
+                        22,
+                        34,
+                        47,
+                        58
+                    ],
+                    "11": [
+                        11,
+                        24,
+                        37,
+                        49
+                    ],
+                    "12": [
+                        1,
+                        13,
+                        24,
+                        36,
+                        48
+                    ],
+                    "13": [
+                        0,
+                        12,
+                        24,
+                        36,
+                        48,
+                        59
+                    ],
+                    "14": [
+                        11,
+                        23,
+                        35,
+                        47,
+                        58
+                    ],
+                    "15": [
+                        1,
+                        11,
+                        20,
+                        31,
+                        41,
+                        51
+                    ],
+                    "16": [
+                        2,
+                        12,
+                        23,
+                        32,
+                        42,
+                        51
+                    ],
+                    "17": [
+                        1,
+                        11,
+                        20,
+                        31,
+                        41,
+                        51
+                    ],
+                    "18": [
+                        0,
+                        10,
+                        21,
+                        31,
+                        41,
+                        51
+                    ],
+                    "19": [
+                        7,
+                        19,
+                        31,
+                        42,
+                        54
+                    ],
+                    "20": [
+                        5,
+                        18,
+                        30,
+                        42,
+                        55
+                    ],
+                    "21": [
+                        7,
+                        19,
+                        31,
+                        43,
+                        55
+                    ],
+                    "22": [
+                        7,
+                        19,
+                        30,
+                        43,
+                        55
+                    ],
+                    "23": [
+                        6,
+                        18,
+                        31,
+                        43,
+                        56
+                    ]
+                },
+                "saturday": {
+                    "5": [
+                        1,
+                        15,
+                        29,
+                        44,
+                        59
+                    ],
+                    "6": [
+                        15,
+                        29,
+                        45
+                    ],
+                    "7": [
+                        0,
+                        15,
+                        30,
+                        45
+                    ],
+                    "8": [
+                        0,
+                        16,
+                        31,
+                        45
+                    ],
+                    "9": [
+                        0,
+                        16,
+                        32,
+                        47
+                    ],
+                    "10": [
+                        1,
+                        16,
+                        31,
+                        46
+                    ],
+                    "11": [
+                        1,
+                        16,
+                        31,
+                        47
+                    ],
+                    "12": [
+                        2,
+                        16,
+                        31,
+                        46
+                    ],
+                    "13": [
+                        1,
+                        16,
+                        32,
+                        47
+                    ],
+                    "14": [
+                        2,
+                        17,
+                        33,
+                        47
+                    ],
+                    "15": [
+                        2,
+                        17,
+                        32,
+                        47
+                    ],
+                    "16": [
+                        1,
+                        17,
+                        32,
+                        47
+                    ],
+                    "17": [
+                        1,
+                        15,
+                        30,
+                        46
+                    ],
+                    "18": [
+                        2,
+                        18,
+                        33,
+                        48
+                    ],
+                    "19": [
+                        4,
+                        18,
+                        33,
+                        47
+                    ],
+                    "20": [
+                        2,
+                        16,
+                        31,
+                        47
+                    ],
+                    "21": [
+                        2,
+                        16,
+                        31,
+                        47
+                    ],
+                    "22": [
+                        3,
+                        18,
+                        33,
+                        48
+                    ],
+                    "23": [
+                        3,
+                        18,
+                        34,
+                        49
+                    ]
+                }
+            }
+        }
+    ]
+}

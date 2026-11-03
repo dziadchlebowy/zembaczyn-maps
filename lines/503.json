@@ -1,0 +1,664 @@
+{
+    "line": "503",
+    "type": "bus",
+    "description": "linia przyspieszona",
+    "validFrom": "2026-09-08",
+    "routes": [
+        {
+            "id": "TP-MET",
+            "name": "TP-MET",
+            "from": "NOWE DWORY",
+            "to": "METRO NALEŚNIKARNIA",
+            "stops": [
+                {
+                    "street": "Pasłęcka",
+                    "name": "NOWE DWORY",
+                    "travelTime": 0,
+                    "number": "09",
+                    "terminus": true,
+                    "groupId": "0011"
+                },
+                {
+                    "street": "Al. Chopina",
+                    "name": "NOWE DWORY",
+                    "travelTime": 2,
+                    "number": "03",
+                    "groupId": "0011"
+                },
+                {
+                    "street": "Ks. Popiełuszki",
+                    "name": "PL.DOBRZYŃSKIEGO",
+                    "travelTime": 3,
+                    "number": "01",
+                    "groupId": "0086"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "POLSODA",
+                    "travelTime": 4,
+                    "number": "02",
+                    "groupId": "0016"
+                },
+                {
+                    "street": "Malborska"
+                },
+                {
+                    "street": "Malborska",
+                    "name": "SUWALSKA",
+                    "travelTime": 5,
+                    "number": "02",
+                    "groupId": "0032"
+                },
+                {
+                    "street": "Kwidzyńska",
+                    "name": "PL.GDAŃSKI",
+                    "travelTime": 6,
+                    "number": "01",
+                    "groupId": "0031"
+                },
+                {
+                    "street": "Trasa Wystrzyńska"
+                },
+                {
+                    "street": "Trasa Zagajska"
+                },
+                {
+                    "street": "Trasa Zagajska",
+                    "name": "METRO USZYM",
+                    "travelTime": 7,
+                    "number": "02",
+                    "groupId": "0059"
+                },
+                {
+                    "street": "Trasa Zagajska",
+                    "name": "KLUŻAŃSKA",
+                    "travelTime": 8,
+                    "number": "02",
+                    "groupId": "0058"
+                },
+                {
+                    "street": "Trasa Zagajska",
+                    "name": "MOST SIEDMIOGRODZKI",
+                    "travelTime": 9,
+                    "number": "02",
+                    "groupId": "0057"
+                },
+                {
+                    "street": "Marymoncka",
+                    "name": "METRO NALEŚNIKARNIA",
+                    "travelTime": 10,
+                    "number": "07",
+                    "terminus": true,
+                    "groupId": "0026"
+                }
+            ],
+            "timetable": {
+                "weekday": {
+                    "5": [
+                        8,
+                        23,
+                        39,
+                        53
+                    ],
+                    "6": [
+                        9,
+                        25,
+                        40,
+                        55
+                    ],
+                    "7": [
+                        11,
+                        26,
+                        41,
+                        57
+                    ],
+                    "8": [
+                        13,
+                        28,
+                        43,
+                        58
+                    ],
+                    "9": [
+                        3,
+                        17,
+                        31,
+                        46
+                    ],
+                    "10": [
+                        1,
+                        16,
+                        31,
+                        46
+                    ],
+                    "11": [
+                        0,
+                        14,
+                        29,
+                        44,
+                        59
+                    ],
+                    "12": [
+                        14,
+                        29,
+                        43,
+                        57
+                    ],
+                    "13": [
+                        12,
+                        27,
+                        42,
+                        57
+                    ],
+                    "14": [
+                        12,
+                        26,
+                        41,
+                        56
+                    ],
+                    "15": [
+                        0,
+                        15,
+                        30,
+                        44,
+                        59
+                    ],
+                    "16": [
+                        13,
+                        28,
+                        43,
+                        58
+                    ],
+                    "17": [
+                        13,
+                        29,
+                        44,
+                        59
+                    ],
+                    "18": [
+                        13,
+                        29,
+                        45
+                    ],
+                    "19": [
+                        1,
+                        15,
+                        30,
+                        45
+                    ],
+                    "20": [
+                        0,
+                        15,
+                        30,
+                        46
+                    ],
+                    "21": [
+                        0,
+                        14,
+                        30,
+                        44
+                    ],
+                    "22": [
+                        0,
+                        15,
+                        30,
+                        46
+                    ],
+                    "23": [
+                        2,
+                        18,
+                        33,
+                        47
+                    ]
+                },
+                "saturday": {
+                    "5": [
+                        7,
+                        22,
+                        37,
+                        52
+                    ],
+                    "6": [
+                        6,
+                        21,
+                        36,
+                        52
+                    ],
+                    "7": [
+                        6,
+                        22,
+                        37,
+                        52
+                    ],
+                    "8": [
+                        7,
+                        23,
+                        38,
+                        53
+                    ],
+                    "9": [
+                        8,
+                        22,
+                        37,
+                        52
+                    ],
+                    "10": [
+                        6,
+                        20,
+                        35,
+                        50
+                    ],
+                    "11": [
+                        5,
+                        20,
+                        35,
+                        49
+                    ],
+                    "12": [
+                        3,
+                        18,
+                        33,
+                        48
+                    ],
+                    "13": [
+                        3,
+                        19,
+                        34,
+                        50
+                    ],
+                    "14": [
+                        5,
+                        19,
+                        34,
+                        49
+                    ],
+                    "15": [
+                        4,
+                        20,
+                        35,
+                        50
+                    ],
+                    "16": [
+                        5,
+                        20,
+                        36,
+                        52
+                    ],
+                    "17": [
+                        6,
+                        20,
+                        35,
+                        49
+                    ],
+                    "18": [
+                        4,
+                        20,
+                        36,
+                        51
+                    ],
+                    "19": [
+                        6,
+                        22,
+                        37,
+                        53
+                    ],
+                    "20": [
+                        8,
+                        23,
+                        39,
+                        55
+                    ],
+                    "21": [
+                        9,
+                        23,
+                        39,
+                        55
+                    ],
+                    "22": [
+                        11,
+                        25,
+                        39,
+                        54
+                    ],
+                    "23": [
+                        10,
+                        24,
+                        39,
+                        54
+                    ]
+                }
+            }
+        },
+        {
+            "id": "TP-NOW",
+            "name": "TP-NOW",
+            "from": "METRO NALEŚNIKARNIA",
+            "to": "NOWE DWORY",
+            "stops": [
+                {
+                    "street": "Marymoncka",
+                    "name": "METRO NALEŚNIKARNIA",
+                    "travelTime": 0,
+                    "number": "07",
+                    "terminus": true,
+                    "groupId": "0026"
+                },
+                {
+                    "street": "Trasa Zagajska",
+                    "name": "METRO NALEŚNIKARNIA",
+                    "travelTime": 1,
+                    "number": "02",
+                    "groupId": "0026"
+                },
+                {
+                    "street": "Trasa Zagajska",
+                    "name": "MOST SIEDMIOGRODZKI",
+                    "travelTime": 3,
+                    "number": "01",
+                    "groupId": "0057"
+                },
+                {
+                    "street": "Trasa Zagajska",
+                    "name": "KLUŻAŃSKA",
+                    "travelTime": 4,
+                    "number": "01",
+                    "groupId": "0058"
+                },
+                {
+                    "street": "Trasa Zagajska",
+                    "name": "METRO USZYM",
+                    "travelTime": 5,
+                    "number": "01",
+                    "groupId": "0059"
+                },
+                {
+                    "street": "Trasa Wystrzyńska"
+                },
+                {
+                    "street": "Kwidzyńska"
+                },
+                {
+                    "street": "Malborska",
+                    "name": "PL.GDAŃSKI",
+                    "travelTime": 6,
+                    "number": "03",
+                    "groupId": "0031"
+                },
+                {
+                    "street": "Malborska",
+                    "name": "SUWALSKA",
+                    "travelTime": 7,
+                    "number": "01",
+                    "groupId": "0032"
+                },
+                {
+                    "street": "Toruńska",
+                    "name": "POLSODA",
+                    "travelTime": 8,
+                    "number": "01",
+                    "groupId": "0016"
+                },
+                {
+                    "street": "Ks. Popiełuszki"
+                },
+                {
+                    "street": "Al. Chopina",
+                    "name": "PL.DOBRZYŃSKIEGO",
+                    "travelTime": 9,
+                    "number": "02",
+                    "groupId": "0086"
+                },
+                {
+                    "street": "Pasłęcka",
+                    "name": "NOWE DWORY",
+                    "travelTime": 10,
+                    "number": "02",
+                    "groupId": "0011"
+                },
+                {
+                    "street": "Pasłęcka",
+                    "name": "NOWE DWORY",
+                    "travelTime": 11,
+                    "number": "09",
+                    "terminus": true,
+                    "groupId": "0011"
+                }
+            ],
+            "timetable": {
+                "weekday": {
+                    "5": [
+                        5,
+                        20,
+                        35,
+                        50
+                    ],
+                    "6": [
+                        4,
+                        19,
+                        35,
+                        50
+                    ],
+                    "7": [
+                        5,
+                        20,
+                        35,
+                        51
+                    ],
+                    "8": [
+                        5,
+                        20,
+                        34,
+                        48
+                    ],
+                    "9": [
+                        4,
+                        18,
+                        33,
+                        49
+                    ],
+                    "10": [
+                        4,
+                        19,
+                        33,
+                        48
+                    ],
+                    "11": [
+                        3,
+                        17,
+                        32,
+                        47
+                    ],
+                    "12": [
+                        3,
+                        18,
+                        34,
+                        49
+                    ],
+                    "13": [
+                        3,
+                        17,
+                        32,
+                        47
+                    ],
+                    "14": [
+                        2,
+                        17,
+                        32,
+                        46
+                    ],
+                    "15": [
+                        0,
+                        15,
+                        31,
+                        45
+                    ],
+                    "16": [
+                        0,
+                        16,
+                        32,
+                        47
+                    ],
+                    "17": [
+                        2,
+                        18,
+                        32,
+                        48
+                    ],
+                    "18": [
+                        4,
+                        19,
+                        35,
+                        51
+                    ],
+                    "19": [
+                        0,
+                        14,
+                        29,
+                        44,
+                        59
+                    ],
+                    "20": [
+                        15,
+                        30,
+                        45
+                    ],
+                    "21": [
+                        1,
+                        17,
+                        32,
+                        47
+                    ],
+                    "22": [
+                        1,
+                        16,
+                        30,
+                        46
+                    ],
+                    "23": [
+                        1,
+                        15,
+                        30,
+                        44,
+                        58
+                    ]
+                },
+                "saturday": {
+                    "5": [
+                        1,
+                        16,
+                        31,
+                        46
+                    ],
+                    "6": [
+                        1,
+                        15,
+                        29,
+                        44,
+                        58
+                    ],
+                    "7": [
+                        14,
+                        30,
+                        44,
+                        58
+                    ],
+                    "8": [
+                        13,
+                        28,
+                        43,
+                        57
+                    ],
+                    "9": [
+                        11,
+                        25,
+                        40,
+                        55
+                    ],
+                    "10": [
+                        10,
+                        25,
+                        41,
+                        56
+                    ],
+                    "11": [
+                        11,
+                        26,
+                        41,
+                        55
+                    ],
+                    "12": [
+                        10,
+                        24,
+                        39,
+                        53
+                    ],
+                    "13": [
+                        8,
+                        22,
+                        37,
+                        51
+                    ],
+                    "14": [
+                        5,
+                        21,
+                        36,
+                        51
+                    ],
+                    "15": [
+                        6,
+                        20,
+                        35,
+                        50
+                    ],
+                    "16": [
+                        5,
+                        19,
+                        34,
+                        48
+                    ],
+                    "17": [
+                        3,
+                        19,
+                        34,
+                        48
+                    ],
+                    "18": [
+                        2,
+                        18,
+                        33,
+                        49
+                    ],
+                    "19": [
+                        4,
+                        20,
+                        35,
+                        50
+                    ],
+                    "20": [
+                        5,
+                        19,
+                        34,
+                        49
+                    ],
+                    "21": [
+                        4,
+                        19,
+                        35,
+                        50
+                    ],
+                    "22": [
+                        6,
+                        21,
+                        36,
+                        51
+                    ],
+                    "23": [
+                        6,
+                        21,
+                        37,
+                        52
+                    ]
+                }
+            }
+        }
+    ]
+}
