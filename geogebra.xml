@@ -31,7 +31,7 @@
 <euclidianView>
 	<viewNumber viewNo="1"/>
 	<size width="1545" height="855"/>
-	<coordSystem xZero="16999.738855660773" yZero="4135.91019191622" scale="21.06982441449799" yscale="21.06982441449047"/>
+	<coordSystem xZero="834.710683673226" yZero="1854.7275009464329" scale="4.907712897811161" yscale="4.907712897809388"/>
 	<evSettings axes="false" grid="false" gridIsBold="false" pointCapturing="0" rightAngleStyle="1" checkboxSize="26" gridType="0"/>
 	<bgColor r="213" g="214" b="218"/>
 	<axesColor r="255" g="255" b="255"/>
@@ -1676,7 +1676,7 @@
 	<labelOffset x="-80" y="-1"/>
 	<labelMode val="3"/>
 	<fixed val="true"/>
-	<caption val="Bulwary Jana Olszewskiego"/>
+	<caption val="Bulwary Olszewskiego"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
