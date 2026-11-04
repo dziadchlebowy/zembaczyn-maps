@@ -31,7 +31,7 @@
 <euclidianView>
 	<viewNumber viewNo="1"/>
 	<size width="1545" height="855"/>
-	<coordSystem xZero="834.710683673226" yZero="1854.7275009464329" scale="4.907712897811161" yscale="4.907712897809388"/>
+	<coordSystem xZero="-541.6326649953068" yZero="3064.935321087928" scale="5.304630397253837" yscale="5.304630397252521"/>
 	<evSettings axes="false" grid="false" gridIsBold="false" pointCapturing="0" rightAngleStyle="1" checkboxSize="26" gridType="0"/>
 	<bgColor r="213" g="214" b="218"/>
 	<axesColor r="255" g="255" b="255"/>
@@ -19998,20 +19998,6 @@
 	<endStyle val="default"/>
 	<coords x="-3.862342399585941" y="3.9143227839178394" z="-1114.5989646215312"/>
 </element>
-<command name="Point">
-	<input a0="s_8"/>
-	<output a0="L_{38}"/>
-</command>
-<element type="point" label="L_{38}">
-	<show object="true" label="false"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="207.04730637630414" y="478.9517080741895" z="1"/>
-</element>
 <expression label="M_{38}" exp="(-277, -63)" type="point"/>
 <element type="point" label="M_{38}">
 	<show object="true" label="false" ev="4"/>
@@ -21332,24 +21318,6 @@
 	<coords x="-44" y="0" z="8844"/>
 </element>
 <command name="Segment">
-	<input a0="J_{38}" a1="L_{38}"/>
-	<output a0="j_{26}"/>
-</command>
-<element type="segment" label="j_{26}">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="230" b="150" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<caption val="Toruńska [DK59]"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="10.048291925810474" y="0.047306376304135256" z="-2103.129246655488"/>
-</element>
-<command name="Segment">
 	<input a0="U_{26}" a1="F_9"/>
 	<output a0="j_7"/>
 </command>
@@ -22043,6 +22011,24 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="-0.005435427970041928" y="20.28843450993304" z="-3412.756421193044"/>
+</element>
+<command name="Segment">
+	<input a0="J_{38}" a1="Q_{15}"/>
+	<output a0="j_{26}"/>
+</command>
+<element type="segment" label="j_{26}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="230" b="150" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Toruńska [DK59]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="10" y="0" z="-2070"/>
 </element>
 </construction>
 </geogebra>
