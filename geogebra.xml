@@ -5829,7 +5829,7 @@
 	<font serif="false" sizeM="1" size="0" style="1"/>
 	<startPoint x="-817.6322873702028" y="-170.20125863754623" z="1"/>
 </element>
-<expression label="CENTRUM_{19}" exp="&quot;ZAGAJE-&#xa;-PLAŻA&quot;"/>
+<expression label="CENTRUM_{19}" exp="&quot;ZAGAJE-PLAŻA&quot;"/>
 <element type="text" label="CENTRUM_{19}">
 	<show object="true" label="false" ev="40"/>
 	<objColor r="64" g="64" b="64" alpha="0"/>
