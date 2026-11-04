@@ -31,7 +31,7 @@
 <euclidianView>
 	<viewNumber viewNo="1"/>
 	<size width="1545" height="855"/>
-	<coordSystem xZero="1225.850534387165" yZero="1293.2899064667627" scale="5.448516442293199" yscale="5.448516442291862"/>
+	<coordSystem xZero="-2506.102934158164" yZero="6840.242192319078" scale="2.92237470348997" yscale="2.9223747034892678"/>
 	<evSettings axes="false" grid="false" gridIsBold="false" pointCapturing="0" rightAngleStyle="1" checkboxSize="26" gridType="0"/>
 	<bgColor r="213" g="214" b="218"/>
 	<axesColor r="255" g="255" b="255"/>
@@ -7688,11 +7688,12 @@
 	<output a0="t_9"/>
 </command>
 <element type="segment" label="t_9">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
 	<fixed val="true"/>
+	<caption val="Kazachska"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -7778,11 +7779,12 @@
 	<output a0="e_9"/>
 </command>
 <element type="segment" label="e_9">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
 	<fixed val="true"/>
+	<caption val="Kazachska"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
