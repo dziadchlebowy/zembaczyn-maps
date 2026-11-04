@@ -716,7 +716,7 @@ function buildCaches() {
   rondos = order.filter(o => o.cat === 'rondo' && o.visible);
   const mc = streets.map(s => s.chains.find(c => c.cls === 'main')).find(Boolean);
   rondoCol = mc ? { fill: mc.fill, cs: mc.cs } : null;
-  graph = null; geoCache.clear();
+  graph = null; tgraph = null; geoCache.clear();
   stopIndex = new Map();
   for (const o of order) if (o.lines && o.team) { const k = skey(o.team, o.num); let a = stopIndex.get(k); if (!a) stopIndex.set(k, a = []); a.push(o); }
   const pr = { shop: 0, tram: 1, bus: 2, metro: 3 };
@@ -1371,53 +1371,63 @@ async function computeDepartures(stop) {
   out.sort((a, b) => a.when - b.when);
   return { deps: out, missing, now, routes: [...seenR.values()] };
 }
-/* ───────────── TRASY LINII NA MAPIE (po grafie ulic) ───────────── */
+/* ───────────── TRASY LINII NA MAPIE (po grafie ulic / torów) ───────────── */
 const LINE_PAL = ['#1a73e8', '#d93025', '#188038', '#e37400', '#9334e6', '#007b83', '#c2185b', '#6d4c41', '#3949ab', '#689f38', '#5e35b1', '#455a64'];
 const lineColor = n => {
   const str = String(n), m = /\d+/.exec(str); let h = m ? parseInt(m[0], 10) : 0;
   for (const ch of str) if (!/\d/.test(ch)) h += ch.charCodeAt(0);
   return LINE_PAL[h % LINE_PAL.length];
 };
-const snorm = s => norm(String(s)).replace(/[^a-z0-9]+/g, ' ').trim();
-let graph = null; const geoCache = new Map();
-function buildGraph() {
+// nazwa ulicy bez wielkości liter, polskich znaków, interpunkcji i przedrostków (ul., al., plac…)
+const snorm = s => norm(String(s)).replace(/[^a-z0-9]+/g, ' ').trim().replace(/^(ul|al|aleja|aleje|pl|plac|os|osiedle)\s+(?=\S)/, '');
+let graph = null, tgraph = null; const geoCache = new Map();
+function buildGraph(items) {
   const K = p => Math.round(p[0] * 1e5) + ',' + Math.round(p[1] * 1e5);
   const idOf = new Map(), pos = [], adj = [], edges = [], sidEdges = [], names = new Map();
   const node = p => { const k = K(p); let id = idOf.get(k); if (id === undefined) { id = pos.length; idOf.set(k, id); pos.push(p); adj.push([]); } return id; };
-  streets.forEach((s, sid) => {
+  items.forEach((s, sid) => {
     const list = [];
     for (const c of s.chains) for (let i = 0; i + 1 < c.pts.length; i++) {
       const a = node(c.pts[i]), b = node(c.pts[i + 1]); if (a === b) continue;
-      const eid = edges.push({ a, b, len: Math.hypot(c.pts[i + 1][0] - c.pts[i][0], c.pts[i + 1][1] - c.pts[i][1]), sid }) - 1;
+      const eid = edges.push({ a, b, sid, cls: c.cls, len: Math.hypot(c.pts[i + 1][0] - c.pts[i][0], c.pts[i + 1][1] - c.pts[i][1]) }) - 1;
       adj[a].push(eid); adj[b].push(eid); list.push(eid);
     }
     sidEdges.push(list);
     if (s.name) { const k = snorm(s.name); let a = names.get(k); if (!a) names.set(k, a = []); a.push(sid); }
   });
-  graph = { pos, adj, edges, sidEdges, names };
+  return { pos, adj, edges, sidEdges, names };
 }
-function project(p, sids) {
+// tramwaje – graf torów, autobusy – graf ulic
+function getGraph(tram) {
+  if (tram) {
+    if (!tgraph) tgraph = buildGraph(tracks.map(o => ({ chains: [{ cls: 'tram', pts: o.kind === 'segment' ? [o.p1, o.p2] : o.kind === 'polygon' ? o.pts : [] }] })));
+    return tgraph;
+  }
+  if (!graph) graph = buildGraph(streets);
+  return graph;
+}
+function project(g, p, sids) {
   let best = null, bd = Infinity;
   const eat = eid => {
-    const e = graph.edges[eid], A = graph.pos[e.a], B = graph.pos[e.b], dx = B[0] - A[0], dy = B[1] - A[1];
+    const e = g.edges[eid], A = g.pos[e.a], B = g.pos[e.b], dx = B[0] - A[0], dy = B[1] - A[1];
     const t = clamp(((p[0] - A[0]) * dx + (p[1] - A[1]) * dy) / (dx * dx + dy * dy || 1), 0, 1), q = [A[0] + dx * t, A[1] + dy * t], d = Math.hypot(p[0] - q[0], p[1] - q[1]);
     if (d < bd) { bd = d; best = { eid, t, q }; }
   };
-  if (sids) for (const sid of sids) for (const eid of graph.sidEdges[sid]) eat(eid); else for (let eid = 0; eid < graph.edges.length; eid++) eat(eid);
+  if (sids) for (const sid of sids) for (const eid of g.sidEdges[sid]) eat(eid); else for (let eid = 0; eid < g.edges.length; eid++) eat(eid);
   return best;
 }
 const hpush = (h, it) => { h.push(it); let i = h.length - 1; while (i > 0) { const p = (i - 1) >> 1; if (h[p][0] <= h[i][0]) break; [h[p], h[i]] = [h[i], h[p]]; i = p; } };
 const hpop = h => {
   const top = h[0], last = h.pop();
-  if (h.length) { h[0] = last; let i = 0; for (;;) { let l = 2 * i + 1, r = l + 1, m = i; if (l < h.length && h[l][0] < h[m][0]) m = l; if (r < h.length && h[r][0] < h[m][0]) m = r; if (m === i) break; [h[m], h[i]] = [h[i], h[m]]; i = m; } }
+  if (h.length) { h[0] = last; let i = 0; for (;;) { const l = 2 * i + 1, r = l + 1; let m = i; if (l < h.length && h[l][0] < h[m][0]) m = l; if (r < h.length && h[r][0] < h[m][0]) m = r; if (m === i) break; [h[m], h[i]] = [h[i], h[m]]; i = m; } }
   return top;
 };
-// najkrótsza droga między dwoma rzutami punktów na ulice; allowed – zbiór dozwolonych ulic (lub null)
-function shortest(A, B, allowed) {
+// najkrótsza droga między rzutami punktów; zwraca punkty i klasę drogi każdego odcinka
+function shortest(g, A, B, allowed) {
   if (!A || !B) return null;
-  const g = graph, ok = eid => !allowed || allowed.has(g.edges[eid].sid);
+  const ok = eid => !allowed || allowed.has(g.edges[eid].sid);
   if (!ok(A.eid) || !ok(B.eid)) return null;
-  const n = g.pos.length, dist = new Float64Array(n).fill(Infinity), prev = new Int32Array(n).fill(-2), heap = [];
+  const n = g.pos.length, dist = new Float64Array(n).fill(Infinity), prev = new Int32Array(n).fill(-2), prevE = new Int32Array(n).fill(-1), heap = [];
   const eA = g.edges[A.eid], eB = g.edges[B.eid];
   const init = (u, d) => { if (d < dist[u]) { dist[u] = d; prev[u] = -1; hpush(heap, [d, u]); } };
   init(eA.a, A.t * eA.len); init(eA.b, (1 - A.t) * eA.len);
@@ -1430,48 +1440,65 @@ function shortest(A, B, allowed) {
     for (const eid of g.adj[u]) {
       if (!ok(eid)) continue;
       const e = g.edges[eid], v = e.a === u ? e.b : e.a, nd = d + e.len;
-      if (nd < dist[v]) { dist[v] = nd; prev[v] = u; hpush(heap, [nd, v]); }
+      if (nd < dist[v]) { dist[v] = nd; prev[v] = u; prevE[v] = eid; hpush(heap, [nd, v]); }
     }
   }
   if (best === Infinity) return null;
-  if (direct) return [A.q, B.q];
+  if (direct) return { pts: [A.q, B.q], cls: [eA.cls] };
   const ns = []; for (let u = bestEnd; u >= 0; u = prev[u]) ns.push(u);
   ns.reverse();
-  return [A.q, ...ns.map(i => g.pos[i]), B.q];
+  return { pts: [A.q, ...ns.map(i => g.pos[i]), B.q], cls: [eA.cls, ...ns.slice(1).map(v => g.edges[prevE[v]].cls), eB.cls] };
 }
-// geometria trasy: odcinki między kolejnymi przystankami (leżącymi na mapie), po ulicach wymienionych w trasie
+// geometria trasy: odcinki między kolejnymi przystankami leżącymi na mapie.
+// Autobus – po ulicach wymienionych w JSON-ie (także tych bez przystanków), tramwaj – po torach.
 function routeGeometry(data, route) {
   const key = data.line + '|' + route.id; if (geoCache.has(key)) return geoCache.get(key);
-  if (!graph) buildGraph();
+  const tram = data.type === 'tram', g = getGraph(tram), has = g.edges.length > 0;
   const anchors = [];
   route.stops.forEach((st, k) => { if (!st.name) return; const ms = findStop(st.name, st.number, data.type); if (ms) anchors.push({ k, ms }); });
   const legs = [];
   for (let i = 0; i + 1 < anchors.length; i++) {
     const a = anchors[i], b = anchors[i + 1], P = [a.ms.x, a.ms.y], Q = [b.ms.x, b.ms.y];
-    const allowed = new Set();
-    for (let k = a.k; k <= b.k; k++) { const sn = route.stops[k].street; if (sn) (graph.names.get(snorm(sn)) || []).forEach(s => allowed.add(s)); }
-    const own = k => graph.names.get(snorm(route.stops[k].street || ''));
-    let pts = null;
-    if (allowed.size && graph.edges.length) {
-      const sa = own(a.k) || [...allowed], sb = own(b.k) || [...allowed];
-      pts = shortest(project(P, sa), project(Q, sb), allowed);
+    let res = null;
+    if (has && tram) res = shortest(g, project(g, P, null), project(g, Q, null), null);
+    else if (has) {
+      const allowed = new Set();
+      for (let k = a.k; k <= b.k; k++) { const sn = route.stops[k].street; if (sn) (g.names.get(snorm(sn)) || []).forEach(s => allowed.add(s)); }
+      const own = k => g.names.get(snorm(route.stops[k].street || ''));
+      if (allowed.size) res = shortest(g, project(g, P, own(a.k) || [...allowed]), project(g, Q, own(b.k) || [...allowed]), allowed);
+      if (!res) res = shortest(g, project(g, P, null), project(g, Q, null), null);
     }
-    if (!pts && graph.edges.length) pts = shortest(project(P, null), project(Q, null), null);
-    pts = pts ? [P, ...pts, Q] : [P, Q];
-    legs.push({ k0: a.k, k1: b.k, pts });
+    legs.push({ k0: a.k, k1: b.k, pts: res ? res.pts : [P, Q], cls: res ? res.cls : [null] });
   }
   const geo = { legs, anchors };
   geoCache.set(key, geo);
   return geo;
 }
+// przesunięcie łamanej (ekran) w prawo względem kierunku jazdy; ds – odsunięcie każdego odcinka w px
+function offsetPath(sp, ds) {
+  const P = [sp[0]], D = [];
+  for (let i = 1; i < sp.length; i++) { const l = P[P.length - 1]; if (Math.hypot(sp[i][0] - l[0], sp[i][1] - l[1]) < .5) continue; D.push(ds[i - 1]); P.push(sp[i]); }
+  if (P.length < 2 || D.every(d => !d)) return P;
+  const N = D.map((_, i) => { const dx = P[i + 1][0] - P[i][0], dy = P[i + 1][1] - P[i][1], l = Math.hypot(dx, dy) || 1; return [-dy / l, dx / l]; }); // prawa strona (oś y w dół)
+  return P.map((p, i) => {
+    const a = N[Math.max(0, i - 1)], b = N[Math.min(N.length - 1, i)], d = ((D[Math.max(0, i - 1)] || 0) + (D[Math.min(D.length - 1, i)] || 0)) / 2;
+    let mx = a[0] + b[0], my = a[1] + b[1]; const ml = Math.hypot(mx, my);
+    if (ml < .2) { mx = b[0]; my = b[1]; } else { mx /= ml; my /= ml; }
+    const f = Math.min(2, 1 / Math.max(.5, mx * b[0] + my * b[1]));
+    return [p[0] + mx * d * f, p[1] + my * d * f];
+  });
+}
 function drawRouteLines(th) {
   if (!routeViews.length) return;
   const n = routeViews.length, step = n > 6 ? 1.2 : 2, wd = i => 3 + (n - 1 - i) * step;
+  const off = { main: Math.max(1.5, roadW('main') * .27), minor: Math.max(1.5, roadW('minor') * .27) };
   ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.setLineDash([]);
-  const sc = routeViews.map(v => v.geo.legs.map(l => ({ sp: l.pts.map(p => w2s(p[0], p[1])), faded: v.fadeK != null && l.k1 <= v.fadeK })));
+  const sc = routeViews.map(v => v.geo.legs.map(l => ({
+    sp: offsetPath(l.pts.map(p => w2s(p[0], p[1])), l.cls.map(c => off[c] || 0)),
+    faded: v.fadeK != null && l.k1 <= v.fadeK,
+  })));
   const pass = (colFn, wFn) => sc.forEach((legs, i) => { for (const l of legs) { ctx.globalAlpha = l.faded ? .4 : 1; tracePath(l.sp, false); ctx.lineWidth = wFn(i); ctx.strokeStyle = colFn(i); ctx.stroke(); } });
-  const casing = th.dark ? '#1f2329' : '#ffffff';
-  pass(() => casing, i => wd(i) + 3);
+  pass(() => th.dark ? '#1f2329' : '#ffffff', i => wd(i) + 3);
   pass(i => routeViews[i].color, wd);
   ctx.globalAlpha = 1;
 }
