@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<geogebra format="5.0" version="5.4.934.0" app="classic" platform="w" id="a5058d8a-ce0e-4b80-8b5e-600ae08c512a" xsi:noNamespaceSchemaLocation="https://www.geogebra.org/apps/xsd/ggb.xsd" xmlns="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<geogebra format="5.0" version="5.4.934.0" app="classic" platform="w" id="90a3f77c-4104-4bb0-b726-ac50a2f03776" xsi:noNamespaceSchemaLocation="https://www.geogebra.org/apps/xsd/ggb.xsd" xmlns="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <gui>
 	<window width="1920" height="951"/>
 	<perspectives>
@@ -31,7 +31,7 @@
 <euclidianView>
 	<viewNumber viewNo="1"/>
 	<size width="1545" height="855"/>
-	<coordSystem xZero="-541.6326649953068" yZero="3064.935321087928" scale="5.304630397253837" yscale="5.304630397252521"/>
+	<coordSystem xZero="1225.850534387165" yZero="1293.2899064667627" scale="5.448516442293199" yscale="5.448516442291862"/>
 	<evSettings axes="false" grid="false" gridIsBold="false" pointCapturing="0" rightAngleStyle="1" checkboxSize="26" gridType="0"/>
 	<bgColor r="213" g="214" b="218"/>
 	<axesColor r="255" g="255" b="255"/>
@@ -2434,13 +2434,11 @@
 <expression label="R_4" exp="(-274, -86)" type="point"/>
 <element type="point" label="R_4">
 	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="102" alpha="0"/>
+	<objColor r="0" g="0" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelOffset x="-73" y="32"/>
+	<labelOffset x="-16" y="35"/>
 	<labelMode val="3"/>
 	<animation step="0.1" type="1" playing="false"/>
-	<fixed val="true"/>
-	<caption val="05/06 [1, 2]"/>
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="-274" y="-86" z="1"/>
@@ -2462,16 +2460,6 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="-51" y="0" z="-13974"/>
-</element>
-<element type="point" label="T_4">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="77" g="77" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="0.1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="-276.1092744425376" y="-86.84673179705852" z="1"/>
 </element>
 <element type="point" label="U_4">
 	<show object="true" label="false" ev="4"/>
@@ -22029,6 +22017,30 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="10" y="0" z="-2070"/>
+</element>
+<element type="point" label="R_{39}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="102" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="18" y="34"/>
+	<labelMode val="3"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<caption val="06 [1, 2]"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-272.0377320921142" y="-85.57596659438539" z="1"/>
+</element>
+<element type="point" label="R_{40}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="102" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="-53" y="32"/>
+	<labelMode val="3"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<caption val="05 [1, 2]"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-275.13807084743587" y="-85.43817376081552" z="1"/>
 </element>
 </construction>
 </geogebra>
