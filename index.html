@@ -1314,7 +1314,7 @@ function infoRows(o) {
   return R;
 }
 /* ───────────── ODJAZDY I TRASY LINII (lines/<numer>.json) ───────────── */
-const LINES_DIR = 'lines/';
+const LINES_DIR = 'https://dziadchlebowy.github.io/zkm-zembaczyn/data/';
 const lineCache = new Map();
 function loadLine(n) {
   if (!lineCache.has(n)) lineCache.set(n, fetch(LINES_DIR + encodeURIComponent(n) + '.json', { cache: 'no-cache' }).then(r => { if (!r.ok) throw 0; return r.json(); }).catch(() => null));
