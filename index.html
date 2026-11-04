@@ -75,17 +75,28 @@
   .more:hover,.back:hover{background:#f6fafe}
   .routehead{display:flex;align-items:center;gap:10px;padding:4px 4px 8px}
   .routehead .ln{padding:2px 7px;font-size:13px}
-  .route{display:flex;flex-direction:column;max-height:46vh;overflow:auto;border-left:2px solid var(--line);margin-left:6px}
-  .rs{display:flex;align-items:flex-start;gap:10px;width:100%;border:0;background:transparent;padding:5px 8px;text-align:left;font:inherit;font-size:13px;cursor:pointer;border-radius:4px;color:var(--text)}
+  .route{display:flex;flex-direction:column;max-height:46vh;overflow:auto}
+  .rs{display:flex;align-items:stretch;gap:8px;width:100%;border:0;background:transparent;padding:0 8px 0 4px;text-align:left;font:inherit;font-size:13px;cursor:pointer;border-radius:4px;color:var(--text)}
   div.rs{cursor:default}
-  .rs .t{font-variant-numeric:tabular-nums;color:var(--sub);min-width:40px}
-  .rs .nm{flex:1;min-width:0}
+  .rs .t{font-variant-numeric:tabular-nums;color:var(--sub);min-width:40px;padding:6px 0}
+  .rs .nm{flex:1;min-width:0;padding:6px 0}
   .rs .nm small{display:block;font-size:11px;color:var(--sub)}
-  .rs .nzt{font-size:10px;font-weight:500;color:var(--blue);border:1px dashed var(--blue);border-radius:3px;padding:0 3px}
+  .rs .bc{position:relative;width:18px;flex:none}
+  .rs .bc::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:4px;margin-left:-2px;background:var(--rc,#1a73e8)}
+  .rs.first .bc::before{top:15px}
+  .rs.last .bc::before{bottom:auto;height:15px}
+  .rs .bead{position:absolute;left:50%;top:15px;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;box-sizing:border-box;background:var(--rc,#1a73e8);border:3px solid var(--rc,#1a73e8)}
+  .rs.nzs .bead{background:#fff}
+  .rs.past .bc::before{background:#c4c7c5}
+  .rs.past .bead{border-color:#c4c7c5;background:#c4c7c5}
+  .rs.past.nzs .bead{background:#fff}
   .rs.sel{background:#e8f0fe;font-weight:500}
   .rs.sel .t{color:var(--blue)}
-  .rs.past{color:#9aa0a6}
-  .rs.nomap{color:#9aa0a6}
+  .rs.sel .bead{box-shadow:0 0 0 3px rgba(26,115,232,.3)}
+  .rs.past .nm,.rs.nomap .nm{color:#9aa0a6}
+  .beadleg{margin-top:8px;font-size:12px;color:var(--sub)}
+  .beadleg .lb{display:inline-block;width:11px;height:11px;border-radius:50%;box-sizing:border-box;border:3px solid var(--rc);background:var(--rc);margin:0 5px 0 0;vertical-align:-1px}
+  .beadleg .lb.h{background:#fff;margin-left:12px}
   #infoLegend{margin-top:8px;font-size:12px;color:var(--sub)}
 
   /* prawy dół: zoom + status */
@@ -705,6 +716,7 @@ function buildCaches() {
   rondos = order.filter(o => o.cat === 'rondo' && o.visible);
   const mc = streets.map(s => s.chains.find(c => c.cls === 'main')).find(Boolean);
   rondoCol = mc ? { fill: mc.fill, cs: mc.cs } : null;
+  graph = null; geoCache.clear();
   stopIndex = new Map();
   for (const o of order) if (o.lines && o.team) { const k = skey(o.team, o.num); let a = stopIndex.get(k); if (!a) stopIndex.set(k, a = []); a.push(o); }
   const pr = { shop: 0, tram: 1, bus: 2, metro: 3 };
@@ -726,6 +738,7 @@ function pointVisible(o) {
 }
 function pointRad(o) {
   const z = zr();
+  if ((o.cat === 'bus' || o.cat === 'tram') && routeSet.has(o)) return 7;
   switch (o.cat) {
     case 'bus': case 'tram': return z < 3 ? 3.4 : z < 6 ? 7 : 8.5;
     case 'shop': return z < 4 ? 3.2 : 7;
@@ -990,6 +1003,7 @@ function drawLabels(th) {
   }
   for (const o of order) if (o.cat === 'stopname') o._rect = null;
   drawRoadBadges();
+  drawRouteStopLabels(th);
   if (!settings.labels) return;
 
   drawStreetLabels(th);
@@ -1070,8 +1084,9 @@ function draw() {
   drawStreets(th);
   drawTracks(th);
   drawMetroLines(th);
+  drawRouteLines(th);
   for (const o of pointsList) { if (o.visible && inView(o.bbox)) drawPoint(o); }
-  for (const o of routeStops) { const [sx, sy] = w2s(o.x, o.y); ctx.beginPath(); ctx.arc(sx, sy, pointRad(o) + 4.5, 0, 7); ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(26,115,232,.9)'; ctx.setLineDash([3, 3]); ctx.stroke(); ctx.setLineDash([]); }
+  for (const o of routeStops) { const [sx, sy] = w2s(o.x, o.y); ctx.beginPath(); ctx.arc(sx, sy, pointRad(o) + 4.5, 0, 7); ctx.lineWidth = 2; ctx.strokeStyle = routeViews[0] ? routeViews[0].color : 'rgba(26,115,232,.9)'; ctx.setLineDash([3, 3]); ctx.stroke(); ctx.setLineDash([]); }
   if (selected && selected.visible) drawSelection(selected);
   drawLabels(th);
   drawScale();
@@ -1328,7 +1343,7 @@ function dayKey(d, tt) {
 }
 // odjazd z przystanku = odjazd z pętli początkowej + travelTime tego przystanku
 async function computeDepartures(stop) {
-  const out = [], missing = [], now = new Date(); now.setSeconds(0, 0);
+  const out = [], missing = [], seenR = new Map(), now = new Date(); now.setSeconds(0, 0);
   const names = [...new Set(stop.lines.map(l => l.n))];
   const datas = await Promise.all(names.map(loadLine));
   names.forEach((n, i) => {
@@ -1339,6 +1354,7 @@ async function computeDepartures(stop) {
       route.stops.forEach((st, k) => {
         if (!st.name || k === lastK || st.travelTime == null) return;
         if (skey(st.name, st.number) !== skey(stop.team, stop.num)) return;
+        seenR.set(n + '|' + route.id, { data, route });
         for (let d = -1; d <= 3; d++) {
           const day = new Date(now.getFullYear(), now.getMonth(), now.getDate() + d), key = dayKey(day, route.timetable || {});
           if (!key) continue;
@@ -1353,11 +1369,125 @@ async function computeDepartures(stop) {
     }
   });
   out.sort((a, b) => a.when - b.when);
-  return { deps: out, missing, now };
+  return { deps: out, missing, now, routes: [...seenR.values()] };
 }
-let depFilter = null, depToken = 0, depTimer = 0, depState = null, routeStops = [], routeSet = new Set();
+/* ───────────── TRASY LINII NA MAPIE (po grafie ulic) ───────────── */
+const LINE_PAL = ['#1a73e8', '#d93025', '#188038', '#e37400', '#9334e6', '#007b83', '#c2185b', '#6d4c41', '#3949ab', '#689f38', '#5e35b1', '#455a64'];
+const lineColor = n => {
+  const str = String(n), m = /\d+/.exec(str); let h = m ? parseInt(m[0], 10) : 0;
+  for (const ch of str) if (!/\d/.test(ch)) h += ch.charCodeAt(0);
+  return LINE_PAL[h % LINE_PAL.length];
+};
+const snorm = s => norm(String(s)).replace(/[^a-z0-9]+/g, ' ').trim();
+let graph = null; const geoCache = new Map();
+function buildGraph() {
+  const K = p => Math.round(p[0] * 1e5) + ',' + Math.round(p[1] * 1e5);
+  const idOf = new Map(), pos = [], adj = [], edges = [], sidEdges = [], names = new Map();
+  const node = p => { const k = K(p); let id = idOf.get(k); if (id === undefined) { id = pos.length; idOf.set(k, id); pos.push(p); adj.push([]); } return id; };
+  streets.forEach((s, sid) => {
+    const list = [];
+    for (const c of s.chains) for (let i = 0; i + 1 < c.pts.length; i++) {
+      const a = node(c.pts[i]), b = node(c.pts[i + 1]); if (a === b) continue;
+      const eid = edges.push({ a, b, len: Math.hypot(c.pts[i + 1][0] - c.pts[i][0], c.pts[i + 1][1] - c.pts[i][1]), sid }) - 1;
+      adj[a].push(eid); adj[b].push(eid); list.push(eid);
+    }
+    sidEdges.push(list);
+    if (s.name) { const k = snorm(s.name); let a = names.get(k); if (!a) names.set(k, a = []); a.push(sid); }
+  });
+  graph = { pos, adj, edges, sidEdges, names };
+}
+function project(p, sids) {
+  let best = null, bd = Infinity;
+  const eat = eid => {
+    const e = graph.edges[eid], A = graph.pos[e.a], B = graph.pos[e.b], dx = B[0] - A[0], dy = B[1] - A[1];
+    const t = clamp(((p[0] - A[0]) * dx + (p[1] - A[1]) * dy) / (dx * dx + dy * dy || 1), 0, 1), q = [A[0] + dx * t, A[1] + dy * t], d = Math.hypot(p[0] - q[0], p[1] - q[1]);
+    if (d < bd) { bd = d; best = { eid, t, q }; }
+  };
+  if (sids) for (const sid of sids) for (const eid of graph.sidEdges[sid]) eat(eid); else for (let eid = 0; eid < graph.edges.length; eid++) eat(eid);
+  return best;
+}
+const hpush = (h, it) => { h.push(it); let i = h.length - 1; while (i > 0) { const p = (i - 1) >> 1; if (h[p][0] <= h[i][0]) break; [h[p], h[i]] = [h[i], h[p]]; i = p; } };
+const hpop = h => {
+  const top = h[0], last = h.pop();
+  if (h.length) { h[0] = last; let i = 0; for (;;) { let l = 2 * i + 1, r = l + 1, m = i; if (l < h.length && h[l][0] < h[m][0]) m = l; if (r < h.length && h[r][0] < h[m][0]) m = r; if (m === i) break; [h[m], h[i]] = [h[i], h[m]]; i = m; } }
+  return top;
+};
+// najkrótsza droga między dwoma rzutami punktów na ulice; allowed – zbiór dozwolonych ulic (lub null)
+function shortest(A, B, allowed) {
+  if (!A || !B) return null;
+  const g = graph, ok = eid => !allowed || allowed.has(g.edges[eid].sid);
+  if (!ok(A.eid) || !ok(B.eid)) return null;
+  const n = g.pos.length, dist = new Float64Array(n).fill(Infinity), prev = new Int32Array(n).fill(-2), heap = [];
+  const eA = g.edges[A.eid], eB = g.edges[B.eid];
+  const init = (u, d) => { if (d < dist[u]) { dist[u] = d; prev[u] = -1; hpush(heap, [d, u]); } };
+  init(eA.a, A.t * eA.len); init(eA.b, (1 - A.t) * eA.len);
+  let best = Infinity, bestEnd = -1, direct = false;
+  if (A.eid === B.eid) { best = Math.abs(A.t - B.t) * eA.len; direct = true; }
+  const goals = [[eB.a, B.t * eB.len], [eB.b, (1 - B.t) * eB.len]];
+  while (heap.length) {
+    const [d, u] = hpop(heap); if (d > dist[u]) continue; if (d >= best) break;
+    for (const [gn, gc] of goals) if (u === gn && d + gc < best) { best = d + gc; bestEnd = u; direct = false; }
+    for (const eid of g.adj[u]) {
+      if (!ok(eid)) continue;
+      const e = g.edges[eid], v = e.a === u ? e.b : e.a, nd = d + e.len;
+      if (nd < dist[v]) { dist[v] = nd; prev[v] = u; hpush(heap, [nd, v]); }
+    }
+  }
+  if (best === Infinity) return null;
+  if (direct) return [A.q, B.q];
+  const ns = []; for (let u = bestEnd; u >= 0; u = prev[u]) ns.push(u);
+  ns.reverse();
+  return [A.q, ...ns.map(i => g.pos[i]), B.q];
+}
+// geometria trasy: odcinki między kolejnymi przystankami (leżącymi na mapie), po ulicach wymienionych w trasie
+function routeGeometry(data, route) {
+  const key = data.line + '|' + route.id; if (geoCache.has(key)) return geoCache.get(key);
+  if (!graph) buildGraph();
+  const anchors = [];
+  route.stops.forEach((st, k) => { if (!st.name) return; const ms = findStop(st.name, st.number, data.type); if (ms) anchors.push({ k, ms }); });
+  const legs = [];
+  for (let i = 0; i + 1 < anchors.length; i++) {
+    const a = anchors[i], b = anchors[i + 1], P = [a.ms.x, a.ms.y], Q = [b.ms.x, b.ms.y];
+    const allowed = new Set();
+    for (let k = a.k; k <= b.k; k++) { const sn = route.stops[k].street; if (sn) (graph.names.get(snorm(sn)) || []).forEach(s => allowed.add(s)); }
+    const own = k => graph.names.get(snorm(route.stops[k].street || ''));
+    let pts = null;
+    if (allowed.size && graph.edges.length) {
+      const sa = own(a.k) || [...allowed], sb = own(b.k) || [...allowed];
+      pts = shortest(project(P, sa), project(Q, sb), allowed);
+    }
+    if (!pts && graph.edges.length) pts = shortest(project(P, null), project(Q, null), null);
+    pts = pts ? [P, ...pts, Q] : [P, Q];
+    legs.push({ k0: a.k, k1: b.k, pts });
+  }
+  const geo = { legs, anchors };
+  geoCache.set(key, geo);
+  return geo;
+}
+function drawRouteLines(th) {
+  if (!routeViews.length) return;
+  const n = routeViews.length, step = n > 6 ? 1.2 : 2, wd = i => 3 + (n - 1 - i) * step;
+  ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.setLineDash([]);
+  const sc = routeViews.map(v => v.geo.legs.map(l => ({ sp: l.pts.map(p => w2s(p[0], p[1])), faded: v.fadeK != null && l.k1 <= v.fadeK })));
+  const pass = (colFn, wFn) => sc.forEach((legs, i) => { for (const l of legs) { ctx.globalAlpha = l.faded ? .4 : 1; tracePath(l.sp, false); ctx.lineWidth = wFn(i); ctx.strokeStyle = colFn(i); ctx.stroke(); } });
+  const casing = th.dark ? '#1f2329' : '#ffffff';
+  pass(() => casing, i => wd(i) + 3);
+  pass(i => routeViews[i].color, wd);
+  ctx.globalAlpha = 1;
+}
+function drawRouteStopLabels(th) {
+  for (const o of routeLabels) {
+    const [sx, sy] = w2s(o.x, o.y); if (sx < -30 || sy < -30 || sx > W + 30 || sy > H + 30) continue;
+    ctx.font = '500 12px Roboto, "Segoe UI", system-ui, sans-serif';
+    const w = ctx.measureText(o.name).width, r = pointRad(o) + 5;
+    const opts = [['left', sx + r, sy, sx + r, sx + r + w], ['right', sx - r, sy, sx - r - w, sx - r], ['center', sx, sy - r - 5, sx - w / 2, sx + w / 2], ['center', sx, sy + r + 5, sx - w / 2, sx + w / 2]];
+    for (const [al, x, y, xa, xb] of opts) if (tryPlace({ x1: xa, y1: y - 9, x2: xb, y2: y + 9 })) { labelText(o.name, x, y, al, th.label, th, 12); break; }
+  }
+}
+
+let routeViews = [], routeLabels = [], depFilter = null, depToken = 0, depTimer = 0, depState = null, routeStops = [], routeSet = new Set();
 const lineBadge = (n, type, demand) => {
-  const b = el('span', 'ln' + (demand ? ' nz' : ''), n); b.style.setProperty('--lc', type === 'tram' ? '#0b8043' : '#1a73e8');
+  const b = el('span', 'ln' + (demand ? ' nz' : ''), n); b.style.setProperty('--lc', lineColor(n));
   if (demand) { const sm = el('small', null, 'NŻ'); b.append(sm); b.title = 'Zatrzymuje się na żądanie'; }
   return b;
 };
@@ -1374,6 +1504,9 @@ async function showDepartures(stop, count = 1e9) {
   const res = await computeDepartures(stop);
   if (my !== depToken) return;
   depState = { stop, count, mode: 'deps' };
+  routeLabels = []; routeStops = []; routeSet = new Set();
+  routeViews = (depFilter ? res.routes.filter(r => r.data.line === depFilter) : res.routes).map(r => ({ geo: routeGeometry(r.data, r.route), color: lineColor(r.data.line), fadeK: null }));
+  requestDraw();
   const deps = depFilter ? res.deps.filter(d => d.line === depFilter) : res.deps;
   box.replaceChildren(el('h3', null, 'Odjazdy w ciągu 24 godzin' + (depFilter ? ' · linia ' + depFilter : '')));
   if (!deps.length) box.append(el('div', 'depmsg', 'Brak odjazdów w ciągu najbliższych 24 godzin.'));
@@ -1393,32 +1526,37 @@ function showRoute(stop, dep) {
   depToken++; clearInterval(depTimer);
   depState = { stop, count: 1e9, mode: 'route' };
   const box = $('#infoDeps'); box.replaceChildren();
-  const back = el('button', 'back', '← Odjazdy'); back.type = 'button'; back.onclick = () => { routeStops = []; routeSet = new Set(); requestDraw(); showDepartures(stop, depState.count); };
+  const back = el('button', 'back', '← Odjazdy'); back.type = 'button'; back.onclick = () => { routeStops = []; routeSet = new Set(); routeLabels = []; routeViews = []; requestDraw(); showDepartures(stop, depState.count); };
   const head = el('div', 'routehead'); head.append(lineBadge(dep.line, dep.data.type, false), el('span', 'to', '→ ' + (dep.route.to || '')));
   box.append(back, head);
   const list = el('div', 'route'), matched = []; let selEl = null;
-  dep.route.stops.forEach((st, k) => {
-    if (!st.name) return;
+  const rc = lineColor(dep.line); list.style.setProperty('--rc', rc);
+  const named = dep.route.stops.map((st, k) => ({ st, k })).filter(x => x.st.name);
+  named.forEach(({ st, k }, idx) => {
     const ms = findStop(st.name, st.number, dep.data.type);
-    const li = el(ms ? 'button' : 'div', 'rs' + (k === dep.k ? ' sel' : '') + (k < dep.k ? ' past' : '') + (ms ? '' : ' nomap'));
-    if (ms) { li.type = 'button'; li.onclick = () => select(ms, true); matched.push(ms); } else li.title = 'Tego przystanku nie ma na mapie';
+    const li = el(ms ? 'button' : 'div', 'rs' + (k === dep.k ? ' sel' : '') + (k < dep.k ? ' past' : '') + (st.request ? ' nzs' : '') + (idx === 0 ? ' first' : '') + (idx === named.length - 1 ? ' last' : '') + (ms ? '' : ' nomap'));
+    if (ms) { li.type = 'button'; li.onclick = () => select(ms, true); matched.push(ms); }
+    li.title = (st.request ? 'Przystanek na żądanie' : 'Przystanek stały') + (ms ? '' : ' · nie ma go na mapie');
     const tm = new Date(dep.base.getTime() + (st.travelTime || 0) * 60000);
+    const bc = el('span', 'bc'); bc.append(el('span', 'bead'));
     const nm = el('span', 'nm', ms ? ms.name : `${st.name} ${/^\d+$/.test(String(st.number || '')) ? parseInt(st.number, 10) : (st.number || '')}`.trim());
     if (st.street) nm.append(el('small', null, st.street));
-    li.append(el('span', 't', hhmm(tm)), nm);
-    if (st.request) { const z = el('span', 'nzt', 'NŻ'); z.title = 'Na żądanie'; li.append(z); }
+    li.append(el('span', 't', hhmm(tm)), bc, nm);
     list.append(li); if (k === dep.k) selEl = li;
   });
   box.append(list);
+  const lg = el('div', 'beadleg'); lg.style.setProperty('--rc', rc);
+  lg.append(el('span', 'lb'), 'stały', el('span', 'lb h'), 'na żądanie'); box.append(lg);
   if (selEl) selEl.scrollIntoView({ block: 'nearest' });
-  routeStops = matched; routeSet = new Set(matched);
+  routeStops = matched; routeSet = new Set(matched); routeLabels = matched;
+  routeViews = [{ geo: routeGeometry(dep.data, dep.route), color: rc, fadeK: dep.k }];
   if (matched.length > 1) flyToBBox(ptsBBox(matched.map(o => [o.x, o.y])));
   requestDraw();
 }
 
 function select(o, fly) {
   if (o !== selected) depFilter = null;
-  depToken++; clearInterval(depTimer); routeStops = []; routeSet = new Set(); selected = o;
+  depToken++; clearInterval(depTimer); routeStops = []; routeSet = new Set(); routeViews = []; routeLabels = []; selected = o;
   const box = $('#info'); box.hidden = !o;
   if (o) {
     $('#infoDot').style.background = o.dot || `rgb(${o.rgb.join(',')})`;
@@ -1429,10 +1567,9 @@ function select(o, fly) {
     const hasL = !!(o.lines && (o.lines.length || o.alight)); $('#infoLines').hidden = !hasL;
     if (hasL) {
       const bx = $('#infoBadges'); bx.replaceChildren();
-      $('#infoLines').style.setProperty('--lc', o.cat === 'tram' ? '#0b8043' : '#1a73e8');
       $('#infoLines h3').textContent = o.lines.length ? 'Linie' : 'Oznaczenie';
       for (const l of o.lines) {
-        const b = document.createElement('button'); b.type = 'button'; b.className = 'ln' + (l.demand ? ' nz' : '') + (depFilter === l.n ? ' on' : ''); b.textContent = l.n; b.dataset.line = l.n;
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'ln' + (l.demand ? ' nz' : '') + (depFilter === l.n ? ' on' : ''); b.textContent = l.n; b.dataset.line = l.n; b.style.setProperty('--lc', lineColor(l.n));
         b.onclick = () => { depFilter = depFilter === l.n ? null : l.n; bx.querySelectorAll('.ln[data-line]').forEach(x => x.classList.toggle('on', x.dataset.line === depFilter)); showDepartures(o); };
         if (l.demand) { const sm = document.createElement('small'); sm.textContent = 'NŻ'; b.append(sm); b.title = 'Zatrzymuje się na żądanie'; }
         bx.append(b);
