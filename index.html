@@ -731,6 +731,10 @@ const caseW = w => clamp(w * 0.14, 1, 2.4);
 const rondoR = () => roadW('main') * 1.05 + 2;
 function pointVisible(o) {
   if (o === selected || routeSet.has(o)) return true;
+  if (routeViews.length) { // pokazana trasa: tylko przystanki z trasy, bez lokali
+    if (o.cat === 'bus' || o.cat === 'tram') return routeAll().has(o);
+    if (o.cat === 'shop') return false;
+  }
   const z = zr();
   if (o.cat === 'bus' || o.cat === 'tram') return z >= 1.6;
   if (o.cat === 'shop') return z >= 2.5;
@@ -956,7 +960,7 @@ function drawBadge(x, y, w, h, r) {
 }
 // piktogramy dróg krajowych (DK) i ekspresowych (S) na ulicy
 function drawRoadBadges() {
-  if (zr() < 1.2) return;
+  if (zr() < 1.2 || routeViews.length) return;
   ctx.font = '700 10.5px Roboto, "Segoe UI", system-ui, sans-serif';
   const h = 16, gap = 3;
   for (const s of streetsByPrio) {
@@ -1502,6 +1506,11 @@ function drawRouteLines(th) {
   pass(i => routeViews[i].color, wd);
   ctx.globalAlpha = 1;
 }
+let rvCache = null, rvSet = null;
+const routeAll = () => {
+  if (rvCache !== routeViews) { rvCache = routeViews; rvSet = new Set(); for (const v of routeViews) for (const a of v.geo.anchors) rvSet.add(a.ms); }
+  return rvSet;
+};
 function drawRouteStopLabels(th) {
   for (const o of routeLabels) {
     const [sx, sy] = w2s(o.x, o.y); if (sx < -30 || sy < -30 || sx > W + 30 || sy > H + 30) continue;
