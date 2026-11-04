@@ -31,7 +31,7 @@
 <euclidianView>
 	<viewNumber viewNo="1"/>
 	<size width="1545" height="855"/>
-	<coordSystem xZero="1004.9177491708905" yZero="173.42181606302236" scale="2.623147331422169" yscale="2.6231473314214973"/>
+	<coordSystem xZero="-3700.533012630629" yZero="9461.167906677894" scale="3.7990657440990314" yscale="3.799065744097733"/>
 	<evSettings axes="false" grid="false" gridIsBold="false" pointCapturing="0" rightAngleStyle="1" checkboxSize="26" gridType="0"/>
 	<bgColor r="213" g="214" b="218"/>
 	<axesColor r="255" g="255" b="255"/>
@@ -337,7 +337,7 @@
 	<show object="true" label="true" ev="4"/>
 	<objColor r="77" g="77" b="255" alpha="0"/>
 	<layer val="0"/>
-	<labelOffset x="3" y="-5"/>
+	<labelOffset x="12" y="-79"/>
 	<labelMode val="3"/>
 	<animation step="0.1" type="1" playing="false"/>
 	<fixed val="true"/>
@@ -1044,25 +1044,6 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="91" y="0" z="25207"/>
-</element>
-<command name="Segment">
-	<input a0="B_2" a1="W_1"/>
-	<output a0="n_1"/>
-</command>
-<element type="segment" label="n_1">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="0"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Ekspresowa"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="59" y="0" z="16343"/>
 </element>
 <command name="Segment">
 	<input a0="W_1" a1="D_2"/>
@@ -1947,6 +1928,25 @@
 	<pointStyle val="0"/>
 	<coords x="-277" y="162" z="1"/>
 </element>
+<command name="Segment">
+	<input a0="L_3" a1="W_1"/>
+	<output a0="n_1"/>
+</command>
+<element type="segment" label="n_1">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Ekspresowa"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="53" y="0" z="14681"/>
+</element>
 <expression label="M_3" exp="(-171, 162)" type="point"/>
 <element type="point" label="M_3">
 	<show object="true" label="false" ev="4"/>
@@ -1977,17 +1977,6 @@
 	<endStyle val="default"/>
 	<coords x="0" y="98" z="-15876"/>
 </element>
-<expression label="P_3" exp="(-782, 168)" type="point"/>
-<element type="point" label="P_3">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="0.1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="-782" y="168" z="1"/>
-</element>
 <expression label="Q_3" exp="(-782, 162)" type="point"/>
 <element type="point" label="Q_3">
 	<show object="true" label="false" ev="4"/>
@@ -2017,26 +2006,6 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="0" y="407" z="-65934"/>
-</element>
-<command name="Segment">
-	<input a0="P_3" a1="K_3"/>
-	<output a0="r_3"/>
-</command>
-<element type="segment" label="r_3">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="230" b="150" alpha="0"/>
-	<layer val="8"/>
-	<labelOffset x="-4" y="-22"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Most Dmowskiego [DK41]"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="0" y="407" z="-68376"/>
 </element>
 <expression label="S_3" exp="(-782, -254)" type="point"/>
 <element type="point" label="S_3">
@@ -2076,25 +2045,6 @@
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="-691" y="-259" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="Q_3" a1="P_3"/>
-	<output a0="s_3"/>
-</command>
-<element type="segment" label="s_3">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Trasa Zagajska"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="-6" y="0" z="-4692"/>
 </element>
 <command name="Segment">
 	<input a0="T_3" a1="S_3"/>
@@ -2906,7 +2856,7 @@
 	<show object="true" label="true" ev="4"/>
 	<objColor r="160" g="160" b="160" alpha="0"/>
 	<layer val="8"/>
-	<labelOffset x="9" y="21"/>
+	<labelOffset x="75" y="-28"/>
 	<labelMode val="3"/>
 	<animation step="0.1" type="1" playing="false"/>
 	<fixed val="true"/>
@@ -3290,11 +3240,12 @@
 	<output a0="j_5"/>
 </command>
 <element type="segment" label="j_5">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
 	<fixed val="true"/>
+	<caption val="Marymoncka"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -3332,25 +3283,6 @@
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="-837" y="-121" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="Z_6" a1="A_7"/>
-	<output a0="n_5"/>
-</command>
-<element type="segment" label="n_5">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Złotej Patelni"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="48" y="0" z="40176"/>
 </element>
 <element type="point" label="B_7">
 	<show object="true" label="true" ev="4"/>
@@ -3416,26 +3348,6 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="3" y="15" z="4326"/>
-</element>
-<command name="Segment">
-	<input a0="D_7" a1="E_7"/>
-	<output a0="q_5"/>
-</command>
-<element type="segment" label="q_5">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelOffset x="26" y="0"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Złotej Patelni"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="48.77955306106375" y="1" z="40220.792616194405"/>
 </element>
 <expression label="F_7" exp="(-823, -167)" type="point"/>
 <element type="point" label="F_7">
@@ -3827,26 +3739,6 @@
 	<coords x="1210" y="2298" z="1"/>
 </element>
 <command name="Segment">
-	<input a0="E_8" a1="F_8"/>
-	<output a0="f_6"/>
-</command>
-<element type="segment" label="f_6">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelOffset x="24" y="0"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Aleja Boska"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="115" y="0" z="-139150"/>
-</element>
-<command name="Segment">
 	<input a0="C_8" a1="E_8"/>
 	<output a0="g_6"/>
 </command>
@@ -3988,45 +3880,6 @@
 	<endStyle val="default"/>
 	<coords x="0" y="-66" z="151338"/>
 </element>
-<command name="Segment">
-	<input a0="H_8" a1="L_8"/>
-	<output a0="k_6"/>
-</command>
-<element type="segment" label="k_6">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelOffset x="-78" y="18"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Aleja Boska"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="0" y="-99" z="227007"/>
-</element>
-<command name="Segment">
-	<input a0="H_8" a1="F_8"/>
-	<output a0="l_6"/>
-</command>
-<element type="segment" label="l_6">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Aleja Boska"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="-5" y="0" z="6050"/>
-</element>
 <expression label="M_8" exp="(1111, 2413)" type="point"/>
 <element type="point" label="M_8">
 	<show object="true" label="false" ev="4"/>
@@ -4057,25 +3910,6 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="110" y="0" z="-122210"/>
-</element>
-<command name="Segment">
-	<input a0="L_8" a1="K_8"/>
-	<output a0="n_6"/>
-</command>
-<element type="segment" label="n_6">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Aleja Boska"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="-10" y="0" z="11110"/>
 </element>
 <command name="Segment">
 	<input a0="M_8" a1="E_8"/>
@@ -4185,25 +4019,6 @@
 	<coords x="0" y="57" z="-131271"/>
 </element>
 <command name="Segment">
-	<input a0="L_8" a1="P_8"/>
-	<output a0="t_6"/>
-</command>
-<element type="segment" label="t_6">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Aleja Boska"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="0" y="-57" z="130701"/>
-</element>
-<command name="Segment">
 	<input a0="N_8" a1="M_8"/>
 	<output a0="a_6"/>
 </command>
@@ -4234,40 +4049,6 @@
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="1273" y="2504" z="1"/>
-</element>
-<command name="Point">
-	<input a0="e_5"/>
-	<output a0="R_8"/>
-</command>
-<element type="point" label="R_8">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="1273" y="2413" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="R_8" a1="Q_8"/>
-	<output a0="b_6"/>
-</command>
-<element type="segment" label="b_6">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelOffset x="-11" y="10"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Chińska"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="-91" y="0" z="115843"/>
 </element>
 <expression label="S_8" exp="(1302, 2504)" type="point"/>
 <element type="point" label="S_8">
@@ -4551,26 +4332,6 @@
 	<pointStyle val="0"/>
 	<coords x="20" y="528" z="1"/>
 </element>
-<command name="Segment">
-	<input a0="E_9" a1="F_9"/>
-	<output a0="j_7"/>
-</command>
-<element type="segment" label="j_7">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelOffset x="34" y="10"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Malborska"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="0" y="-205" z="108240"/>
-</element>
 <expression label="G_9" exp="(1295, 2540)" type="point"/>
 <element type="point" label="G_9">
 	<show object="true" label="true" ev="4"/>
@@ -4845,45 +4606,6 @@
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="903" y="1902" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="T_9" a1="V_9"/>
-	<output a0="l_7"/>
-</command>
-<element type="segment" label="l_7">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="247" g="117" b="108" alpha="0"/>
-	<layer val="8"/>
-	<labelOffset x="23" y="6"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Aleja Napędowa [S67]"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="343" y="0" z="-309729"/>
-</element>
-<command name="Segment">
-	<input a0="U_9" a1="S_9"/>
-	<output a0="m_7"/>
-</command>
-<element type="segment" label="m_7">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="247" g="117" b="108" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Aleja Napędowa [S67]"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="-343" y="0" z="307671"/>
 </element>
 <expression label="W_9" exp="(897, 1762)" type="point"/>
 <element type="point" label="W_9">
@@ -5449,7 +5171,7 @@
 	<font serif="false" sizeM="1" size="0" style="1"/>
 	<startPoint x="-817.6322873702028" y="-170.20125863754623" z="1"/>
 </element>
-<expression label="CENTRUM_{19}" exp="&quot;ZAGAJE-&#xa;-PLAŻA&quot;"/>
+<expression label="CENTRUM_{19}" exp="&quot;ZAGAJE-PLAŻA&quot;"/>
 <element type="text" label="CENTRUM_{19}">
 	<show object="true" label="false" ev="40"/>
 	<objColor r="64" g="64" b="64" alpha="0"/>
@@ -6848,6 +6570,25 @@
 	<coords x="1111" y="2293" z="1"/>
 </element>
 <command name="Segment">
+	<input a0="G_{15}" a1="P_8"/>
+	<output a0="t_6"/>
+</command>
+<element type="segment" label="t_6">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Aleja Boska"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="-57" z="130701"/>
+</element>
+<command name="Segment">
 	<input a0="C_{15}" a1="G_{15}"/>
 	<output a0="h_8"/>
 </command>
@@ -6913,11 +6654,12 @@
 	<output a0="k_8"/>
 </command>
 <element type="segment" label="k_8">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
 	<fixed val="true"/>
+	<caption val="Aleja Rynkowa"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -6953,7 +6695,7 @@
 	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelOffset x="-68" y="42"/>
+	<labelOffset x="-63" y="-35"/>
 	<labelMode val="3"/>
 	<fixed val="true"/>
 	<caption val="Aleja Rynkowa"/>
@@ -7358,11 +7100,12 @@
 	<output a0="t_8"/>
 </command>
 <element type="segment" label="t_8">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
 	<fixed val="true"/>
+	<caption val="Aleja Rynkowa"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -7376,11 +7119,12 @@
 	<output a0="a_8"/>
 </command>
 <element type="segment" label="a_8">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
 	<fixed val="true"/>
+	<caption val="Aleja Rynkowa"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -7394,11 +7138,12 @@
 	<output a0="b_8"/>
 </command>
 <element type="segment" label="b_8">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
 	<fixed val="true"/>
+	<caption val="Aleja Rynkowa"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -7412,11 +7157,12 @@
 	<output a0="c_8"/>
 </command>
 <element type="segment" label="c_8">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
 	<fixed val="true"/>
+	<caption val="Aleja Rynkowa"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -7430,11 +7176,12 @@
 	<output a0="d_8"/>
 </command>
 <element type="segment" label="d_8">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
 	<fixed val="true"/>
+	<caption val="Aleja Rynkowa"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -7448,11 +7195,12 @@
 	<output a0="e_8"/>
 </command>
 <element type="segment" label="e_8">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
 	<fixed val="true"/>
+	<caption val="Aleja Rynkowa"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -7466,11 +7214,12 @@
 	<output a0="f_9"/>
 </command>
 <element type="segment" label="f_9">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
 	<fixed val="true"/>
+	<caption val="Aleja Rynkowa"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -7478,34 +7227,6 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="-0.2715000352545758" y="-43.035213333116644" z="93337.93297235342"/>
-</element>
-<command name="Point">
-	<input a0="m_7"/>
-	<output a0="E_{16}"/>
-</command>
-<element type="point" label="E_{16}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="897" y="2102.8830860095786" z="1"/>
-</element>
-<command name="Point">
-	<input a0="m_7"/>
-	<output a0="F_{16}"/>
-</command>
-<element type="point" label="F_{16}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="897" y="2152.1427449517582" z="1"/>
 </element>
 <command name="Intersect">
 	<input a0="g_8" a1="l_8"/>
@@ -7519,58 +7240,6 @@
 	<pointSize val="4"/>
 	<pointStyle val="0"/>
 	<coords x="496518.56682992354" y="1017085.0414550084" z="471.52760382707856"/>
-</element>
-<command name="Segment">
-	<input a0="Z_{15}" a1="G_{16}"/>
-	<output a0="i_9"/>
-</command>
-<element type="segment" label="i_9">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Aleja Rynkowa"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="1" y="114.00000000002092" z="-246951.00000004517"/>
-</element>
-<command name="Point">
-	<input a0="f_8"/>
-	<output a0="H_{16}"/>
-</command>
-<element type="point" label="H_{16}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="1053" y="2165.5634364811035" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="W_{15}" a1="H_{16}"/>
-	<output a0="j_9"/>
-</command>
-<element type="segment" label="j_9">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Aleja Rynkowa"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="0.8978218476340771" y="114.1081859344547" z="-248053.92166840122"/>
 </element>
 <expression label="I_{16}" exp="(1114, 2186)" type="point"/>
 <element type="point" label="I_{16}">
@@ -8081,39 +7750,6 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="0" y="-49" z="106232"/>
-</element>
-<command name="Point">
-	<input a0="j_8"/>
-	<output a0="I_{17}"/>
-</command>
-<element type="point" label="I_{17}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="1111" y="2165.1297862728807" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="E_{17}" a1="I_{17}"/>
-	<output a0="b_9"/>
-</command>
-<element type="segment" label="b_9">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Most Borata"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="2.870213727119335" y="-21" z="42278.91806090111"/>
 </element>
 <command name="Intersect">
 	<input a0="k_8" a1="l_8"/>
@@ -8861,11 +8497,12 @@
 	<output a0="g_{11}"/>
 </command>
 <element type="segment" label="g_{11}">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
 	<fixed val="true"/>
+	<caption val="Olecka"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -9847,7 +9484,7 @@
 	<caption val="Rondo Elbląskie"/>
 	<pointSize val="4"/>
 	<pointStyle val="0"/>
-	<coords x="-719092" y="282964" z="2596"/>
+	<coords x="-645964" y="254188" z="2332"/>
 </element>
 <expression label="M_{20}" exp="(-142, 158)" type="point"/>
 <element type="point" label="M_{20}">
@@ -10858,7 +10495,7 @@
 	<layer val="8"/>
 	<labelMode val="3"/>
 	<fixed val="true"/>
-	<caption val="W BUDOWIE"/>
+	<caption val="Studzienna"/>
 	<lineStyle thickness="13" type="0" typeHidden="1" opacity="178"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -11038,11 +10675,12 @@
 	<output a0="n_{14}"/>
 </command>
 <element type="segment" label="n_{14}">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
 	<fixed val="true"/>
+	<caption val="Studzienna"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -11193,6 +10831,7 @@
 	<show object="true" label="true" ev="4"/>
 	<objColor r="160" g="160" b="160" alpha="0"/>
 	<layer val="8"/>
+	<labelOffset x="6" y="-80"/>
 	<labelMode val="3"/>
 	<animation step="0.1" type="1" playing="false"/>
 	<fixed val="true"/>
@@ -11442,7 +11081,7 @@
 	<layer val="8"/>
 	<labelMode val="0"/>
 	<fixed val="true"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
 	<keepTypeOnTransform val="true"/>
@@ -11461,8 +11100,7 @@
 	<labelOffset x="-30" y="31"/>
 	<labelMode val="3"/>
 	<fixed val="true"/>
-	<caption val="Jana z Kolna"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
 	<keepTypeOnTransform val="true"/>
@@ -11691,7 +11329,7 @@
 	<layer val="8"/>
 	<labelMode val="3"/>
 	<fixed val="true"/>
-	<caption val="Garbik"/>
+	<caption val="Aleja Obrońców Korolina"/>
 	<lineStyle thickness="10" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -11710,7 +11348,7 @@
 	<layer val="8"/>
 	<labelMode val="3"/>
 	<fixed val="true"/>
-	<caption val="Garbik"/>
+	<caption val="Aleja Obrońców Korolina"/>
 	<lineStyle thickness="10" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -11805,7 +11443,6 @@
 	<layer val="8"/>
 	<labelMode val="3"/>
 	<fixed val="true"/>
-	<caption val="Marymoncka"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -12545,25 +12182,6 @@
 	<endStyle val="default"/>
 	<coords x="-2" y="-2" z="-2718"/>
 </element>
-<command name="Segment">
-	<input a0="P_{24}" a1="W_{23}"/>
-	<output a0="c_{16}"/>
-</command>
-<element type="segment" label="c_{16}">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Marymoncka"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="0" y="453" z="-6795"/>
-</element>
 <expression label="Q_{24}" exp="(-1380, 9)" type="point"/>
 <element type="point" label="Q_{24}">
 	<show object="true" label="false" ev="4"/>
@@ -13004,6 +12622,26 @@
 	<pointStyle val="0"/>
 	<coords x="-791" y="168" z="1"/>
 </element>
+<command name="Segment">
+	<input a0="L_{25}" a1="K_3"/>
+	<output a0="r_3"/>
+</command>
+<element type="segment" label="r_3">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="230" b="150" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="-4" y="-22"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Most Dmowskiego [DK41]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="416" z="-69888"/>
+</element>
 <expression label="M_{25}" exp="(-801, 178)" type="point"/>
 <element type="point" label="M_{25}">
 	<show object="true" label="false" ev="4"/>
@@ -13087,38 +12725,6 @@
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="-782" y="164" z="1"/>
-</element>
-<command name="Intersect">
-	<input a0="r_3" a1="s_3"/>
-	<output a0="T_{25}"/>
-</command>
-<element type="point" label="T_{25}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="110" g="109" b="115" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<fixed val="true"/>
-	<pointSize val="4"/>
-	<pointStyle val="0"/>
-	<coords x="-1909644" y="410256" z="2442"/>
-</element>
-<command name="Segment">
-	<input a0="T_{25}" a1="L_{25}"/>
-	<output a0="n_{17}"/>
-</command>
-<element type="segment" label="n_{17}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="255" g="230" b="150" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<fixed val="true"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="0" y="-9" z="1512"/>
 </element>
 <command name="Segment">
 	<input a0="L_{25}" a1="M_{25}"/>
@@ -13945,21 +13551,6 @@
 	<pointStyle val="0"/>
 	<coords x="200.4486345567301" y="524.2757911210285" z="1"/>
 </element>
-<command name="Point">
-	<input a0="j_7"/>
-	<output a0="U_{26}"/>
-</command>
-<element type="point" label="U_{26}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="0.1" type="1" playing="false"/>
-	<fixed val="true"/>
-	<pointSize val="1"/>
-	<pointStyle val="0"/>
-	<coords x="197.6907403122142" y="528" z="1"/>
-</element>
 <element type="point" label="W_{26}">
 	<show object="true" label="false" ev="4"/>
 	<objColor r="77" g="77" b="255" alpha="0"/>
@@ -13970,6 +13561,18 @@
 	<pointSize val="1"/>
 	<pointStyle val="0"/>
 	<coords x="197.6907403122142" y="493.7374324160959" z="1"/>
+</element>
+<expression label="U_{26}" exp="(198, 528)" type="point"/>
+<element type="point" label="U_{26}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<fixed val="true"/>
+	<pointSize val="1"/>
+	<pointStyle val="0"/>
+	<coords x="198" y="528" z="1"/>
 </element>
 <command name="Segment">
 	<input a0="U_{26}" a1="W_{26}"/>
@@ -13988,7 +13591,7 @@
 	<keepTypeOnTransform val="true"/>
 	<startStyle val="default"/>
 	<endStyle val="default"/>
-	<coords x="34.262567583904115" y="0" z="-6773.392350659269"/>
+	<coords x="34.262567583904115" y="-0.30925968778581137" z="-6620.699266462107"/>
 </element>
 <expression label="K_{38}" exp="(201, 489)" type="point"/>
 <element type="point" label="K_{38}">
@@ -14019,21 +13622,6 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="13" y="0" z="-2613"/>
-</element>
-<command name="Point">
-	<input a0="n_8"/>
-	<output a0="Z_{26}"/>
-</command>
-<element type="point" label="Z_{26}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="0.1" type="1" playing="false"/>
-	<fixed val="true"/>
-	<pointSize val="1"/>
-	<pointStyle val="0"/>
-	<coords x="201" y="488.7785889892062" z="1"/>
 </element>
 <expression label="J_{38}" exp="(207, 489)" type="point"/>
 <element type="point" label="J_{38}">
@@ -14092,6 +13680,7 @@
 	<pointStyle val="0"/>
 	<coords x="210.91432278391784" y="492.86234239958594" z="1"/>
 </element>
+<expression label="B_{27}" exp="(211, 528)" type="point"/>
 <element type="point" label="B_{27}">
 	<show object="true" label="false" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
@@ -14101,7 +13690,7 @@
 	<fixed val="true"/>
 	<pointSize val="1"/>
 	<pointStyle val="0"/>
-	<coords x="210.90837961918012" y="527.9770884451191" z="1"/>
+	<coords x="211" y="528" z="1"/>
 </element>
 <command name="Segment">
 	<input a0="A_{27}" a1="B_{27}"/>
@@ -14120,7 +13709,7 @@
 	<keepTypeOnTransform val="true"/>
 	<startStyle val="default"/>
 	<endStyle val="default"/>
-	<coords x="-35.11474604553314" y="-0.0059431647377152785" z="7409.1320440167765"/>
+	<coords x="-35.13765760041406" y="0.08567721608216061" z="7368.808183595989"/>
 </element>
 <expression label="C_{27}" exp="(210, 541)" type="point"/>
 <element type="point" label="C_{27}">
@@ -15691,30 +15280,6 @@
 	<pointStyle val="0"/>
 	<coords x="-782" y="341" z="1"/>
 </element>
-<command name="Segment">
-	<input a0="P_3" a1="P_{31}"/>
-	<output a0="t_3"/>
-</command>
-<element type="segment" label="t_3">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelOffset x="80" y="-1"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Trasa Zagajska"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="-173" y="0" z="-135286"/>
-</element>
-<command name="Point">
-	<input a0="t_3"/>
-	<output a0="W_{29}"/>
-</command>
 <element type="point" label="W_{29}">
 	<show object="true" label="false" ev="4"/>
 	<objColor r="125" g="125" b="255" alpha="0"/>
@@ -15723,7 +15288,7 @@
 	<animation step="1" type="1" playing="false"/>
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
-	<coords x="-782" y="178.37167478609084" z="1"/>
+	<coords x="-782.0265763049282" y="178.97456323855585" z="1"/>
 </element>
 <command name="PolyLine">
 	<input a0="R_{29}" a1="S_{29}" a2="T_{29}" a3="U_{29}" a4="W_{29}"/>
@@ -16315,17 +15880,6 @@
 	<endStyle val="default"/>
 	<coords x="-94" y="17" z="-16034"/>
 </element>
-<expression label="C_{31}" exp="(-821, -173)" type="point"/>
-<element type="point" label="C_{31}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="77" g="77" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="0.1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="-821" y="-173" z="1"/>
-</element>
 <expression label="F_{31}" exp="(-816, -178)" type="point"/>
 <element type="point" label="F_{31}">
 	<show object="true" label="false" ev="4"/>
@@ -16403,24 +15957,6 @@
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="-843" y="-208" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="C_{31}" a1="F_{31}"/>
-	<output a0="r_5"/>
-</command>
-<element type="segment" label="r_5">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<caption val="Złotej Patelni"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="5" y="5" z="4970"/>
 </element>
 <command name="Segment">
 	<input a0="F_{31}" a1="G_{31}"/>
@@ -16522,6 +16058,7 @@
 	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
+	<labelOffset x="-1" y="-80"/>
 	<labelMode val="3"/>
 	<fixed val="true"/>
 	<caption val="Jana z Kolna"/>
@@ -16554,45 +16091,13 @@
 	<layer val="8"/>
 	<labelMode val="0"/>
 	<fixed val="true"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
 	<keepTypeOnTransform val="true"/>
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="0" y="24" z="-600"/>
-</element>
-<command name="Point">
-	<input a0="c_{16}"/>
-	<output a0="L_{31}"/>
-</command>
-<element type="point" label="L_{31}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="-1202.0180968028624" y="15" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="K_{31}" a1="L_{31}"/>
-	<output a0="a_{21}"/>
-</command>
-<element type="segment" label="a_{21}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<fixed val="true"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="10" y="-0.018096802862373806" z="12020.45242007156"/>
 </element>
 <expression label="M_{31}" exp="(-1226, 113)" type="point"/>
 <element type="point" label="M_{31}">
@@ -18540,82 +18045,6 @@
 	<pointStyle val="0"/>
 	<coords x="1342.153094582716" y="2297.874893832034" z="1"/>
 </element>
-<command name="Point">
-	<input a0="f_9"/>
-	<output a0="U_{34}"/>
-</command>
-<element type="point" label="U_{34}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="1"/>
-	<pointStyle val="0"/>
-	<coords x="887.9647866668834" y="2163.2715000352546" z="1"/>
-</element>
-<command name="Point">
-	<input a0="m_7"/>
-	<output a0="Z_{34}"/>
-</command>
-<element type="point" label="Z_{34}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="1"/>
-	<pointStyle val="0"/>
-	<coords x="897" y="2134.6425766011134" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="U_{34}" a1="Z_{34}"/>
-	<output a0="g_9"/>
-</command>
-<element type="segment" label="g_9">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="28.628923434141143" y="9.035213333116644" z="-44967.095389969414"/>
-</element>
-<command name="Point">
-	<input a0="m_7"/>
-	<output a0="A_{35}"/>
-</command>
-<element type="point" label="A_{35}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="1"/>
-	<pointStyle val="0"/>
-	<coords x="897" y="2191.0899221608806" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="U_{34}" a1="A_{35}"/>
-	<output a0="h_9"/>
-</command>
-<element type="segment" label="h_9">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="-27.818422125626057" y="9.035213333116644" z="5156.159767921083"/>
-</element>
 <expression label="C_{35}" exp="(865, 2335)" type="point"/>
 <element type="point" label="C_{35}">
 	<show object="true" label="false" ev="4"/>
@@ -18967,7 +18396,7 @@
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
 	<labelMode val="3"/>
-	<caption val="Przyszłości"/>
+	<caption val="Zaplecze"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -20137,10 +19566,11 @@
 	<output a0="b_3"/>
 </command>
 <element type="segment" label="b_3">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
+	<caption val="Trasa Zagajska"/>
 	<lineStyle thickness="10" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -20188,10 +19618,11 @@
 	<output a0="m_{17}"/>
 </command>
 <element type="segment" label="m_{17}">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
+	<caption val="Trasa Zagajska"/>
 	<lineStyle thickness="10" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -20231,66 +19662,6 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="144" y="0" z="112608"/>
-</element>
-<command name="Intersect">
-	<input a0="q_3" a1="s_3"/>
-	<output a0="U_{37}"/>
-</command>
-<element type="point" label="U_{37}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="110" g="109" b="115" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<pointSize val="4"/>
-	<pointStyle val="0"/>
-	<coords x="-1909644" y="395604" z="2442"/>
-</element>
-<command name="PolyLine">
-	<input a0="M_{30}" a1="L_{30}" a2="K_{30}" a3="J_{30}" a4="I_{30}" a5="H_{30}" a6="G_{30}" a7="F_{30}" a8="U_{37}"/>
-	<output a0="h_{21}"/>
-</command>
-<element type="polyline" label="h_{21}">
-	<lineStyle thickness="10" type="0" typeHidden="1"/>
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelOffset x="-66" y="45"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Most Dmowskiego [DK41]"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-</element>
-<command name="Point">
-	<input a0="h_{21}"/>
-	<output a0="W_{37}"/>
-</command>
-<element type="point" label="W_{37}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="-783.3033702293588" y="160.483148853287" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="W_{37}" a1="U_{37}"/>
-	<output a0="b_{25}"/>
-</command>
-<element type="segment" label="b_{25}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<lineStyle thickness="10" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="-1.5168511467130088" y="1.3033702293588476" z="-1397.3235738857038"/>
 </element>
 <command name="Segment">
 	<input a0="O_{31}" a1="M_{37}"/>
@@ -20601,102 +19972,6 @@
 	<coords x="-0.0043665519741438175" y="142.00480320717156" z="8943.665204659424"/>
 </element>
 <command name="Point">
-	<input a0="j_5"/>
-	<output a0="E_{38}"/>
-</command>
-<element type="point" label="E_{38}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="-837" y="-73" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="E_{38}" a1="P_{37}"/>
-	<output a0="e_{25}"/>
-</command>
-<element type="segment" label="e_{25}">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<caption val="Marymoncka"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="0" y="51" z="3723"/>
-</element>
-<command name="Point">
-	<input a0="j_5"/>
-	<output a0="F_{38}"/>
-</command>
-<element type="point" label="F_{38}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="-837" y="-63.05717747302239" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="O_{37}" a1="F_{38}"/>
-	<output a0="f_{26}"/>
-</command>
-<element type="segment" label="f_{26}">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<caption val="Marymoncka"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="0.05717747302239218" y="-51" z="-3168.0585062043974"/>
-</element>
-<command name="Point">
-	<input a0="b_{15}"/>
-	<output a0="H_{38}"/>
-</command>
-<element type="point" label="H_{38}">
-	<show object="true" label="false"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="-879.0777980807256" y="-62.92220191927436" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="F_{38}" a1="H_{38}"/>
-	<output a0="g_{26}"/>
-</command>
-<element type="segment" label="g_{26}">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<caption val="Marymoncka"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="-0.13497555374803483" y="-42.07779808072564" z="-2766.2817197374243"/>
-</element>
-<command name="Point">
 	<input a0="t_{15}"/>
 	<output a0="I_{38}"/>
 </command>
@@ -20709,24 +19984,6 @@
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="-882" y="-73" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="I_{38}" a1="E_{38}"/>
-	<output a0="h_{26}"/>
-</command>
-<element type="segment" label="h_{26}">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<caption val="Marymoncka"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="0" y="45" z="3285"/>
 </element>
 <command name="Segment">
 	<input a0="W_{26}" a1="K_{38}"/>
@@ -20766,24 +20023,6 @@
 	<endStyle val="default"/>
 	<coords x="-3.862342399585941" y="3.9143227839178394" z="-1114.5989646215312"/>
 </element>
-<command name="Segment">
-	<input a0="Z_{26}" a1="M_{15}"/>
-	<output a0="i_{26}"/>
-</command>
-<element type="segment" label="i_{26}">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="230" b="150" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<caption val="Toruńska [DK59]"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="-44.221411010793815" y="0" z="8888.503613169552"/>
-</element>
 <command name="Point">
 	<input a0="s_8"/>
 	<output a0="L_{38}"/>
@@ -20797,24 +20036,6 @@
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="207.04730637630414" y="478.9517080741895" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="R_{14}" a1="L_{38}"/>
-	<output a0="j_{26}"/>
-</command>
-<element type="segment" label="j_{26}">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="230" b="150" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<caption val="Toruńska [DK59]"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="10.048291925810474" y="0.047306376304135256" z="-2103.129246655488"/>
 </element>
 <expression label="M_{38}" exp="(-277, -63)" type="point"/>
 <element type="point" label="M_{38}">
@@ -20973,23 +20194,6 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="-176" y="0" z="-137632"/>
-</element>
-<command name="Segment">
-	<input a0="O_{38}" a1="U_{37}"/>
-	<output a0="l_{26}"/>
-</command>
-<element type="segment" label="l_{26}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="-11" y="0" z="-8602"/>
 </element>
 <element type="point" label="P_{38}">
 	<show object="true" label="false"/>
@@ -22081,7 +21285,6 @@
 	<objColor r="255" g="230" b="150" alpha="0"/>
 	<layer val="8"/>
 	<labelMode val="3"/>
-	<caption val="Księdza Popiełuszki [DK59]"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -22107,6 +21310,709 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="4.813835187365896" y="1.3114761523357856" z="-2121.9331560926657"/>
+</element>
+<command name="Segment">
+	<input a0="W_{29}" a1="P_{31}"/>
+	<output a0="t_3"/>
+</command>
+<element type="segment" label="t_3">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="80" y="-1"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Trasa Zagajska"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-162.02543676144415" y="0.026576304928198624" z="-126712.95406742988"/>
+</element>
+<command name="Segment">
+	<input a0="O_{38}" a1="S_{25}"/>
+	<output a0="s_3"/>
+</command>
+<element type="segment" label="s_3">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Trasa Zagajska"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-13" y="0" z="-10166"/>
+</element>
+<command name="Segment">
+	<input a0="W_{29}" a1="S_{25}"/>
+	<output a0="n_{17}"/>
+</command>
+<element type="segment" label="n_{17}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Trasa Zagajska"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="14.974563238555845" y="0.026576304928198624" z="11705.74993854243"/>
+</element>
+<command name="Segment">
+	<input a0="K_{38}" a1="M_{15}"/>
+	<output a0="i_{26}"/>
+</command>
+<element type="segment" label="i_{26}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="230" b="150" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Toruńska [DK59]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-44" y="0" z="8844"/>
+</element>
+<command name="Segment">
+	<input a0="J_{38}" a1="L_{38}"/>
+	<output a0="j_{26}"/>
+</command>
+<element type="segment" label="j_{26}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="230" b="150" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Toruńska [DK59]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="10.048291925810474" y="0.047306376304135256" z="-2103.129246655488"/>
+</element>
+<command name="Segment">
+	<input a0="U_{26}" a1="F_9"/>
+	<output a0="j_7"/>
+</command>
+<element type="segment" label="j_7">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="34" y="10"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Malborska"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="-178" z="93984"/>
+</element>
+<command name="Segment">
+	<input a0="U_{26}" a1="B_{27}"/>
+	<output a0="h_{21}"/>
+</command>
+<element type="segment" label="h_{21}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Malborska"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="13" z="-6864"/>
+</element>
+<command name="Segment">
+	<input a0="B_{27}" a1="E_9"/>
+	<output a0="b_{25}"/>
+</command>
+<element type="segment" label="b_{25}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Malborska"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="14" z="-7392"/>
+</element>
+<command name="Segment">
+	<input a0="B_2" a1="L_3"/>
+	<output a0="l_{26}"/>
+</command>
+<element type="segment" label="l_{26}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="26" y="2"/>
+	<labelMode val="3"/>
+	<caption val="Ekspresowa"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="6" y="0" z="1662"/>
+</element>
+<command name="Segment">
+	<input a0="E_7" a1="F_{31}"/>
+	<output a0="r_5"/>
+</command>
+<element type="segment" label="r_5">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Złotej Patelni"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="5.220446938936249" y="5" z="5149.884702171985"/>
+</element>
+<command name="Segment">
+	<input a0="C_{19}" a1="E_7"/>
+	<output a0="q_5"/>
+</command>
+<element type="segment" label="q_5">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="26" y="0"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Złotej Patelni"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="20.77955306106375" y="0" z="17060.013063133345"/>
+</element>
+<command name="Segment">
+	<input a0="C_{19}" a1="D_7"/>
+	<output a0="i_{27}"/>
+</command>
+<element type="segment" label="i_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Złotej Patelni"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-28" y="-1" z="-23140"/>
+</element>
+<command name="Segment">
+	<input a0="Z_6" a1="A_7"/>
+	<output a0="n_5"/>
+</command>
+<element type="segment" label="n_5">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Złotej Patelni"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="48" y="0" z="40176"/>
+</element>
+<command name="Segment">
+	<input a0="I_{38}" a1="Z_6"/>
+	<output a0="h_{26}"/>
+</command>
+<element type="segment" label="h_{26}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Marymoncka"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="45" z="3285"/>
+</element>
+<command name="Segment">
+	<input a0="Z_6" a1="P_{37}"/>
+	<output a0="e_{25}"/>
+</command>
+<element type="segment" label="e_{25}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Marymoncka"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="51" z="3723"/>
+</element>
+<command name="Segment">
+	<input a0="O_{37}" a1="W_6"/>
+	<output a0="f_{26}"/>
+</command>
+<element type="segment" label="f_{26}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Marymoncka"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="-51" z="-3213"/>
+</element>
+<command name="Segment">
+	<input a0="W_6" a1="V_3"/>
+	<output a0="g_{26}"/>
+</command>
+<element type="segment" label="g_{26}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Marymoncka"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="-42" z="-2646"/>
+</element>
+<expression label="P_3" exp="(-1202, 15)" type="point"/>
+<element type="point" label="P_3">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-1202" y="15" z="1"/>
+</element>
+<command name="Segment">
+	<input a0="K_{31}" a1="P_3"/>
+	<output a0="a_{21}"/>
+</command>
+<element type="segment" label="a_{21}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="10" y="0" z="12020"/>
+</element>
+<command name="Segment">
+	<input a0="P_{24}" a1="P_3"/>
+	<output a0="c_{16}"/>
+</command>
+<element type="segment" label="c_{16}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Marymoncka"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="172" z="-2580"/>
+</element>
+<command name="Segment">
+	<input a0="W_{23}" a1="P_3"/>
+	<output a0="j_{27}"/>
+</command>
+<element type="segment" label="j_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Marymoncka"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="-281" z="4215"/>
+</element>
+<command name="Segment">
+	<input a0="B_{16}" a1="V_9"/>
+	<output a0="l_7"/>
+</command>
+<element type="segment" label="l_7">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="247" g="117" b="108" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="23" y="6"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Aleja Napędowa [S67]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="232" y="0" z="-209496"/>
+</element>
+<command name="Segment">
+	<input a0="B_{16}" a1="C_{16}"/>
+	<output a0="k_{27}"/>
+</command>
+<element type="segment" label="k_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="247" g="117" b="108" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="-11" y="35"/>
+	<labelMode val="3"/>
+	<caption val="Aleja Napędowa [S67]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-57" y="0" z="51471"/>
+</element>
+<command name="Segment">
+	<input a0="C_{16}" a1="T_9"/>
+	<output a0="l_{27}"/>
+</command>
+<element type="segment" label="l_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="247" g="117" b="108" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Aleja Napędowa [S67]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-54" y="0" z="48762"/>
+</element>
+<expression label="A_{35}" exp="(897, 2191)" type="point"/>
+<element type="point" label="A_{35}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="125" g="125" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="1" type="1" playing="false"/>
+	<pointSize val="1"/>
+	<pointStyle val="0"/>
+	<coords x="897" y="2191" z="1"/>
+</element>
+<command name="Segment">
+	<input a0="E_{11}" a1="A_{35}"/>
+	<output a0="h_9"/>
+</command>
+<element type="segment" label="h_9">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Aleja Rynkowa"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-27.728499964745424" y="9.035213333116644" z="5076.312055518152"/>
+</element>
+<expression label="Z_{34}" exp="(897, 2134)" type="point"/>
+<element type="point" label="Z_{34}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="125" g="125" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="1" type="1" playing="false"/>
+	<pointSize val="1"/>
+	<pointStyle val="0"/>
+	<coords x="897" y="2134" z="1"/>
+</element>
+<command name="Segment">
+	<input a0="E_{11}" a1="Z_{34}"/>
+	<output a0="g_9"/>
+</command>
+<element type="segment" label="g_9">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Aleja Rynkowa"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="29.271500035254576" y="9.035213333116644" z="-45537.68078449415"/>
+</element>
+<command name="Segment">
+	<input a0="U_9" a1="Z_{34}"/>
+	<output a0="m_7"/>
+</command>
+<element type="segment" label="m_7">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="247" g="117" b="108" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Aleja Napędowa [S67]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-232" y="0" z="208104"/>
+</element>
+<command name="Segment">
+	<input a0="Z_{34}" a1="A_{35}"/>
+	<output a0="m_{27}"/>
+</command>
+<element type="segment" label="m_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="247" g="117" b="108" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Aleja Napędowa [S67]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-57" y="0" z="51129"/>
+</element>
+<command name="Segment">
+	<input a0="S_9" a1="A_{35}"/>
+	<output a0="n_{27}"/>
+</command>
+<element type="segment" label="n_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="247" g="117" b="108" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Aleja Napędowa [S67]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="54" y="0" z="-48438"/>
+</element>
+<command name="Segment">
+	<input a0="W_{15}" a1="E_{15}"/>
+	<output a0="j_9"/>
+</command>
+<element type="segment" label="j_9">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Aleja Rynkowa"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="1.3314720558569206" y="114.1081859344547" z="-248461.0722990695"/>
+</element>
+<command name="Segment">
+	<input a0="Z_{15}" a1="F_{15}"/>
+	<output a0="i_9"/>
+</command>
+<element type="segment" label="i_9">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Aleja Rynkowa"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="1" y="114" z="-246951"/>
+</element>
+<command name="Segment">
+	<input a0="E_{17}" a1="H_{15}"/>
+	<output a0="b_9"/>
+</command>
+<element type="segment" label="b_9">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Most Borata"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="2.870213727119335" y="-21" z="42278.91806090111"/>
+</element>
+<command name="Segment">
+	<input a0="G_{15}" a1="K_8"/>
+	<output a0="n_6"/>
+</command>
+<element type="segment" label="n_6">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Aleja Boska"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-10" y="0" z="11110"/>
+</element>
+<command name="Segment">
+	<input a0="H_8" a1="G_{15}"/>
+	<output a0="k_6"/>
+</command>
+<element type="segment" label="k_6">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="-78" y="18"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Aleja Boska"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="-99" z="227007"/>
+</element>
+<command name="Segment">
+	<input a0="E_8" a1="G_8"/>
+	<output a0="f_6"/>
+</command>
+<element type="segment" label="f_6">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="24" y="0"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Niepodległości"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="110" y="0" z="-133100"/>
+</element>
+<command name="Segment">
+	<input a0="H_8" a1="G_8"/>
+	<output a0="l_6"/>
+</command>
+<element type="segment" label="l_6">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Aleja Boska"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-10" y="0" z="12100"/>
+</element>
+<command name="Segment">
+	<input a0="C_{18}" a1="Q_8"/>
+	<output a0="b_6"/>
+</command>
+<element type="segment" label="b_6">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="-11" y="10"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Chińska"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-91" y="0" z="115843"/>
 </element>
 </construction>
 </geogebra>
