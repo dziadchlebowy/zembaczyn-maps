@@ -198,6 +198,7 @@
     <label><input type="checkbox" id="optMetro"> Linie metra</label>
     <button class="cta" id="openFile" style="margin:0;align-self:flex-start">Otwórz plik XML…</button>
     <div class="meta" id="meta"></div>
+    <div class="meta" id="terrMeta"></div>
   </div>
   <button id="layersBtn" aria-label="Warstwy" aria-expanded="false"><span>Warstwy</span></button>
 </div>
@@ -217,6 +218,8 @@
 const XML_FILE      = 'geogebra.xml';   // nazwa pliku XML leżącego obok index.html
 const FALLBACK_FILES = ['map.xml', 'mapa.xml', 'zembaczyn.xml', 'data.xml']; // próbowane, gdy powyższego brak
 const UNIT_NAME     = 'j.';             // jednostka długości w GeoGebrze, np. 'm' albo 'km'
+const TERRAIN_JSON  = 'terrain.json'; // z mc_map.py: położenie, skala i kalibracja podkładu (obok index.html)
+const TERRAIN_PNG   = 'terrain.png';  // użyte, gdy w JSON-ie nie ma nazwy obrazu
 const MIN_FILL_ALPHA = 0.25;            // minimalna nieprzezroczystość wypełnień (GeoGebra domyślnie daje 0.1)
 
 /* ───────────── NARZĘDZIA ───────────── */
@@ -486,9 +489,11 @@ const ROADS_LIGHT = { mainFill: '#fde9a0', mainCase: '#dcb54b', minorFill: '#fff
 const ROADS_DARK = { mainFill: '#5d5a4a', mainCase: '#2b2f35', minorFill: '#474c54', minorCase: '#2b2f35', streetText: '#cfd3d8',
   rail: '#9aa0a6', railDash: '#1f2329', island: '#2f4a37', shopText: '#f2a65a', placeText: '#bdc1c6' };
 const THEMES = {
-  map:   { name: 'Mapa',      bg: '#ebe8e1', minor: 'rgba(255,255,255,.5)',  major: 'rgba(255,255,255,.95)', majorW: 2, dark: false, label: '#3c4043', halo: 'rgba(255,255,255,.92)', swatch: '#ebe8e1', ...ROADS_LIGHT },
-  dark:  { name: 'Ciemna',    bg: '#1f2329', minor: 'rgba(255,255,255,.04)', major: 'rgba(255,255,255,.09)', majorW: 1, dark: true,  label: '#e8eaed', halo: 'rgba(31,35,41,.92)',    swatch: '#1f2329', ...ROADS_DARK },
+  map:   { name: 'Mapa',      bg: '#ebe8e1', minor: 'rgba(255,255,255,.5)',  major: 'rgba(255,255,255,.95)', majorW: 2, dark: false, label: '#3c4043', halo: 'rgba(255,255,255,.92)', swatch: '#ebe8e1', terrain: 'tint', terr: { water: '#aadaff', forest: '#cde8bf', land: '#f7f4ec' }, ...ROADS_LIGHT },
+  dark:  { name: 'Ciemna',    bg: '#1f2329', minor: 'rgba(255,255,255,.04)', major: 'rgba(255,255,255,.09)', majorW: 1, dark: true,  label: '#e8eaed', halo: 'rgba(31,35,41,.92)',    swatch: '#1f2329', terrain: 'tint', terr: { water: '#27405c', forest: '#27402f', land: '#2b3037' }, ...ROADS_DARK },
   paper: { name: 'GeoGebra',  bg: '#ffffff', minor: '#eeeeee',               major: '#d6d6d6',               majorW: 1, dark: false, label: '#202124', halo: 'rgba(255,255,255,.92)', swatch: '#fff', axes: true, ...ROADS_LIGHT, minorCase: '#c4c4c4' },
+  sat:   { name: 'Satelita',  bg: '#0b1016', minor: 'rgba(255,255,255,.05)', major: 'rgba(255,255,255,.14)', majorW: 1, dark: true,  label: '#ffffff', halo: 'rgba(0,0,0,.75)',       swatch: 'linear-gradient(135deg,#5b8c3f,#1d4e80)', terrain: 'image',
+           ...ROADS_DARK, mainFill: '#f2d479', mainCase: '#4a4120', minorFill: '#e9eaec', minorCase: '#2b2f35', streetText: '#ffffff' },
 };
 const theme = () => THEMES[settings.theme] || THEMES.map;
 const KIND_ORDER = { polygon: 0, ellipse: 1, arc: 1, line: 2, street: 2.5, ray: 3, segment: 3, vector: 4, point: 6, text: 7 };
@@ -531,6 +536,100 @@ function worldPts(o) {
 }
 const isClosed = o => o.kind === 'ellipse' || (o.kind === 'polygon' && o.closed) || (o.kind === 'arc' && o.sector);
 const screenPts = o => { const w = worldPts(o); return w ? w.map(p => w2s(p[0], p[1])) : null; };
+
+/* ───────────── PODKŁAD Z MINECRAFTA (terrain.png + terrain.json) ───────────── */
+const terrain = { ready: false, meta: null, img: null, aff: null, note: '', tints: {} };
+const hexRgb = h => [1, 3, 5].map(i => parseInt(h.substr(i, 2), 16));
+const setTerrNote = t => { terrain.note = t; const e = $('#terrMeta'); if (e) e.textContent = t; };
+
+// dwa punkty z "calib" -> przeliczenie współrzędnych gry (X, Z) na współrzędne GeoGebry (x, y)
+function terrainAffine(meta) {
+  const c = meta.calib;
+  if (c && Array.isArray(c.mc) && Array.isArray(c.ggb) && c.mc.length === 2 && c.ggb.length === 2) {
+    const [[X1, Z1], [X2, Z2]] = c.mc, [[g1x, g1y], [g2x, g2y]] = c.ggb;
+    if ([X1, Z1, X2, Z2, g1x, g1y, g2x, g2y].every(Number.isFinite) && X2 !== X1 && Z2 !== Z1) {
+      const ax = (g2x - g1x) / (X2 - X1), ay = (g2y - g1y) / (Z2 - Z1);
+      return { ax, bx: g1x - ax * X1, ay, by: g1y - ay * Z1, calibrated: true };
+    }
+  }
+  return { ax: 1, bx: 0, ay: -1, by: 0, calibrated: false };   // bez kalibracji: 1 blok = 1 j., północ u góry
+}
+
+async function loadTerrain() {
+  let meta;
+  try {
+    const r = await fetch(TERRAIN_JSON, { cache: 'no-cache' });
+    if (!r.ok) { setTerrNote(`Brak pliku ${TERRAIN_JSON} obok index.html – tryb satelity i teren na mapie są wyłączone.`); return; }
+    meta = await r.json();
+  } catch (e) {
+    setTerrNote(location.protocol === 'file:' ? `Nie można wczytać ${TERRAIN_JSON} przy otwarciu z dysku (działa na GitHub Pages lub lokalnym serwerze).` : `Nie udało się wczytać ${TERRAIN_JSON}: ${e.message}`);
+    return;
+  }
+  const img = new Image();
+  try {
+    const url = new URL(meta.image || TERRAIN_PNG, new URL(TERRAIN_JSON, location.href)).href;
+    await new Promise((ok, no) => { img.onload = ok; img.onerror = () => no(new Error('nie można wczytać obrazu')); img.src = url; });
+  } catch (e) { setTerrNote(`Nie udało się wczytać obrazu podkładu (${meta.image || TERRAIN_PNG}): ${e.message}`); return; }
+  const natW = img.naturalWidth, natH = img.naturalHeight, S = Math.max(1, num(meta.scale, 1));
+  terrain.meta = {
+    x0: num(meta.x0, 0), z0: num(meta.z0, 0),
+    px: S * num(meta.width, natW) / natW,       // bloków gry na piksel obrazu (także gdy PNG zmniejszono)
+    pz: S * num(meta.height, natH) / natH,
+  };
+  terrain.img = img; terrain.aff = terrainAffine(meta); terrain.tints = {}; terrain.ready = true;
+  setTerrNote(terrain.aff.calibrated
+    ? `Podkład: ${meta.image || TERRAIN_PNG} (${natW}×${natH} px), skalibrowany wg ${TERRAIN_JSON}.`
+    : `Podkład: ${meta.image || TERRAIN_PNG} (${natW}×${natH} px). W ${TERRAIN_JSON} brak "calib" – ustawiono 1 blok = 1 j. bez przesunięcia; dopisz calib, by dopasować do mapy.`);
+  requestDraw();
+}
+
+// mapa: z satelitarnego PNG wyciągamy wodę, lasy i ląd i malujemy je płaskimi kolorami (jak w Mapach Google); niewygenerowany świat zostaje tłem
+function terrainTint(id) {
+  if (terrain.tints[id]) return terrain.tints[id];
+  const img = terrain.img, w = img.naturalWidth, h = img.naturalHeight;
+  const f = Math.max(1, Math.ceil(Math.max(w, h) / 3072)), tw = Math.ceil(w / f), thh = Math.ceil(h / f);
+  const c = document.createElement('canvas'); c.width = tw; c.height = thh;
+  const g = c.getContext('2d', { willReadFrequently: true });
+  g.imageSmoothingQuality = 'high'; g.drawImage(img, 0, 0, tw, thh);
+  const data = g.getImageData(0, 0, tw, thh), d = data.data;
+  const wc = hexRgb(THEMES[id].terr.water), fc = hexRgb(THEMES[id].terr.forest), lc = hexRgb(THEMES[id].terr.land);
+  for (let p = 0; p < d.length; p += 4) {
+    const r = d[p], gg = d[p + 1], b = d[p + 2];
+    let col = null;
+    if (d[p + 3] >= 128) {
+      if (b - r >= 40 && b >= gg - 5) col = wc;                                                  // woda
+      else if (gg > r + 12 && gg > b + 25 && 0.299 * r + 0.587 * gg + 0.114 * b < 135) col = fc; // ciemna zieleń = las
+      else col = lc;                                                                              // reszta = ląd
+    }
+    if (col) { d[p] = col[0]; d[p + 1] = col[1]; d[p + 2] = col[2]; d[p + 3] = 255; } else d[p + 3] = 0;
+  }
+  g.putImageData(data, 0, 0);
+  return terrain.tints[id] = { src: c, k: w / tw };
+}
+
+function drawTerrain(th) {
+  if (!terrain.ready || !th.terrain) return;
+  const T = terrain.meta, a = terrain.aff;
+  let src = terrain.img, k = 1;
+  if (th.terrain === 'tint') { const t = terrainTint(settings.theme); src = t.src; k = t.k; }
+  const sw = src.naturalWidth || src.width, sh = src.naturalHeight || src.height;
+  // piksel źródła (i, j) -> ekran: sx = A*i + B, sy = C*j + D
+  const A = a.ax * T.px * k * V.s, B = (a.ax * T.x0 + a.bx - V.cx) * V.s + W / 2;
+  const C = -a.ay * T.pz * k * V.s, D = H / 2 - (a.ay * T.z0 + a.by - V.cy) * V.s;
+  if (!A || !C) return;
+  const range = (b, m, len, max) => {
+    const u = (0 - b) / m, v = (len - b) / m;
+    return [Math.max(0, Math.floor(Math.min(u, v)) - 1), Math.min(max, Math.ceil(Math.max(u, v)) + 1)];
+  };
+  const [i0, i1] = range(B, A, W, sw), [j0, j1] = range(D, C, H, sh);
+  if (i1 <= i0 || j1 <= j0) return;
+  ctx.save();
+  ctx.setTransform(dpr * A, 0, 0, dpr * C, dpr * B, dpr * D);
+  ctx.imageSmoothingEnabled = !(th.terrain === 'image' && Math.abs(A) >= 3);   // z bliska: ostre bloki
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(src, i0, j0, i1 - i0, j1 - j0, i0, j0, i1 - i0, j1 - j0);
+  ctx.restore();
+}
 
 /* ───────────── RYSOWANIE ───────────── */
 function niceStep(raw) { const p = Math.pow(10, Math.floor(Math.log10(raw))); for (const m of [1, 2, 5, 10]) if (p * m >= raw) return p * m; return p * 10; }
@@ -1081,6 +1180,7 @@ function draw() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.fillStyle = th.bg; ctx.fillRect(0, 0, W, H);
   document.body.style.background = th.bg;
+  drawTerrain(th);
   drawGrid(th);
   const pad = 30 / V.s;
   view0 = [V.cx - W / 2 / V.s - pad, V.cy - H / 2 / V.s - pad, V.cx + W / 2 / V.s + pad, V.cy + H / 2 / V.s + pad];
@@ -1752,6 +1852,7 @@ addEventListener('resize', resize);
   const m = document.createElement('span'); m.textContent = ' Maps'; m.style.color = '#5f6368'; el.append(m);
 })();
 syncUI(); resize(); resetView(false);
+loadTerrain();
 boot();
 })();
 </script>
