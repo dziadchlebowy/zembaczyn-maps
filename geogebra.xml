@@ -31,7 +31,7 @@
 <euclidianView>
 	<viewNumber viewNo="1"/>
 	<size width="1545" height="855"/>
-	<coordSystem xZero="-3700.533012630629" yZero="9461.167906677894" scale="3.7990657440990314" yscale="3.799065744097733"/>
+	<coordSystem xZero="16999.738855660773" yZero="4135.91019191622" scale="21.06982441449799" yscale="21.06982441449047"/>
 	<evSettings axes="false" grid="false" gridIsBold="false" pointCapturing="0" rightAngleStyle="1" checkboxSize="26" gridType="0"/>
 	<bgColor r="213" g="214" b="218"/>
 	<axesColor r="255" g="255" b="255"/>
@@ -1987,25 +1987,6 @@
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="-782" y="162" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="Q_3" a1="T_1"/>
-	<output a0="q_3"/>
-</command>
-<element type="segment" label="q_3">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="230" b="150" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Most Dmowskiego [DK41]"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="0" y="407" z="-65934"/>
 </element>
 <expression label="S_3" exp="(-782, -254)" type="point"/>
 <element type="point" label="S_3">
@@ -12622,26 +12603,6 @@
 	<pointStyle val="0"/>
 	<coords x="-791" y="168" z="1"/>
 </element>
-<command name="Segment">
-	<input a0="L_{25}" a1="K_3"/>
-	<output a0="r_3"/>
-</command>
-<element type="segment" label="r_3">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="230" b="150" alpha="0"/>
-	<layer val="8"/>
-	<labelOffset x="-4" y="-22"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Most Dmowskiego [DK41]"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="0" y="416" z="-69888"/>
-</element>
 <expression label="M_{25}" exp="(-801, 178)" type="point"/>
 <element type="point" label="M_{25}">
 	<show object="true" label="false" ev="4"/>
@@ -15213,6 +15174,36 @@
 	<endStyle val="default"/>
 	<coords x="0" y="20" z="-6140"/>
 </element>
+<element type="point" label="E_{16}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-770.711565490067" y="168.00543542797004" z="1"/>
+</element>
+<command name="Segment">
+	<input a0="E_{16}" a1="K_3"/>
+	<output a0="r_3"/>
+</command>
+<element type="segment" label="r_3">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="230" b="150" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="-4" y="-22"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Most Dmowskiego [DK41]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0.005435427970041928" y="395.71156549006696" z="-66477.5047168425"/>
+</element>
 <command name="Point">
 	<input a0="r_3"/>
 	<output a0="R_{29}"/>
@@ -15225,7 +15216,7 @@
 	<animation step="1" type="1" playing="false"/>
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
-	<coords x="-770.8299657569177" y="168" z="1"/>
+	<coords x="-770.711565490067" y="168.00543542797004" z="1"/>
 </element>
 <element type="point" label="S_{29}">
 	<show object="true" label="false" ev="4"/>
@@ -15289,21 +15280,6 @@
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="-782.0265763049282" y="178.97456323855585" z="1"/>
-</element>
-<command name="PolyLine">
-	<input a0="R_{29}" a1="S_{29}" a2="T_{29}" a3="U_{29}" a4="W_{29}"/>
-	<output a0="g_{21}"/>
-</command>
-<element type="polyline" label="g_{21}">
-	<lineStyle thickness="10" type="0" typeHidden="1"/>
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Trasa Zagajska"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
 </element>
 <element type="point" label="Z_{29}">
 	<show object="true" label="false" ev="4"/>
@@ -16424,6 +16400,35 @@
 	<pointStyle val="0"/>
 	<coords x="-774.176571649067" y="159.0884719529201" z="1"/>
 </element>
+<element type="point" label="R_8">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-763.3702140544098" y="162.00411549697324" z="1"/>
+</element>
+<command name="Segment">
+	<input a0="R_8" a1="T_1"/>
+	<output a0="q_3"/>
+</command>
+<element type="segment" label="q_3">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="230" b="150" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Most Dmowskiego [DK41]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0.004115496973241761" y="388.37021405440976" z="-62914.43136544942"/>
+</element>
 <command name="Point">
 	<input a0="q_3"/>
 	<output a0="C_{32}"/>
@@ -16436,7 +16441,7 @@
 	<animation step="1" type="1" playing="false"/>
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
-	<coords x="-765.9855754569289" y="162" z="1"/>
+	<coords x="-763.3702140544098" y="162.00411549697324" z="1"/>
 </element>
 <expression label="D_{32}" exp="(-775, 226)" type="point"/>
 <element type="point" label="D_{32}">
@@ -18114,38 +18119,6 @@
 	<pointStyle val="0"/>
 	<coords x="806" y="2293" z="1"/>
 </element>
-<command name="Point">
-	<input a0="q_6"/>
-	<output a0="J_{35}"/>
-</command>
-<element type="point" label="J_{35}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="1"/>
-	<pointStyle val="0"/>
-	<coords x="1053.9833172327124" y="2303.0415742768405" z="1"/>
-</element>
-<command name="Segment">
-	<input a0="F_{35}" a1="J_{35}"/>
-	<output a0="j_{24}"/>
-</command>
-<element type="segment" label="j_{24}">
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<caption val="Aleja Boska"/>
-	<lineStyle thickness="13" type="0" typeHidden="1"/>
-	<eqnStyle style="implicit"/>
-	<outlyingIntersections val="false"/>
-	<keepTypeOnTransform val="true"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
-	<coords x="-0.04157427684049253" y="247.98331723271235" z="-571072.0707198032"/>
-</element>
 <command name="Intersect">
 	<input a0="q_6" a1="t_6"/>
 	<output a0="L_{35}"/>
@@ -19584,10 +19557,11 @@
 	<output a0="i_4"/>
 </command>
 <element type="segment" label="i_4">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
+	<caption val="Trasa Zagajska"/>
 	<lineStyle thickness="10" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -19601,10 +19575,11 @@
 	<output a0="l_4"/>
 </command>
 <element type="segment" label="l_4">
-	<show object="true" label="false" ev="4"/>
+	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
-	<labelMode val="0"/>
+	<labelMode val="3"/>
+	<caption val="Trasa Zagajska"/>
 	<lineStyle thickness="10" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -19758,7 +19733,7 @@
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
 	<labelMode val="3"/>
-	<caption val="Trasa Zagajska"/>
+	<caption val="Marymoncka"/>
 	<lineStyle thickness="10" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -19848,7 +19823,7 @@
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
 	<labelMode val="3"/>
-	<caption val="Trasa Zagajska"/>
+	<caption val="Marymoncka"/>
 	<lineStyle thickness="10" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -20196,7 +20171,7 @@
 	<coords x="-176" y="0" z="-137632"/>
 </element>
 <element type="point" label="P_{38}">
-	<show object="true" label="false"/>
+	<show object="true" label="false" ev="4"/>
 	<objColor r="77" g="77" b="255" alpha="0"/>
 	<layer val="8"/>
 	<labelMode val="0"/>
@@ -20264,35 +20239,6 @@
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="-767.5911688733274" y="161.19450741990914" z="1"/>
-</element>
-<command name="Point">
-	<input a0="q_3"/>
-	<output a0="Z_{38}"/>
-</command>
-<element type="point" label="Z_{38}">
-	<show object="true" label="false" ev="4"/>
-	<objColor r="125" g="125" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="0"/>
-	<animation step="1" type="1" playing="false"/>
-	<pointSize val="5"/>
-	<pointStyle val="0"/>
-	<coords x="-763.2763272780093" y="162" z="1"/>
-</element>
-<command name="PolyLine">
-	<input a0="O_{38}" a1="P_{38}" a2="Q_{38}" a3="R_{38}" a4="S_{38}" a5="T_{38}" a6="U_{38}" a7="W_{38}" a8="Z_{38}"/>
-	<output a0="m_{26}"/>
-</command>
-<element type="polyline" label="m_{26}">
-	<lineStyle thickness="10" type="0" typeHidden="1"/>
-	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
-	<layer val="8"/>
-	<labelMode val="3"/>
-	<fixed val="true"/>
-	<caption val="Trasa Zagajska"/>
-	<startStyle val="default"/>
-	<endStyle val="default"/>
 </element>
 <command name="Segment">
 	<input a0="C_{20}" a1="H_{20}"/>
@@ -22013,6 +21959,90 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="-91" y="0" z="115843"/>
+</element>
+<command name="Segment">
+	<input a0="F_{35}" a1="O_8"/>
+	<output a0="j_{24}"/>
+</command>
+<element type="segment" label="j_{24}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Aleja Boska"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="248" z="-571144"/>
+</element>
+<command name="PolyLine">
+	<input a0="O_{38}" a1="P_{38}" a2="Q_{38}" a3="R_{38}" a4="S_{38}" a5="T_{38}" a6="U_{38}" a7="W_{38}" a8="R_8"/>
+	<output a0="m_{26}"/>
+</command>
+<element type="polyline" label="m_{26}">
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Trasa Zagajska"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+</element>
+<command name="Segment">
+	<input a0="Q_3" a1="C_{32}"/>
+	<output a0="p_{27}"/>
+</command>
+<element type="segment" label="p_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="230" b="150" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Most Dmowskiego [DK41]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-0.004115496973241761" y="18.629785945590243" z="-3021.243641818699"/>
+</element>
+<command name="PolyLine">
+	<input a0="E_{16}" a1="S_{29}" a2="T_{29}" a3="U_{29}" a4="W_{29}"/>
+	<output a0="g_{21}"/>
+</command>
+<element type="polyline" label="g_{21}">
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Trasa Zagajska"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+</element>
+<command name="Segment">
+	<input a0="L_{25}" a1="R_{29}"/>
+	<output a0="q_{27}"/>
+</command>
+<element type="segment" label="q_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="230" b="150" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Most Dmowskiego [DK41]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-0.005435427970041928" y="20.28843450993304" z="-3412.756421193044"/>
 </element>
 </construction>
 </geogebra>
