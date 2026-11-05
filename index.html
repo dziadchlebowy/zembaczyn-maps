@@ -475,7 +475,7 @@ function bboxOf(o) {
 }
 
 /* ───────────── STAN, WIDOK, MOTYWY ───────────── */
-const canvas = $('#map'), ctx = canvas.getContext('2d');
+const canvas = $('#map'); let ctx = canvas.getContext('2d');
 let W = 0, H = 0, dpr = 1;
 const V = { cx: 0, cy: 0, s: 50, min: 1e-6, max: 1e9, fit: 50 };
 const anim = { mode: null };
@@ -492,7 +492,7 @@ const THEMES = {
   map:   { name: 'Mapa',      bg: '#ebe8e1', minor: 'rgba(255,255,255,.5)',  major: 'rgba(255,255,255,.95)', majorW: 2, dark: false, label: '#3c4043', halo: 'rgba(255,255,255,.92)', swatch: '#ebe8e1', terrain: 'tint', terr: { water: '#aadaff', forest: '#cde8bf', land: '#f7f4ec' }, ...ROADS_LIGHT },
   dark:  { name: 'Ciemna',    bg: '#1f2329', minor: 'rgba(255,255,255,.04)', major: 'rgba(255,255,255,.09)', majorW: 1, dark: true,  label: '#e8eaed', halo: 'rgba(31,35,41,.92)',    swatch: '#1f2329', terrain: 'tint', terr: { water: '#27405c', forest: '#27402f', land: '#2b3037' }, ...ROADS_DARK },
   paper: { name: 'GeoGebra',  bg: '#ffffff', minor: '#eeeeee',               major: '#d6d6d6',               majorW: 1, dark: false, label: '#202124', halo: 'rgba(255,255,255,.92)', swatch: '#fff', axes: true, ...ROADS_LIGHT, minorCase: '#c4c4c4' },
-  sat:   { name: 'Satelita',  bg: '#0b1016', minor: 'rgba(255,255,255,.05)', major: 'rgba(255,255,255,.14)', majorW: 1, dark: true,  label: '#ffffff', halo: 'rgba(0,0,0,.75)',       swatch: 'linear-gradient(135deg,#5b8c3f,#1d4e80)', terrain: 'image',
+  sat:   { name: 'Satelita',  bg: '#0b1016', minor: 'rgba(255,255,255,.05)', major: 'rgba(255,255,255,.14)', majorW: 1, dark: true,  label: '#ffffff', halo: 'rgba(0,0,0,.75)',       swatch: 'linear-gradient(135deg,#5b8c3f,#1d4e80)', terrain: 'image', streetAlpha: .55,
            ...ROADS_DARK, mainFill: '#f2d479', mainCase: '#4a4120', minorFill: '#e9eaec', minorCase: '#2b2f35', streetText: '#ffffff' },
 };
 const theme = () => THEMES[settings.theme] || THEMES.map;
@@ -825,7 +825,7 @@ function buildCaches() {
 /* ───────────── SKALA I WYGLĄD (jak na prawdziwej mapie, nie liniowo) ───────────── */
 const zr = () => V.s / Math.max(V.fit, 1e-9);
 // szerokość jezdni w pikselach: rośnie wolniej niż przybliżenie, ma dolny i górny limit
-const roadW = cls => { const m = clamp(3.4 * Math.pow(zr(), 0.7), 2, 24); return cls === 'main' ? m : Math.max(1.6, m * 0.72); };
+const roadW = cls => { const m = clamp(3.4 * Math.pow(zr(), 0.82), 1.4, 30); return cls === 'main' ? m : Math.max(1.1, m * 0.72); };
 const caseW = w => clamp(w * 0.14, 1, 2.4);
 const rondoR = () => roadW('main') * 1.05 + 2;
 function pointVisible(o) {
@@ -887,7 +887,7 @@ function strokeChains(cls, width, which) {
     ctx.strokeStyle = col; ctx.stroke();
   }
 }
-function drawStreets(th) {
+function drawStreetsOpaque(th) {
   for (const s of streets) s._sc = inView(s.bbox) ? s.chains.map(c => ({ cls: c.cls, fill: c.fill, cs: c.cs, txt: c.txt, sp: c.pts.map(p => w2s(p[0], p[1])), cum: null })) : null;
   const w1 = roadW('main'), w2 = roadW('minor'), c1 = caseW(w1), c2 = caseW(w2), R = rondoR();
   const rs = rondos.filter(o => inView(o.bbox)).map(o => ({ o, p: w2s(o.x, o.y) }));
@@ -907,6 +907,20 @@ function drawStreets(th) {
       ctx.lineWidth = 1; ctx.strokeStyle = rc; ctx.stroke();
     }
   }
+}
+// ulice rysowane najpierw w pełni kryjące na osobnej warstwie, potem nakładane z przezroczystością
+// (dzięki temu obwódka nie prześwituje przez wypełnienie, a skrzyżowania nie robią ciemnych plam)
+let streetLayer = null;
+function drawStreets(th) {
+  if (!th.streetAlpha) { drawStreetsOpaque(th); return; }
+  if (!streetLayer) streetLayer = document.createElement('canvas');
+  if (streetLayer.width !== canvas.width || streetLayer.height !== canvas.height) { streetLayer.width = canvas.width; streetLayer.height = canvas.height; }
+  const main = ctx, lc = streetLayer.getContext('2d');
+  lc.setTransform(1, 0, 0, 1, 0, 0); lc.clearRect(0, 0, streetLayer.width, streetLayer.height); lc.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx = lc;
+  try { drawStreetsOpaque(th); } finally { ctx = main; }
+  main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = th.streetAlpha; main.drawImage(streetLayer, 0, 0); main.restore();
+  main.lineCap = 'round'; main.lineJoin = 'round'; main.setLineDash([]);
 }
 function drawTracks(th) {
   if (!tracks.length) return;
@@ -1008,12 +1022,13 @@ function tryStreetLabel(c, ctr, tw, adv, ls, fs, name, th) {
   }
   if (rects.some(overlaps)) return false;
   rects.forEach(r => placed.push(r));
-  ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round'; ctx.lineWidth = 2.5;
-  const halo = c.fill;
+  const sat = !!th.streetAlpha;   // satelita: biały napis z ciemnym obrysem zamiast koloru jezdni
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round'; ctx.lineWidth = sat ? 3 : 2.5;
+  const halo = sat ? th.halo : c.fill, tcol = sat ? th.label : c.txt;
   for (const g of gl) {
     ctx.save(); ctx.translate(g.x, g.y); ctx.rotate(g.ang);
     ctx.strokeStyle = halo; ctx.strokeText(g.ch, 0, .5);
-    ctx.fillStyle = c.txt; ctx.fillText(g.ch, 0, .5);
+    ctx.fillStyle = tcol; ctx.fillText(g.ch, 0, .5);
     ctx.restore();
   }
   return true;
