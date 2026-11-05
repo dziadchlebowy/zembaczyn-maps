@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<geogebra format="5.0" version="5.4.934.0" app="classic" platform="w" id="90a3f77c-4104-4bb0-b726-ac50a2f03776" xsi:noNamespaceSchemaLocation="https://www.geogebra.org/apps/xsd/ggb.xsd" xmlns="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<geogebra format="5.0" version="5.4.934.0" app="classic" platform="w" id="51b75499-3059-4270-8218-9fbc13a761a0" xsi:noNamespaceSchemaLocation="https://www.geogebra.org/apps/xsd/ggb.xsd" xmlns="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <gui>
 	<window width="1920" height="951"/>
 	<perspectives>
@@ -31,7 +31,7 @@
 <euclidianView>
 	<viewNumber viewNo="1"/>
 	<size width="1545" height="855"/>
-	<coordSystem xZero="-2506.102934158164" yZero="6840.242192319078" scale="2.92237470348997" yscale="2.9223747034892678"/>
+	<coordSystem xZero="-15526.000886462763" yZero="15682.136219428061" scale="45.543796014333665" yscale="45.54379601432213"/>
 	<evSettings axes="false" grid="false" gridIsBold="false" pointCapturing="0" rightAngleStyle="1" checkboxSize="26" gridType="0"/>
 	<bgColor r="213" g="214" b="218"/>
 	<axesColor r="255" g="255" b="255"/>
@@ -6850,7 +6850,7 @@
 </element>
 <expression label="U_{15}" exp="(299, 377)" type="point"/>
 <element type="point" label="U_{15}">
-	<show object="true" label="true" ev="4"/>
+	<show object="true" label="false" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
 	<labelMode val="3"/>
@@ -9326,7 +9326,7 @@
 </element>
 <expression label="A_{20}" exp="(390, 290)" type="point"/>
 <element type="point" label="A_{20}">
-	<show object="true" label="true" ev="4"/>
+	<show object="true" label="false" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
 	<labelMode val="3"/>
@@ -9522,6 +9522,7 @@
 	<pointStyle val="0"/>
 	<coords x="349" y="327" z="1"/>
 </element>
+<expression label="Q_{20}" exp="(349.48958890580195, 335.15506524234627)" type="point"/>
 <element type="point" label="Q_{20}">
 	<show object="true" label="false" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
@@ -21113,6 +21114,7 @@
 	<endStyle val="default"/>
 	<coords x="1.226935873146715" y="5.2149198177876315" z="-2096.2003554263647"/>
 </element>
+<expression label="D_{26}" exp="(357.70681177870347, 327.3244439239655)" type="point"/>
 <element type="point" label="D_{26}">
 	<show object="true" label="false" ev="4"/>
 	<objColor r="77" g="77" b="255" alpha="0"/>
@@ -21206,7 +21208,9 @@
 	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="230" b="150" alpha="0"/>
 	<layer val="8"/>
+	<labelOffset x="-9" y="-17"/>
 	<labelMode val="3"/>
+	<caption val="Księdza Popiełuszki [DK59]"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
 	<eqnStyle style="implicit"/>
 	<outlyingIntersections val="false"/>
@@ -22043,6 +22047,44 @@
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="-275.13807084743587" y="-85.43817376081552" z="1"/>
+</element>
+<element type="point" label="Q_{39}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="349.48958890580195" y="335.15506524234627" z="1"/>
+</element>
+<element type="point" label="D_{40}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="357.70681177870347" y="327.3244439239655" z="1"/>
+</element>
+<command name="Segment">
+	<input a0="D_{26}" a1="Q_{20}"/>
+	<output a0="h_{28}"/>
+</command>
+<element type="segment" label="h_{28}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="230" b="150" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Toruńska [DK59]"/>
+	<lineStyle thickness="13" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-7.830621318380793" y="-8.217222872901516" z="5490.7644935161225"/>
 </element>
 </construction>
 </geogebra>
