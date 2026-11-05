@@ -1,5 +1,6 @@
 {
   "image": "terrain.png",
+  "vector": "terrain_vec.json",
   "x0": -3000,
   "z0": -3000,
   "scale": 1,
