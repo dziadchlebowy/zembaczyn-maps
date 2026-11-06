@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <geogebra format="5.0" version="5.4.934.0" app="classic" platform="w" id="51b75499-3059-4270-8218-9fbc13a761a0" xsi:noNamespaceSchemaLocation="https://www.geogebra.org/apps/xsd/ggb.xsd" xmlns="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <gui>
-	<window width="1920" height="951"/>
+	<window width="1920" height="997"/>
 	<perspectives>
 <perspective id="tmp">
 	<panes>
@@ -30,8 +30,8 @@
 </gui>
 <euclidianView>
 	<viewNumber viewNo="1"/>
-	<size width="1545" height="855"/>
-	<coordSystem xZero="-15526.000886462763" yZero="15682.136219428061" scale="45.543796014333665" yscale="45.54379601432213"/>
+	<size width="1545" height="901"/>
+	<coordSystem xZero="30559.554768182472" yZero="6912.218059497555" scale="38.235331621811675" yscale="38.235331621802345"/>
 	<evSettings axes="false" grid="false" gridIsBold="false" pointCapturing="0" rightAngleStyle="1" checkboxSize="26" gridType="0"/>
 	<bgColor r="213" g="214" b="218"/>
 	<axesColor r="255" g="255" b="255"/>
@@ -19177,7 +19177,7 @@
 	<labelMode val="3"/>
 	<animation step="0.1" type="1" playing="false"/>
 	<fixed val="true"/>
-	<caption val="05 [503]"/>
+	<caption val="03 [503]"/>
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="497" y="286" z="1"/>
