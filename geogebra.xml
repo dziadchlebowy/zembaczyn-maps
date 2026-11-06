@@ -31,7 +31,7 @@
 <euclidianView>
 	<viewNumber viewNo="1"/>
 	<size width="1545" height="855"/>
-	<coordSystem xZero="-15526.000886462763" yZero="15682.136219428061" scale="45.543796014333665" yscale="45.54379601432213"/>
+	<coordSystem xZero="404.28928290480786" yZero="3071.464597027191" scale="4.581744034230117" yscale="4.581744034228973"/>
 	<evSettings axes="false" grid="false" gridIsBold="false" pointCapturing="0" rightAngleStyle="1" checkboxSize="26" gridType="0"/>
 	<bgColor r="213" g="214" b="218"/>
 	<axesColor r="255" g="255" b="255"/>
@@ -3039,7 +3039,6 @@
 	<pointStyle val="0"/>
 	<coords x="-131" y="171" z="1"/>
 </element>
-<expression label="K_6" exp="(-113, 159)" type="point"/>
 <element type="point" label="K_6">
 	<show object="true" label="true" ev="4"/>
 	<objColor r="160" g="160" b="160" alpha="0"/>
@@ -3051,7 +3050,7 @@
 	<caption val="02 [103, 201]"/>
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
-	<coords x="-113" y="159" z="1"/>
+	<coords x="-97.0868033593202" y="160.19870225679324" z="1"/>
 </element>
 <expression label="v_1" exp="-288"/>
 <element type="numeric" label="v_1">
@@ -8959,7 +8958,7 @@
 	<show object="true" label="true" ev="4"/>
 	<objColor r="229" g="229" b="229" alpha="0"/>
 	<layer val="8"/>
-	<labelOffset x="-17" y="-27"/>
+	<labelOffset x="50" y="-62"/>
 	<labelMode val="3"/>
 	<fixed val="true"/>
 	<caption val="Mączna"/>
@@ -9290,6 +9289,7 @@
 	<pointStyle val="0"/>
 	<coords x="-244" y="-23" z="1"/>
 </element>
+<expression label="R_{19}" exp="(500, 129)" type="point"/>
 <element type="point" label="R_{19}">
 	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
@@ -9300,7 +9300,7 @@
 	<caption val="Plac Dobrzyńskiego"/>
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
-	<coords x="500.1773732462004" y="128.72035007446394" z="1"/>
+	<coords x="500" y="129" z="1"/>
 </element>
 <expression label="U_{19}" exp="(437, 139)" type="point"/>
 <element type="point" label="U_{19}">
@@ -12505,7 +12505,7 @@
 </command>
 <element type="segment" label="k_3">
 	<show object="true" label="true" ev="4"/>
-	<objColor r="255" g="255" b="255" alpha="0"/>
+	<objColor r="160" g="160" b="160" alpha="0"/>
 	<layer val="8"/>
 	<labelOffset x="22" y="31"/>
 	<labelMode val="3"/>
@@ -19177,7 +19177,7 @@
 	<labelMode val="3"/>
 	<animation step="0.1" type="1" playing="false"/>
 	<fixed val="true"/>
-	<caption val="05 [503]"/>
+	<caption val="03 [503]"/>
 	<pointSize val="5"/>
 	<pointStyle val="0"/>
 	<coords x="497" y="286" z="1"/>
@@ -20438,6 +20438,7 @@
 	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="255" b="255" alpha="0"/>
 	<layer val="8"/>
+	<labelOffset x="37" y="-71"/>
 	<labelMode val="3"/>
 	<caption val="Piaskowa"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
@@ -20776,6 +20777,7 @@
 	<show object="true" label="true" ev="4"/>
 	<objColor r="255" g="230" b="150" alpha="0"/>
 	<layer val="8"/>
+	<labelOffset x="-78" y="-20"/>
 	<labelMode val="3"/>
 	<caption val="Aleja Jana Pawła II [DK41]"/>
 	<lineStyle thickness="13" type="0" typeHidden="1"/>
@@ -22085,6 +22087,834 @@
 	<startStyle val="default"/>
 	<endStyle val="default"/>
 	<coords x="-7.830621318380793" y="-8.217222872901516" z="5490.7644935161225"/>
+</element>
+<expression label="T_4" exp="(-181, 300)" type="point"/>
+<element type="point" label="T_4">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-181" y="300" z="1"/>
+</element>
+<expression label="F_{16}" exp="(-169, 285)" type="point"/>
+<element type="point" label="F_{16}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-169" y="285" z="1"/>
+</element>
+<expression label="H_{16}" exp="(-178, 267)" type="point"/>
+<element type="point" label="H_{16}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-178" y="267" z="1"/>
+</element>
+<expression label="I_{17}" exp="(-177, 251)" type="point"/>
+<element type="point" label="I_{17}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-177" y="251" z="1"/>
+</element>
+<expression label="T_{25}" exp="(-166, 242)" type="point"/>
+<element type="point" label="T_{25}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-166" y="242" z="1"/>
+</element>
+<expression label="J_{26}" exp="(-147, 236)" type="point"/>
+<element type="point" label="J_{26}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-147" y="236" z="1"/>
+</element>
+<expression label="Z_{26}" exp="(-138, 236)" type="point"/>
+<element type="point" label="Z_{26}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-138" y="236" z="1"/>
+</element>
+<expression label="W_{28}" exp="(-132, 242)" type="point"/>
+<element type="point" label="W_{28}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-132" y="242" z="1"/>
+</element>
+<expression label="C_{31}" exp="(-116, 240)" type="point"/>
+<element type="point" label="C_{31}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-116" y="240" z="1"/>
+</element>
+<expression label="L_{31}" exp="(-122, 222)" type="point"/>
+<element type="point" label="L_{31}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-122" y="222" z="1"/>
+</element>
+<expression label="U_{34}" exp="(-115, 199)" type="point"/>
+<element type="point" label="U_{34}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-115" y="199" z="1"/>
+</element>
+<expression label="J_{35}" exp="(-111, 184)" type="point"/>
+<element type="point" label="J_{35}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-111" y="184" z="1"/>
+</element>
+<expression label="U_{37}" exp="(-55, 175)" type="point"/>
+<element type="point" label="U_{37}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-55" y="175" z="1"/>
+</element>
+<expression label="W_{37}" exp="(-48, 157)" type="point"/>
+<element type="point" label="W_{37}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-48" y="157" z="1"/>
+</element>
+<expression label="E_{38}" exp="(-22, 143)" type="point"/>
+<element type="point" label="E_{38}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-22" y="143" z="1"/>
+</element>
+<expression label="F_{38}" exp="(-27, 126)" type="point"/>
+<element type="point" label="F_{38}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-27" y="126" z="1"/>
+</element>
+<expression label="H_{38}" exp="(-36, 114)" type="point"/>
+<element type="point" label="H_{38}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-36" y="114" z="1"/>
+</element>
+<expression label="L_{38}" exp="(-46, 105)" type="point"/>
+<element type="point" label="L_{38}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-46" y="105" z="1"/>
+</element>
+<expression label="Z_{38}" exp="(-50, 104)" type="point"/>
+<element type="point" label="Z_{38}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-50" y="104" z="1"/>
+</element>
+<expression label="H_{39}" exp="(-55, 97)" type="point"/>
+<element type="point" label="H_{39}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-55" y="97" z="1"/>
+</element>
+<expression label="J_{39}" exp="(-58, 77)" type="point"/>
+<element type="point" label="J_{39}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-58" y="77" z="1"/>
+</element>
+<expression label="K_{39}" exp="(-63, 75)" type="point"/>
+<element type="point" label="K_{39}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-63" y="75" z="1"/>
+</element>
+<expression label="L_{39}" exp="(-78, 75)" type="point"/>
+<element type="point" label="L_{39}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-78" y="75" z="1"/>
+</element>
+<expression label="M_{39}" exp="(-90, 86)" type="point"/>
+<element type="point" label="M_{39}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-90" y="86" z="1"/>
+</element>
+<expression label="N_{39}" exp="(-101, 85)" type="point"/>
+<element type="point" label="N_{39}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-101" y="85" z="1"/>
+</element>
+<expression label="O_{39}" exp="(-104, 66)" type="point"/>
+<element type="point" label="O_{39}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-104" y="66" z="1"/>
+</element>
+<expression label="P_{39}" exp="(-117, 56)" type="point"/>
+<element type="point" label="P_{39}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-117" y="56" z="1"/>
+</element>
+<expression label="S_{39}" exp="(-123, 51)" type="point"/>
+<element type="point" label="S_{39}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-123" y="51" z="1"/>
+</element>
+<expression label="T_{39}" exp="(-123, 39)" type="point"/>
+<element type="point" label="T_{39}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-123" y="39" z="1"/>
+</element>
+<expression label="U_{39}" exp="(-128, 27)" type="point"/>
+<element type="point" label="U_{39}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-128" y="27" z="1"/>
+</element>
+<expression label="W_{39}" exp="(-158, -5)" type="point"/>
+<element type="point" label="W_{39}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-158" y="-5" z="1"/>
+</element>
+<expression label="Z_{39}" exp="(-166, -21)" type="point"/>
+<element type="point" label="Z_{39}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-166" y="-21" z="1"/>
+</element>
+<expression label="A_{40}" exp="(-165, -32)" type="point"/>
+<element type="point" label="A_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-165" y="-32" z="1"/>
+</element>
+<expression label="B_{40}" exp="(-161, -40)" type="point"/>
+<element type="point" label="B_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-161" y="-40" z="1"/>
+</element>
+<expression label="C_{40}" exp="(-143, -60)" type="point"/>
+<element type="point" label="C_{40}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-143" y="-60" z="1"/>
+</element>
+<expression label="E_{40}" exp="(-142, -69)" type="point"/>
+<element type="point" label="E_{40}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-142" y="-69" z="1"/>
+</element>
+<expression label="F_{40}" exp="(-152, -84)" type="point"/>
+<element type="point" label="F_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-152" y="-84" z="1"/>
+</element>
+<expression label="H_{40}" exp="(-147, -103)" type="point"/>
+<element type="point" label="H_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-147" y="-103" z="1"/>
+</element>
+<expression label="I_{40}" exp="(-120, -101)" type="point"/>
+<element type="point" label="I_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-120" y="-101" z="1"/>
+</element>
+<expression label="J_{40}" exp="(-106, -88)" type="point"/>
+<element type="point" label="J_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-106" y="-88" z="1"/>
+</element>
+<expression label="K_{40}" exp="(-76, -85)" type="point"/>
+<element type="point" label="K_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-76" y="-85" z="1"/>
+</element>
+<expression label="L_{40}" exp="(-53, -101)" type="point"/>
+<element type="point" label="L_{40}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-53" y="-101" z="1"/>
+</element>
+<expression label="M_{40}" exp="(-41, -112)" type="point"/>
+<element type="point" label="M_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-41" y="-112" z="1"/>
+</element>
+<expression label="N_{40}" exp="(-43, -138)" type="point"/>
+<element type="point" label="N_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-43" y="-138" z="1"/>
+</element>
+<expression label="O_{40}" exp="(-49, -142)" type="point"/>
+<element type="point" label="O_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-49" y="-142" z="1"/>
+</element>
+<expression label="P_{40}" exp="(-60, -142)" type="point"/>
+<element type="point" label="P_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-60" y="-142" z="1"/>
+</element>
+<expression label="Q_{40}" exp="(-73, -160)" type="point"/>
+<element type="point" label="Q_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-73" y="-160" z="1"/>
+</element>
+<expression label="S_{40}" exp="(-96, -171)" type="point"/>
+<element type="point" label="S_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-96" y="-171" z="1"/>
+</element>
+<expression label="T_{40}" exp="(-106, -219)" type="point"/>
+<element type="point" label="T_{40}">
+	<show object="true" label="false"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="-106" y="-219" z="1"/>
+</element>
+<command name="PolyLine">
+	<input a0="T_4" a1="F_{16}" a2="H_{16}" a3="I_{17}" a4="T_{25}" a5="J_{26}" a6="Z_{26}" a7="W_{28}" a8="C_{31}" a9="L_{31}" a10="U_{34}" a11="J_{35}" a12="U_{37}" a13="W_{37}" a14="E_{38}" a15="F_{38}" a16="H_{38}" a17="L_{38}" a18="Z_{38}" a19="H_{39}" a20="J_{39}" a21="K_{39}" a22="L_{39}" a23="M_{39}" a24="N_{39}" a25="O_{39}" a26="P_{39}" a27="S_{39}" a28="T_{39}" a29="U_{39}" a30="W_{39}" a31="Z_{39}" a32="A_{40}" a33="B_{40}" a34="C_{40}" a35="E_{40}" a36="F_{40}" a37="H_{40}" a38="I_{40}" a39="J_{40}" a40="K_{40}" a41="L_{40}" a42="M_{40}" a43="N_{40}" a44="O_{40}" a45="P_{40}" a46="Q_{40}" a47="S_{40}" a48="T_{40}"/>
+	<output a0="r_{27}"/>
+</command>
+<element type="polyline" label="r_{27}">
+	<lineStyle thickness="13" type="0" typeHidden="1" opacity="178"/>
+	<show object="true" label="true" ev="4"/>
+	<objColor r="168" g="212" b="242" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<fixed val="true"/>
+	<caption val="Łacha"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+</element>
+<expression label="U_{40}" exp="(142, 589)" type="point"/>
+<element type="point" label="U_{40}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="142" y="589" z="1"/>
+</element>
+<expression label="W_{40}" exp="(48, 550)" type="point"/>
+<element type="point" label="W_{40}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="48" y="550" z="1"/>
+</element>
+<expression label="Z_{40}" exp="(92, 550)" type="point"/>
+<element type="point" label="Z_{40}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="92" y="550" z="1"/>
+</element>
+<expression label="A_{41}" exp="(142, 550)" type="point"/>
+<element type="point" label="A_{41}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="142" y="550" z="1"/>
+</element>
+<command name="Segment">
+	<input a0="B_9" a1="W_{40}"/>
+	<output a0="s_{27}"/>
+</command>
+<element type="segment" label="s_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="229" g="229" b="229" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="22" y="3"/>
+	<labelMode val="3"/>
+	<caption val="Zakładowa"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="37" y="0" z="-1776"/>
+</element>
+<command name="Segment">
+	<input a0="W_{40}" a1="Z_{40}"/>
+	<output a0="t_{27}"/>
+</command>
+<element type="segment" label="t_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="229" g="229" b="229" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Pomorska"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="44" z="-24200"/>
+</element>
+<command name="Segment">
+	<input a0="Z_{40}" a1="S_{15}"/>
+	<output a0="a_{27}"/>
+</command>
+<element type="segment" label="a_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="229" g="229" b="229" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="21" y="-1"/>
+	<labelMode val="3"/>
+	<caption val="Suwalska"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="22" y="0" z="-2024"/>
+</element>
+<command name="Segment">
+	<input a0="Z_{40}" a1="A_{41}"/>
+	<output a0="b_{27}"/>
+</command>
+<element type="segment" label="b_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="229" g="229" b="229" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Pomorska"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="0" y="50" z="-27500"/>
+</element>
+<command name="Segment">
+	<input a0="A_{41}" a1="U_{40}"/>
+	<output a0="c_{27}"/>
+</command>
+<element type="segment" label="c_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="229" g="229" b="229" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="-3" y="0"/>
+	<labelMode val="3"/>
+	<caption val="Kopernika"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-39" y="0" z="5538"/>
+</element>
+<command name="Segment">
+	<input a0="U_{40}" a1="I_{27}"/>
+	<output a0="d_{27}"/>
+</command>
+<element type="segment" label="d_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="229" g="229" b="229" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="-9" y="1"/>
+	<labelMode val="3"/>
+	<caption val="jezdnia CH Żyrmuny Park"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-79" y="0" z="11218"/>
+</element>
+<expression label="B_{41}" exp="t" type="point"/>
+<element type="point" label="B_{41}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="NaN" y="NaN" z="NaN"/>
+</element>
+<expression label="D_{41}" exp="(500, 100)" type="point"/>
+<element type="point" label="D_{41}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="500" y="100" z="1"/>
+</element>
+<expression label="F_{41}" exp="(500, 0)" type="point"/>
+<element type="point" label="F_{41}">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="0"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="500" y="0" z="1"/>
+</element>
+<command name="Segment">
+	<input a0="D_{41}" a1="F_{41}"/>
+	<output a0="e_{27}"/>
+</command>
+<element type="segment" label="e_{27}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="25" y="8"/>
+	<labelMode val="3"/>
+	<caption val="Most Wystrucki"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="100" y="0" z="-50000"/>
+</element>
+<expression label="H_{41}" exp="(700, -200)" type="point"/>
+<element type="point" label="H_{41}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="77" g="77" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<animation step="0.1" type="1" playing="false"/>
+	<caption val="y=67"/>
+	<pointSize val="5"/>
+	<pointStyle val="0"/>
+	<coords x="700" y="-200" z="1"/>
+</element>
+<command name="Segment">
+	<input a0="F_{41}" a1="H_{41}"/>
+	<output a0="f_{28}"/>
+</command>
+<element type="segment" label="f_{28}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelOffset x="19" y="-6"/>
+	<labelMode val="3"/>
+	<caption val="Most Wystrucki"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="200" y="200" z="-100000"/>
+</element>
+<command name="Segment">
+	<input a0="D_{41}" a1="G_{20}"/>
+	<output a0="g_{28}"/>
+</command>
+<element type="segment" label="g_{28}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Most Wystrucki"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-26" y="-3" z="13300"/>
+</element>
+<command name="Segment">
+	<input a0="D_{41}" a1="E_{20}"/>
+	<output a0="i_{28}"/>
+</command>
+<element type="segment" label="i_{28}">
+	<show object="true" label="true" ev="4"/>
+	<objColor r="255" g="255" b="255" alpha="0"/>
+	<layer val="8"/>
+	<labelMode val="3"/>
+	<caption val="Most Wystrucki"/>
+	<lineStyle thickness="10" type="0" typeHidden="1"/>
+	<eqnStyle style="implicit"/>
+	<outlyingIntersections val="false"/>
+	<keepTypeOnTransform val="true"/>
+	<startStyle val="default"/>
+	<endStyle val="default"/>
+	<coords x="-26" y="3" z="12700"/>
 </element>
 </construction>
 </geogebra>
